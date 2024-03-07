@@ -34,7 +34,7 @@ public class PlaceService {
             throw new AttributeException("name already in use");
 
         int id = autoIncrement();
-        Place place = new Place(id, createPlaceDto.description(), createPlaceDto.name(), createPlaceDto.schedules(), createPlaceDto.images(), createPlaceDto.comments(), createPlaceDto.businessType(), createPlaceDto.phones());
+        Place place = new Place(id, createPlaceDto.description(), createPlaceDto.name(), createPlaceDto.schedules(), createPlaceDto.images(), createPlaceDto.businessType(), createPlaceDto.phones());
 
         return placeRepository.save(place);
     }

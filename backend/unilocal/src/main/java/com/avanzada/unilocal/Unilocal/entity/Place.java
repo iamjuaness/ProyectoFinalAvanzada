@@ -30,4 +30,7 @@ public class Place implements Serializable {
     private List<Comment> comments;
     private BusinessType businessType;
     private List<String> phones;
+
+    public Place(int id, String description, String name, List<String> schedules, List<String> images, BusinessType businessType, List<String> phones) {
+    }
 }
