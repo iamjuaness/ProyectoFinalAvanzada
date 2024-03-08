@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0c7b1b6-6f27-4090-8ad1-cc09046d027f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/SesionUserDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreateCommentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreateCommentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreatePlaceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreatePlaceDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/RegisterUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/RegisterUserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/UpdateUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/UpdateUserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Place.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/service/PlaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/service/PlaceService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +131,7 @@
       <workItem from="1709580587438" duration="3483000" />
       <workItem from="1709759547709" duration="1036000" />
       <workItem from="1709760618094" duration="3327000" />
-      <workItem from="1709821013314" duration="2588000" />
+      <workItem from="1709821013314" duration="3721000" />
     </task>
     <servers />
   </component>
