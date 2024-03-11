@@ -2,7 +2,7 @@ package com.avanzada.unilocal.Unilocal.controller;
 
 import com.avanzada.unilocal.Unilocal.dto.CreatePlaceDto;
 import com.avanzada.unilocal.Unilocal.entity.Place;
-import com.avanzada.unilocal.Unilocal.service.PlaceService;
+import com.avanzada.unilocal.Unilocal.serviceImplements.PlaceService;
 import com.avanzada.unilocal.global.dto.MessageDto;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;

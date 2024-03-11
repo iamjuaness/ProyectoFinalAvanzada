@@ -3,7 +3,7 @@ package com.avanzada.unilocal.Unilocal.controller;
 import com.avanzada.unilocal.Unilocal.dto.RegisterUserDto;
 import com.avanzada.unilocal.Unilocal.dto.UpdateUserDto;
 import com.avanzada.unilocal.Unilocal.entity.Person;
-import com.avanzada.unilocal.Unilocal.service.PersonService;
+import com.avanzada.unilocal.Unilocal.serviceImplements.PersonService;
 import com.avanzada.unilocal.global.dto.MessageDto;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
@@ -36,7 +36,7 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<MessageDto> save(@Valid @RequestBody RegisterUserDto registerUserDto) throws AttributeException {
 
-        Person person = personService.save(registerUserDto);
+        Person person = personService.signUp(registerUserDto);
         String message = "user " + person.getName() + " have been saved";
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
@@ -44,7 +44,7 @@ public class PersonController {
 
     @PutMapping("/{id}")
     public ResponseEntity<MessageDto> update(@PathVariable("id") int id, @Valid @RequestBody UpdateUserDto updateUserDto) throws ResourceNotFoundException, AttributeException {
-        Person person = personService.update(id, updateUserDto);
+        Person person = personService.profileEdit(updateUserDto, id);
         String message = "user " + person.getName() + " have been updated";
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));

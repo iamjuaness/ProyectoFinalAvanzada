@@ -2,6 +2,7 @@ package com.avanzada.unilocal.Unilocal.entity;
 
 
 import com.avanzada.unilocal.Unilocal.enums.Role;
+import com.avanzada.unilocal.Unilocal.enums.StateRegister;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -26,7 +27,9 @@ public class Person implements Serializable {
     private String residenceCity;
     private Place[] myPlaces;
     private Role role;
+    private StateRegister stateRegister;
 
-    public Person(int id, String name, String photo, String nickname, String email, String password, String residenceCity, Role role) {
+
+    public Person(int id, String name, String photo, String nickname, String email, String password, String s, Role role, StateRegister register) {
     }
 }
