@@ -5,26 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0c7b1b6-6f27-4090-8ad1-cc09046d027f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/ChangePasswordDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/enums/StateRegister.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/AccountService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/BusinessService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/CommentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/ModeratorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/RegisterRevisionDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/unilocal/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PersonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PlaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PlaceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreatePlaceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreatePlaceDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/ChangePasswordDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/ChangePasswordDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Place.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/enums/StateRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/enums/StateUnilocal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/BusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/BusinessService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/repository/PersonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/repository/PersonRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/service/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/service/PlaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PlaceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PlaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PlaceService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,10 +65,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Record" />
         <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -178,6 +170,8 @@
       <workItem from="1709960442285" duration="51000" />
       <workItem from="1710117625059" duration="623000" />
       <workItem from="1710167185040" duration="4026000" />
+      <workItem from="1710185065414" duration="632000" />
+      <workItem from="1710214182729" duration="5048000" />
     </task>
     <servers />
   </component>

@@ -1,21 +1,30 @@
 package com.avanzada.unilocal.Unilocal.interfaces;
 
+import com.avanzada.unilocal.Unilocal.dto.CreatePlaceDto;
+import com.avanzada.unilocal.Unilocal.dto.RegisterRevisionDto;
+import com.avanzada.unilocal.Unilocal.entity.Place;
+import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
+import com.avanzada.unilocal.global.exceptions.AttributeException;
+import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
+
+/**
+ * @author Juanes Cardona
+ */
 public interface BusinessService {
 
-    void crearNegocio();
+    Place createBusiness(CreatePlaceDto createPlaceDto) throws AttributeException;
+    Place updateBusiness(int id, CreatePlaceDto createPlaceDto) throws AttributeException, ResourceNotFoundException;
 
-    void actualizarNegocio();
+    Place deleteBusiness(int id) throws ResourceNotFoundException;
 
-    void eliminarNegocio(String idNegocio);
+    void findBusiness(int id);
 
-    void buscarNegocios();
+    void filterByState(StateUnilocal stateBusiness);
 
-    void filtrarPorEstado();
+    void listOwnerBusiness();
 
-    void listarNegociosPropietario();
+    void changeState(StateUnilocal newState);
 
-    void cambiarEstado();
-
-    void registrarRevision();
+    void registerRevision(RegisterRevisionDto registerRevisionDto);
 
 }

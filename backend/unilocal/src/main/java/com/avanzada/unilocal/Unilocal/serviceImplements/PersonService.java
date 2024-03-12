@@ -5,7 +5,7 @@ import com.avanzada.unilocal.Unilocal.dto.RegisterUserDto;
 import com.avanzada.unilocal.Unilocal.dto.SesionUserDto;
 import com.avanzada.unilocal.Unilocal.dto.UpdateUserDto;
 import com.avanzada.unilocal.Unilocal.entity.Person;
-import com.avanzada.unilocal.Unilocal.enums.StateRegister;
+import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import com.avanzada.unilocal.Unilocal.interfaces.UserService;
 import com.avanzada.unilocal.Unilocal.repository.PersonRepository;
 import com.avanzada.unilocal.Unilocal.enums.Role;
@@ -25,6 +25,8 @@ public class PersonService implements UserService {
 
     @Autowired
     PersonRepository personRepository;
+    @Autowired
+    EmailService emailService;
 
     /**
      * Method to register a new user
@@ -41,7 +43,7 @@ public class PersonService implements UserService {
             throw new AttributeException("Email already in use");
 
         int id = autoIncrement();
-        StateRegister register = StateRegister.Active;
+        StateUnilocal register = StateUnilocal.Active;
         Person person = new Person(id, registerUserDto.name(), registerUserDto.photo(), registerUserDto.nickname(), registerUserDto.email(), registerUserDto.password(), registerUserDto.residenceCity(), Role.USER, register);
 
         return personRepository.save(person);
@@ -57,7 +59,7 @@ public class PersonService implements UserService {
      * Method to update user information
      *
      * @param updateUserDto User to be updated
-     * @param id User id
+     * @param id            User id
      * @return The updated user
      * @throws ResourceNotFoundException Exception that is executed if a user with that id is not found
      */
@@ -85,22 +87,44 @@ public class PersonService implements UserService {
     @Override
     public Person delete(int id) throws ResourceNotFoundException {
         Person person = personRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
-        person.setStateRegister(StateRegister.Inactive);
+                .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un usuario"));
+        person.setStateUnilocal(StateUnilocal.Inactive);
         personRepository.save(person);
         return person;
     }
 
+    /**
+     * This method generates a link and sends an email to a user to change the password
+     *
+     * @param email User email
+     * @throws ResourceNotFoundException Exception that is executed if a user with that email is not found
+     */
     @Override
-    public void sendLinkPassword(String email) throws Exception {
+    public void sendLinkPassword(String email) throws ResourceNotFoundException {
+        Person person = personRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("El email no esta asociado a un usuario"));
 
+        String subject = "RECUPERACIÓN DE CONTRASEÑA";
+        String body = "TODO: Hacer metodo que genere el cuerpo del correo y que genere" +
+                "el link de recuperacion";
+        emailService.sendmail(email, subject, body);
     }
 
+    /**
+     * This method changes the user's password
+     *
+     * @param changePasswordDTO DTO to change the password
+     *
+     * @throws ResourceNotFoundException Exception that is executed if a user with that id is not found
+     */
     @Override
-    public void changePassword(ChangePasswordDTO changePasswordDTO) throws Exception {
+    public void changePassword(ChangePasswordDTO changePasswordDTO) throws ResourceNotFoundException {
+        Person person = personRepository.findById(changePasswordDTO.id())
+                .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un usuario"));
 
+        person.setPassword(changePasswordDTO.password());
+        personRepository.save(person);
     }
-
 
 
     //----------------------Private Methods--------------------------------------

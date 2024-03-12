@@ -1,6 +1,7 @@
 package com.avanzada.unilocal.Unilocal.entity;
 
 import com.avanzada.unilocal.Unilocal.enums.BusinessType;
+import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +31,8 @@ public class Place implements Serializable {
     private List<Comment> comments;
     private BusinessType businessType;
     private List<String> phones;
+    private StateUnilocal stateBusiness;
 
-    public Place(int id, String description, String name, List<String> schedules, List<String> images, BusinessType businessType, List<String> phones) {
+    public Place(int id, String description, String name, List<String> schedules, List<String> images, BusinessType businessType, List<String> phones, StateUnilocal stateBusiness) {
     }
 }

@@ -1,7 +1,10 @@
 package com.avanzada.unilocal.Unilocal.serviceImplements;
 
 import com.avanzada.unilocal.Unilocal.dto.CreatePlaceDto;
+import com.avanzada.unilocal.Unilocal.dto.RegisterRevisionDto;
 import com.avanzada.unilocal.Unilocal.entity.Place;
+import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
+import com.avanzada.unilocal.Unilocal.interfaces.BusinessService;
 import com.avanzada.unilocal.Unilocal.repository.PlaceRepository;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
@@ -12,35 +15,29 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author Juanes Cardona
+ */
 @Service
-public class PlaceService {
+public class PlaceService implements BusinessService {
 
     @Autowired
     PlaceRepository placeRepository;
 
-    public List<Place> getAll() {
-        return placeRepository.findAll();
-    }
-
-
-    public Place getOne(int id) throws ResourceNotFoundException {
-        return placeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
-    }
-
-    public Place save(CreatePlaceDto createPlaceDto) throws AttributeException {
-
+    @Override
+    public Place createBusiness(CreatePlaceDto createPlaceDto) throws AttributeException {
         if (placeRepository.existsByName(createPlaceDto.name()))
             throw new AttributeException("name already in use");
 
         int id = autoIncrement();
-        Place place = new Place(id, createPlaceDto.description(), createPlaceDto.name(), createPlaceDto.schedules(), createPlaceDto.images(), createPlaceDto.businessType(), createPlaceDto.phones());
+        StateUnilocal stateBusiness = StateUnilocal.Revision;
+        Place place = new Place(id, createPlaceDto.description(), createPlaceDto.name(), createPlaceDto.schedules(), createPlaceDto.images(), createPlaceDto.businessType(), createPlaceDto.phones(), stateBusiness);
 
         return placeRepository.save(place);
     }
 
-    public Place update(int id, CreatePlaceDto createPlaceDto) throws ResourceNotFoundException, AttributeException {
-
+    @Override
+    public Place updateBusiness(int id, CreatePlaceDto createPlaceDto) throws AttributeException, ResourceNotFoundException {
         Place place = placeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found"));
 
@@ -57,11 +54,50 @@ public class PlaceService {
         return placeRepository.save(place);
     }
 
-    public Place delete(int id) throws ResourceNotFoundException {
+    @Override
+    public Place deleteBusiness(int id) throws ResourceNotFoundException {
         Place place = placeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
-        placeRepository.delete(place);
+                .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un lugar"));
+        place.setStateBusiness(StateUnilocal.Inactive);
+        placeRepository.save(place);
         return place;
+    }
+
+    @Override
+    public void findBusiness(int id) {
+
+    }
+
+    @Override
+    public void filterByState(StateUnilocal stateBusiness) {
+
+    }
+
+    @Override
+    public void listOwnerBusiness() {
+
+    }
+
+    @Override
+    public void changeState(StateUnilocal newState) {
+
+    }
+
+    @Override
+    public void registerRevision(RegisterRevisionDto registerRevisionDto) {
+
+    }
+
+    //-----------------------------Private Methods----------------------------------------
+
+    public List<Place> getAll() {
+        return placeRepository.findAll();
+    }
+
+
+    public Place getOne(int id) throws ResourceNotFoundException {
+        return placeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
     }
 
     // private methods

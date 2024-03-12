@@ -12,4 +12,5 @@ public interface PersonRepository extends MongoRepository<Person, Integer> {
     boolean existsByNickname(String nickname);
     boolean existsByEmail(String email);
     Optional<Person> findByNickname(String nickname);
+    Optional<Person> findByEmail(String email);
 }
