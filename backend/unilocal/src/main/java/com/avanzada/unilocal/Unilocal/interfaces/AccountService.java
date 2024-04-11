@@ -4,9 +4,10 @@ import com.avanzada.unilocal.Unilocal.dto.ChangePasswordDTO;
 import com.avanzada.unilocal.Unilocal.dto.SesionUserDto;
 import com.avanzada.unilocal.Unilocal.entity.Person;
 
+import java.util.Optional;
+
 public interface AccountService {
-    void login(SesionUserDto sesionUserDto)throws Exception;
+    Optional<Person> login(SesionUserDto sesionUserDto)throws Exception;
     Person delete(int idCuenta)throws Exception;
-    void sendLinkPassword(String email)throws Exception;
     void changePassword(ChangePasswordDTO changePasswordDTO)throws Exception;
 }

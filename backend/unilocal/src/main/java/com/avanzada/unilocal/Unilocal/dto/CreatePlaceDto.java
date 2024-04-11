@@ -1,5 +1,6 @@
 package com.avanzada.unilocal.Unilocal.dto;
 
+import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.enums.BusinessType;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
@@ -12,5 +13,6 @@ public record CreatePlaceDto(
                 @NotBlank(message = "The schedules are required") List<String> schedules,
                 @NotBlank(message = "Images are required") List<String> images,
                 @NotBlank(message = "businessType is required") BusinessType businessType,
+                @NotBlank(message = "owner is required") Person owner,
                 @NotBlank(message = "phones are required") List<String> phones) {
 }

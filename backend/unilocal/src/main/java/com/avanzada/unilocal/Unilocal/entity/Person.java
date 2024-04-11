@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Setter
 @Getter
-@Document(collection = "people")
+@Document(collection = "users")
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

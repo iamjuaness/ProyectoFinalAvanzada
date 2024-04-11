@@ -4,7 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0c7b1b6-6f27-4090-8ad1-cc09046d027f" name="Changes" comment="" />
+    <list default="true" id="d0c7b1b6-6f27-4090-8ad1-cc09046d027f" name="Changes" comment="New Changes&#10;Se implementó la logica de los tokens haciendo uso de JWT, y tambien la lógica para el envio de correos">
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/EmailDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/MensajeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/TokenDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/resources/Revision.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/JwtTokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PersonController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PlaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PlaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreatePlaceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreatePlaceDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Place.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/BusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/BusinessService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PlaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PlaceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/api/placesApiClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/api/placesApiClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/maps.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/maps.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,10 +86,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
         <option value="Record" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -162,7 +196,12 @@
       <workItem from="1710260769212" duration="321000" />
       <workItem from="1710360893105" duration="709000" />
       <workItem from="1710453014393" duration="64000" />
-      <workItem from="1710693476277" duration="974000" />
+      <workItem from="1710693476277" duration="13790000" />
+      <workItem from="1710771154624" duration="5043000" />
+      <workItem from="1710819752453" duration="399000" />
+      <workItem from="1712585995755" duration="6068000" />
+      <workItem from="1712611801382" duration="969000" />
+      <workItem from="1712848622396" duration="404000" />
     </task>
     <servers />
   </component>
@@ -182,6 +221,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="New Changes&#10;Se implementó la logica de los tokens haciendo uso de JWT, y tambien la lógica para el envio de correos" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Changes&#10;Se implementó la logica de los tokens haciendo uso de JWT, y tambien la lógica para el envio de correos" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

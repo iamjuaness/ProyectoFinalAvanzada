@@ -2,6 +2,7 @@ package com.avanzada.unilocal.Unilocal.entity;
 
 import com.avanzada.unilocal.Unilocal.enums.BusinessType;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
+import com.avanzada.unilocal.Unilocal.resources.Revision;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -32,7 +34,10 @@ public class Place implements Serializable {
     private BusinessType businessType;
     private List<String> phones;
     private StateUnilocal stateBusiness;
+    private Person owner;
 
-    public Place(int id, String description, String name, List<String> schedules, List<String> images, BusinessType businessType, List<String> phones, StateUnilocal stateBusiness) {
+    List<Revision> revisions = new ArrayList<>();
+
+    public Place(int id, String description, String name, List<String> schedules, List<String> images, BusinessType businessType, List<String> phones, StateUnilocal stateBusiness, Person owner) {
     }
 }

@@ -1,8 +1,11 @@
 package com.avanzada.unilocal.Unilocal.controller;
 
 import com.avanzada.unilocal.Unilocal.dto.RegisterUserDto;
+import com.avanzada.unilocal.Unilocal.dto.SesionUserDto;
+import com.avanzada.unilocal.Unilocal.dto.TokenDto;
 import com.avanzada.unilocal.Unilocal.dto.UpdateUserDto;
 import com.avanzada.unilocal.Unilocal.entity.Person;
+import com.avanzada.unilocal.Unilocal.serviceImplements.JwtTokenService;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PersonService;
 import com.avanzada.unilocal.global.dto.MessageDto;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
@@ -13,16 +16,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/auth")
 public class PersonController {
 
     @Autowired
     PersonService personService;
 
-    @GetMapping
+    @Autowired
+    private JwtTokenService jwtTokenService;
+
+
+    @GetMapping("/users")
     public ResponseEntity<List<Person>> getAll() {
         return ResponseEntity.ok(personService.getAll());
     }
@@ -33,13 +43,36 @@ public class PersonController {
         return ResponseEntity.ok(personService.getOne(id));
     }
 
-    @PostMapping
-    public ResponseEntity<MessageDto> save(@Valid @RequestBody RegisterUserDto registerUserDto) throws AttributeException {
+    @PostMapping("/register")
+    public ResponseEntity<MessageDto> registerUser(@Valid @RequestBody RegisterUserDto registerUserDto) throws AttributeException {
 
-        Person person = personService.signUp(registerUserDto);
-        String message = "user " + person.getName() + " have been saved";
+        personService.signUp(registerUserDto);
+        String message = "user " + registerUserDto.name() + " have been saved";
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody SesionUserDto userDto) throws Exception {
+        // Buscar el usuario en la base de datos
+        Optional<Person> user = personService.login(userDto);
+        Person person = null;
+
+        // Comprobar si el usuario existe y la contraseña es correcta
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+        } else {
+            person = user.get();
+        }
+
+        Map<String, Object> authToken = new HashMap<>();
+        authToken.put("role", person.getRole());
+        authToken.put("nombre", person.getName());
+        authToken.put("id", person.getId());
+
+        TokenDto tokenDto = new TokenDto(jwtTokenService.generarToken(person.getEmail(), authToken));
+
+        return ResponseEntity.ok(tokenDto);
     }
 
     @PutMapping("/{id}")

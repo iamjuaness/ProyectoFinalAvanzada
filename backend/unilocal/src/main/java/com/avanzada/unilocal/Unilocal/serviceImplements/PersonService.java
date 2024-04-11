@@ -1,9 +1,6 @@
 package com.avanzada.unilocal.Unilocal.serviceImplements;
 
-import com.avanzada.unilocal.Unilocal.dto.ChangePasswordDTO;
-import com.avanzada.unilocal.Unilocal.dto.RegisterUserDto;
-import com.avanzada.unilocal.Unilocal.dto.SesionUserDto;
-import com.avanzada.unilocal.Unilocal.dto.UpdateUserDto;
+import com.avanzada.unilocal.Unilocal.dto.*;
 import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import com.avanzada.unilocal.Unilocal.interfaces.UserService;
@@ -11,11 +8,14 @@ import com.avanzada.unilocal.Unilocal.repository.PersonRepository;
 import com.avanzada.unilocal.Unilocal.enums.Role;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Juanes Cardona
@@ -27,6 +27,13 @@ public class PersonService implements UserService {
     PersonRepository personRepository;
     @Autowired
     EmailService emailService;
+
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public PersonService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     /**
      * Method to register a new user
@@ -43,16 +50,38 @@ public class PersonService implements UserService {
             throw new AttributeException("Email already in use");
 
         int id = autoIncrement();
-        StateUnilocal register = StateUnilocal.Active;
-        Person person = new Person(id, registerUserDto.name(), registerUserDto.photo(), registerUserDto.nickname(), registerUserDto.email(), registerUserDto.password(), registerUserDto.residenceCity(), Role.USER, register);
-
+        String pass = passwordEncoder.encode(registerUserDto.password());
+        Person person = getPerson(registerUserDto, id, pass);
         return personRepository.save(person);
+    }
+
+    private static Person getPerson(RegisterUserDto registerUserDto, int id, String password) {
+        StateUnilocal register = StateUnilocal.Active;
+        Person person = new Person();
+        person.setId(id);
+        person.setName(registerUserDto.name());
+        person.setNickname(registerUserDto.nickname());
+        person.setPassword(password);
+        person.setEmail(registerUserDto.email());
+        person.setResidenceCity(registerUserDto.residenceCity());
+        person.setRole(Role.MOD);
+        person.setStateUnilocal(register);
+        person.setPhoto(registerUserDto.photo());
+        return person;
     }
 
 
     @Override
-    public void login(SesionUserDto sesionUserDto) throws Exception {
+    public Optional<Person> login(SesionUserDto sesionUserDto) throws Exception {
 
+        Optional<Person> person = personRepository.findByEmail(sesionUserDto.email());
+
+
+        if(person.isEmpty() || !passwordEncoder.matches(sesionUserDto.password(), person.get().getPassword())){
+            return Optional.empty();
+        }
+
+        return person;
     }
 
     /**
@@ -96,18 +125,14 @@ public class PersonService implements UserService {
     /**
      * This method generates a link and sends an email to a user to change the password
      *
-     * @param email User email
      * @throws ResourceNotFoundException Exception that is executed if a user with that email is not found
      */
     @Override
-    public void sendLinkPassword(String email) throws ResourceNotFoundException {
-        Person person = personRepository.findByEmail(email)
+    public void sendLinkPassword(EmailDTO emailDTO) throws ResourceNotFoundException, MessagingException {
+        Person person = personRepository.findByEmail(emailDTO.destinatario())
                 .orElseThrow(() -> new ResourceNotFoundException("El email no esta asociado a un usuario"));
 
-        String subject = "RECUPERACIÓN DE CONTRASEÑA";
-        String body = "TODO: Hacer metodo que genere el cuerpo del correo y que genere" +
-                "el link de recuperacion";
-        emailService.sendmail(email, subject, body);
+        emailService.sendEmail(emailDTO);
     }
 
     /**

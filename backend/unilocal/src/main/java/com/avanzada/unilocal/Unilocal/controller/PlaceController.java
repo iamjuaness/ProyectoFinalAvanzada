@@ -35,7 +35,7 @@ public class PlaceController {
     @PostMapping
     public ResponseEntity<MessageDto> save(@Valid @RequestBody CreatePlaceDto createPlaceDto) throws AttributeException {
 
-        Place place = placeService.save(createPlaceDto);
+        Place place = placeService.createBusiness(createPlaceDto);
         String message = "place " + place.getName() + " have been saved";
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
@@ -43,7 +43,7 @@ public class PlaceController {
 
     @PutMapping("/{id}")
     public ResponseEntity<MessageDto> update(@PathVariable("id") int id, @Valid @RequestBody CreatePlaceDto createPlaceDto) throws ResourceNotFoundException, AttributeException {
-        Place place = placeService.update(id, createPlaceDto);
+        Place place = placeService.updateBusiness(id, createPlaceDto);
         String message = "place " + place.getName() + " have been updated";
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
@@ -52,7 +52,7 @@ public class PlaceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageDto> delete(@PathVariable("id") int id) throws ResourceNotFoundException {
-        Place place = placeService.delete(id);
+        Place place = placeService.deleteBusiness(id);
         String message = "user " + place.getName() + " have been deleted";
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
