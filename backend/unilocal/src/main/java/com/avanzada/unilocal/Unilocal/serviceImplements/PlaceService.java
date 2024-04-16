@@ -34,9 +34,24 @@ public class PlaceService implements BusinessService {
 
         int id = autoIncrement();
         StateUnilocal stateBusiness = StateUnilocal.Revision;
-        Place place = new Place(id, createPlaceDto.description(), createPlaceDto.name(), createPlaceDto.schedules(), createPlaceDto.images(), createPlaceDto.businessType(), createPlaceDto.phones(), stateBusiness, createPlaceDto.owner());
+        Place place = getPlace(createPlaceDto, id, stateBusiness);
 
         return placeRepository.save(place);
+    }
+
+    private static Place getPlace(CreatePlaceDto createPlaceDto, int id, StateUnilocal stateUnilocal){
+        Place place = new Place();
+        place.setId(id);
+        place.setName(createPlaceDto.name());
+        place.setDescription(createPlaceDto.description());
+        place.setOwner(createPlaceDto.owner());
+        place.setPhones(createPlaceDto.phones());
+        place.setImages(createPlaceDto.images());
+        place.setLocation(createPlaceDto.location());
+        place.setStateBusiness(stateUnilocal);
+        place.setSchedules(createPlaceDto.schedules());
+        place.setBusinessType(createPlaceDto.businessType());
+        return place;
     }
 
     @Override
@@ -94,7 +109,7 @@ public class PlaceService implements BusinessService {
 
         for(Place place: placeRepository.findAll()){
             if (place != null && place.getOwner() != null) throw new ResourceNotFoundException("No hay lugares creados");{
-                people.add(place.getOwner());
+
             }
         }
 

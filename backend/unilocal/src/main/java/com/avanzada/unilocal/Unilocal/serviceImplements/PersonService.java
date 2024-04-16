@@ -64,7 +64,7 @@ public class PersonService implements UserService {
         person.setPassword(password);
         person.setEmail(registerUserDto.email());
         person.setResidenceCity(registerUserDto.residenceCity());
-        person.setRole(Role.MOD);
+        person.setRole(Role.USER);
         person.setStateUnilocal(register);
         person.setPhoto(registerUserDto.photo());
         return person;

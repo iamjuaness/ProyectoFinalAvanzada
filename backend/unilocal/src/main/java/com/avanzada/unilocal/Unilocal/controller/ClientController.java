@@ -22,8 +22,9 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/auth")
-public class PersonController {
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/user")
+public class ClientController {
 
     @Autowired
     PersonService personService;
@@ -32,18 +33,18 @@ public class PersonController {
     private JwtTokenService jwtTokenService;
 
 
-    @GetMapping("/users")
+    @GetMapping("/get-all")
     public ResponseEntity<List<Person>> getAll() {
         return ResponseEntity.ok(personService.getAll());
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Person> getOne(@PathVariable("id") int id) throws ResourceNotFoundException {
         return ResponseEntity.ok(personService.getOne(id));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register-client")
     public ResponseEntity<MessageDto> registerUser(@Valid @RequestBody RegisterUserDto registerUserDto) throws AttributeException {
 
         personService.signUp(registerUserDto);
@@ -52,7 +53,7 @@ public class PersonController {
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login-client")
     public ResponseEntity<?> loginUser(@RequestBody SesionUserDto userDto) throws Exception {
         // Buscar el usuario en la base de datos
         Optional<Person> user = personService.login(userDto);
@@ -75,7 +76,9 @@ public class PersonController {
         return ResponseEntity.ok(tokenDto);
     }
 
-    @PutMapping("/{id}")
+
+
+    @PutMapping("/update/{id}")
     public ResponseEntity<MessageDto> update(@PathVariable("id") int id, @Valid @RequestBody UpdateUserDto updateUserDto) throws ResourceNotFoundException, AttributeException {
         Person person = personService.profileEdit(updateUserDto, id);
         String message = "user " + person.getName() + " have been updated";
@@ -84,7 +87,7 @@ public class PersonController {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete{id}")
     public ResponseEntity<MessageDto> delete(@PathVariable("id") int id) throws ResourceNotFoundException {
         Person person = personService.delete(id);
         String message = "user " + person.getName() + " have been deleted";
