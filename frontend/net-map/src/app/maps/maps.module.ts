@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MapscreenComponent } from './screens/mapscreen/mapscreen.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MapViewComponent } from './components/map-view/map-view.component';
+import { MainWindowComponent } from './components/main-window/main-window.component';
 
 
 
@@ -11,12 +12,14 @@ import { MapViewComponent } from './components/map-view/map-view.component';
   declarations: [
     MapscreenComponent,
     LoadingComponent,
-    MapViewComponent
+    MapViewComponent,
+    MainWindowComponent,
   ],
   imports: [
     CommonModule
   ],
   exports: [
+    MainWindowComponent,
     MapscreenComponent,
     LoadingComponent
   ]

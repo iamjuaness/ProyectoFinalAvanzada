@@ -14,6 +14,7 @@ export class MapService {
   
   private map?: Map;
   private markers: Marker[] = [];
+  public lugares: Feature[] = [];
 
 
   get isMapReady() {

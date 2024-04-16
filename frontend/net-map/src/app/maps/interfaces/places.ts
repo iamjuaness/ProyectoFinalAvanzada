@@ -7,22 +7,26 @@ export interface PlacesResponse {
     attribution: string;
 }
 
+export interface CustomFeature extends Feature {
+    type: "Feature";
+}
+
 export interface Feature {
-    id:            string;
-    type:          string;
-    place_type:    string[];
-    relevance:     number;
-    properties:    Properties;
-    text_es:       string;
-    language_es?:  Language;
+    id: string;
+    type: string;
+    place_type: string[];
+    relevance: number;
+    properties: Properties;
+    text_es: string;
+    language_es?: Language;
     place_name_es: string;
-    text:          string;
-    language?:     Language;
-    place_name:    string;
-    bbox?:         number[];
-    center:        number[];
-    geometry:      Geometry;
-    context?:      Context[];
+    text: string;
+    language?: Language;
+    place_name: string;
+    bbox?: [number, number, number, number, number, number] | [number, number, number, number];
+    center: number[];
+    geometry: Geometry;
+    context?: Context[];
 }
 
 export interface Context {
@@ -41,8 +45,9 @@ export enum Language {
 }
 
 export interface Geometry {
-    type:        string;
-    coordinates: number[];
+    type: "Point" | "MultiPoint" | "LineString" | "MultiLineString" | "Polygon" | "MultiPolygon";
+    coordinates: any; // Aquí podrías especificar un tipo más específico según el tipo de geometría
+    bbox?: [number, number, number, number, number, number] | [number, number, number, number];
 }
 
 export interface Properties {

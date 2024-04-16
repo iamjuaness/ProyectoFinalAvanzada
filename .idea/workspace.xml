@@ -4,28 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0c7b1b6-6f27-4090-8ad1-cc09046d027f" name="Changes" comment="New Changes&#10;Se implementó la logica de los tokens haciendo uso de JWT, y tambien la lógica para el envio de correos">
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/EmailDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/MensajeDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/TokenDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/resources/Revision.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/JwtTokenService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/SecurityConfig.java" afterDir="false" />
+    <list default="true" id="d0c7b1b6-6f27-4090-8ad1-cc09046d027f" name="Changes" comment="New Changes&#10;Se implemento la logica de mostrar los lugares que se obtienen desde el backend, asi como tambien la logica que permite mostrar los sitios que esten en un rango de 50km de distancia del usuario">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PersonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PlaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PlaceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreatePlaceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/CreatePlaceDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Place.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/BusinessService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/BusinessService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/EmailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PlaceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PlaceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/angular.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/package.json" afterDir="false" />
@@ -34,7 +14,10 @@
       <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/api/placesApiClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/api/placesApiClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/components/map-view/map-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/components/map-view/map-view.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/interfaces/places.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/interfaces/places.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/maps.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/maps.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/services/map.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/services/map.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/styles.css" afterDir="false" />
@@ -87,9 +70,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
         <option value="Record" />
-        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -124,27 +107,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Application.Unilocal.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.unilocal [:UnilocalApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/cardo/OneDrive/Escritorio/Juanes/Programacion/Proyectos/Elipses/InterfazElipses&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;spring.boot.initializr&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\cardo\\OneDrive\\Escritorio\\Juanes\\ProgramacionAvanzada\\ProyectoFinal\\frontend\\net-map\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.Unilocal.executor": "Run",
+    "Gradle.unilocal [:UnilocalApplication.main()].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/cardo/OneDrive/Escritorio/Juanes/Programacion/Proyectos/Elipses/InterfazElipses",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "spring.boot.initializr",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.Unilocal">
     <configuration name="Unilocal" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
@@ -201,8 +184,28 @@
       <workItem from="1710819752453" duration="399000" />
       <workItem from="1712585995755" duration="6068000" />
       <workItem from="1712611801382" duration="969000" />
-      <workItem from="1712848622396" duration="404000" />
+      <workItem from="1712848622396" duration="1818000" />
+      <workItem from="1713135426106" duration="11532000" />
+      <workItem from="1713190091834" duration="6805000" />
+      <workItem from="1713238968146" duration="2023000" />
     </task>
+    <task id="LOCAL-00001" summary="New Changes&#10;Se implementó la logica de los tokens haciendo uso de JWT, y tambien la lógica para el envio de correos">
+      <option name="closed" value="true" />
+      <created>1712849043234</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1712849043234</updated>
+    </task>
+    <task id="LOCAL-00002" summary="New Changes&#10;Se organizaron funciones de la API, asi como tambien se implementaron algunas clases necesarias para el funcionamiento del negocio">
+      <option name="closed" value="true" />
+      <created>1713244627555</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713244627555</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,7 +225,9 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="New Changes&#10;Se implementó la logica de los tokens haciendo uso de JWT, y tambien la lógica para el envio de correos" />
-    <option name="LAST_COMMIT_MESSAGE" value="New Changes&#10;Se implementó la logica de los tokens haciendo uso de JWT, y tambien la lógica para el envio de correos" />
+    <MESSAGE value="New Changes&#10;Se organizaron funciones de la API, asi como tambien se implementaron algunas clases necesarias para el funcionamiento del negocio" />
+    <MESSAGE value="New Changes&#10;Se implemento la logica de mostrar los lugares que se obtienen desde el backend, asi como tambien la logica que permite mostrar los sitios que esten en un rango de 50km de distancia del usuario" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Changes&#10;Se implemento la logica de mostrar los lugares que se obtienen desde el backend, asi como tambien la logica que permite mostrar los sitios que esten en un rango de 50km de distancia del usuario" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
