@@ -1,13 +1,13 @@
 package com.avanzada.unilocal.Unilocal.controller;
 
-import com.avanzada.unilocal.Unilocal.dto.RegisterUserDto;
-import com.avanzada.unilocal.Unilocal.dto.SesionUserDto;
-import com.avanzada.unilocal.Unilocal.dto.TokenDto;
+import com.avanzada.unilocal.Unilocal.dto.*;
 import com.avanzada.unilocal.Unilocal.serviceImplements.AuthServiceImp;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PersonService;
 import com.avanzada.unilocal.global.dto.MensajeAuthDto;
 import com.avanzada.unilocal.global.dto.MessageDto;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
+import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,6 +40,26 @@ public class AuthController {
         String message = "user " + registerUserDto.name() + " have been saved";
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestBody EmailDTO emailDTO) {
+        try {
+            personService.sendLinkPassword(emailDTO);
+            return ResponseEntity.ok("Se ha enviado un correo electrónico con el enlace para restablecer la contraseña.");
+        } catch (ResourceNotFoundException | MessagingException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody ChangePasswordDTO changePasswordDTO) {
+        try {
+            personService.changePassword(changePasswordDTO);
+            return ResponseEntity.ok("Contraseña cambiada exitosamente.");
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping("/login-mod")

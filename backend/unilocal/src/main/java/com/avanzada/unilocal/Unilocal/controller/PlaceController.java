@@ -1,5 +1,6 @@
 package com.avanzada.unilocal.Unilocal.controller;
 
+import com.avanzada.unilocal.Unilocal.dto.CommentDTO;
 import com.avanzada.unilocal.Unilocal.dto.CreatePlaceDto;
 import com.avanzada.unilocal.Unilocal.entity.Place;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PlaceService;
@@ -59,6 +60,24 @@ public class PlaceController {
         String message = "user " + place.getName() + " have been deleted";
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+    }
+
+    @PostMapping("/{lugarId}/comments")
+    public ResponseEntity<String> agregarComentario(@PathVariable int lugarId, @RequestBody CommentDTO comentario) {
+        placeService.addComment(lugarId, comentario);
+        return ResponseEntity.ok("Comentario agregado exitosamente.");
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Place>> buscarLugares(
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String tipo,
+            @RequestParam(required = false) Double latitud,
+            @RequestParam(required = false) Double longitud,
+            @RequestParam(required = false, defaultValue = "1000") Double distanciaMaxima) {
+
+        List<Place> lugares = placeService.buscarLugares(nombre, tipo, latitud, longitud, distanciaMaxima);
+        return ResponseEntity.ok(lugares);
     }
 
 }

@@ -1,11 +1,15 @@
 package com.avanzada.unilocal.Unilocal.serviceImplements;
 
 import com.avanzada.unilocal.Unilocal.dto.*;
+import com.avanzada.unilocal.Unilocal.entity.Comment;
 import com.avanzada.unilocal.Unilocal.entity.Person;
+import com.avanzada.unilocal.Unilocal.entity.Place;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import com.avanzada.unilocal.Unilocal.interfaces.UserService;
 import com.avanzada.unilocal.Unilocal.repository.ClientRepository;
 import com.avanzada.unilocal.Unilocal.enums.Role;
+import com.avanzada.unilocal.Unilocal.repository.CommentRepository;
+import com.avanzada.unilocal.Unilocal.repository.PlaceRepository;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
 import jakarta.mail.MessagingException;
@@ -13,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Juanes Cardona
@@ -26,6 +27,10 @@ public class PersonService implements UserService {
 
     @Autowired
     ClientRepository clientRepository;
+    @Autowired
+    PlaceRepository placeRepository;
+    @Autowired
+    CommentRepository commentRepository;
     @Autowired
     EmailService emailService;
 
@@ -152,6 +157,47 @@ public class PersonService implements UserService {
         clientRepository.save(person);
     }
 
+    public void agregarFavorito(int usuarioId, int lugarId) throws ResourceNotFoundException {
+        Optional<Person> usuario = Optional.ofNullable(clientRepository.findById(usuarioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado")));
+        Optional<Place> lugar = Optional.ofNullable(placeRepository.findById(lugarId)
+                .orElseThrow(() -> new ResourceNotFoundException("Lugar no encontrado")));
+
+        usuario.get().getLugaresFavoritos().add(lugar.get());
+        clientRepository.save(usuario.get());
+    }
+
+    public void eliminarFavorito(int usuarioId, int lugarId) throws ResourceNotFoundException {
+        Optional<Person> usuario = Optional.ofNullable(clientRepository.findById(usuarioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado")));
+        Optional<Place> lugar = Optional.ofNullable(placeRepository.findById(lugarId)
+                .orElseThrow(() -> new ResourceNotFoundException("Lugar no encontrado")));
+
+        usuario.get().getLugaresFavoritos().remove(lugar);
+        clientRepository.save(usuario.get());
+    }
+
+    public Set<Place> obtenerFavoritos(int usuarioId) throws ResourceNotFoundException {
+        Optional<Person> usuario = Optional.ofNullable(clientRepository.findById(usuarioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado")));
+        return usuario.get().getLugaresFavoritos();
+    }
+
+    public List<Place> obtenerLugaresUsuario(int usuarioId) {
+        // Implementación para obtener la lista de lugares del usuario
+        // Usar el lugarRepository para obtener los lugares asociados al usuario
+        return placeRepository.findByUsuarioId(usuarioId);
+    }
+
+    public void responderComentario(int comentarioId, CommentDTO respuesta) throws ResourceNotFoundException {
+        // Implementación para responder a un comentario
+        // Usar el comentarioRepository para obtener y actualizar el comentario con la respuesta
+        Comment comentario = commentRepository.findById(comentarioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Comentario no encontrado"));
+        comentario.getResponses().add(getComment(respuesta));
+        commentRepository.save(comentario);
+    }
+
 
     //----------------------Private Methods--------------------------------------
 
@@ -186,5 +232,12 @@ public class PersonService implements UserService {
         List<Person> people = clientRepository.findAll();
         return people.isEmpty() ? 1 :
                 people.stream().max(Comparator.comparing(Person::getId)).get().getId() + 1;
+    }
+
+    private Comment getComment(CommentDTO commentDTO){
+        Comment comment = new Comment();
+        comment.setMessage(commentDTO.message());
+        comment.setQualification(commentDTO.qualification());
+        return  comment;
     }
 }

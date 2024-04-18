@@ -1,5 +1,6 @@
 package com.avanzada.unilocal.Unilocal.serviceImplements;
 
+import com.avanzada.unilocal.Unilocal.dto.CommentDTO;
 import com.avanzada.unilocal.Unilocal.dto.CreatePlaceDto;
 import com.avanzada.unilocal.Unilocal.dto.RegisterRevisionDto;
 import com.avanzada.unilocal.Unilocal.entity.Person;
@@ -137,10 +138,39 @@ public class PlaceService implements BusinessService {
         }
     }
 
+    @Override
+    public void addComment(int lugarId, CommentDTO comment) {
+
+    }
+
+    public List<Place> buscarLugares(String nombre, String tipo, Double latitud, Double longitud, Double distanciaMaxima) {
+        // Implementar la lógica de búsqueda de lugares según los parámetros proporcionados
+        // Puedes utilizar métodos de consulta de Spring Data JPA o consultas personalizadas según sea necesario
+        // Por ejemplo:
+        if (nombre != null && tipo != null && latitud != null && longitud != null) {
+//            return placeRepository.buscarPorNombreTipoYDistancia(nombre, tipo, latitud, longitud, distanciaMaxima);
+        } else if (nombre != null) {
+            return placeRepository.findByNombreContainingIgnoreCase(nombre);
+        } else if (tipo != null) {
+            return placeRepository.findByTipoIgnoreCase(tipo);
+        } else if (latitud != null && longitud != null) {
+//            return placeRepository.buscarPorUbicacion(latitud, longitud, distanciaMaxima);
+        } else {
+            return placeRepository.findAll();
+        }
+        return null;
+    }
+
     //-----------------------------Private Methods----------------------------------------
 
     public List<Place> getAll() {
-        return placeRepository.findAll();
+        List<Place> places = new ArrayList<>();
+        for (Place place : placeRepository.findAll()){
+            if (place.getStateBusiness().equals(StateUnilocal.Active)){
+                places.add(place);
+            }
+        }
+        return places;
     }
 
 

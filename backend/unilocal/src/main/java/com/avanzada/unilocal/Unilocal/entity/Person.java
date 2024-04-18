@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -28,6 +30,7 @@ public class Person implements Serializable {
     private Place[] myPlaces;
     private Role role;
     private StateUnilocal stateUnilocal;
+    private Set<Place> lugaresFavoritos = new HashSet<>();
 
 
     public Person(int id, String name, String photo, String nickname, String email, String password, String s, Role role, StateUnilocal register) {

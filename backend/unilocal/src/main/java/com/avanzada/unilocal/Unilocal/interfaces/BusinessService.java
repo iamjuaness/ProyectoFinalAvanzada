@@ -1,7 +1,9 @@
 package com.avanzada.unilocal.Unilocal.interfaces;
 
+import com.avanzada.unilocal.Unilocal.dto.CommentDTO;
 import com.avanzada.unilocal.Unilocal.dto.CreatePlaceDto;
 import com.avanzada.unilocal.Unilocal.dto.RegisterRevisionDto;
+import com.avanzada.unilocal.Unilocal.entity.Comment;
 import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.entity.Place;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
@@ -29,5 +31,7 @@ public interface BusinessService {
     void changeState(StateUnilocal newState, int id) throws ResourceNotFoundException;
 
     void registerRevision(RegisterRevisionDto registerRevisionDto, int id) throws ResourceNotFoundException;
+
+    void addComment(int lugarId, CommentDTO comment);
 
 }
