@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface PersonRepository extends MongoRepository<Person, Integer> {
+public interface ClientRepository extends MongoRepository<Person, Integer> {
 
     boolean existsByNickname(String nickname);
     boolean existsByEmail(String email);

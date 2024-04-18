@@ -32,4 +32,9 @@ public class Person implements Serializable {
 
     public Person(int id, String name, String photo, String nickname, String email, String password, String s, Role role, StateUnilocal register) {
     }
+
+    public Person(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
 }

@@ -1,8 +1,9 @@
-package com.avanzada.unilocal.Unilocal.serviceImplements;
+package com.avanzada.unilocal.Unilocal.utils;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -11,8 +12,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Map;
 
-@Service
-public class JwtTokenService {
+@Component
+public class JwtUtils {
 
     @Value("${jwt.secret}")
     private String secret;

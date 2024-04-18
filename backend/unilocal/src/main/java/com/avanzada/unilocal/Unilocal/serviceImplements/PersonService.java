@@ -4,7 +4,7 @@ import com.avanzada.unilocal.Unilocal.dto.*;
 import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import com.avanzada.unilocal.Unilocal.interfaces.UserService;
-import com.avanzada.unilocal.Unilocal.repository.PersonRepository;
+import com.avanzada.unilocal.Unilocal.repository.ClientRepository;
 import com.avanzada.unilocal.Unilocal.enums.Role;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +25,7 @@ import java.util.Optional;
 public class PersonService implements UserService {
 
     @Autowired
-    PersonRepository personRepository;
+    ClientRepository clientRepository;
     @Autowired
     EmailService emailService;
 
@@ -44,15 +45,15 @@ public class PersonService implements UserService {
      */
     @Override
     public Person signUp(RegisterUserDto registerUserDto) throws AttributeException {
-        if (personRepository.existsByNickname(registerUserDto.nickname()))
+        if (clientRepository.existsByNickname(registerUserDto.nickname()))
             throw new AttributeException("nickname already in use");
-        if (personRepository.existsByEmail(registerUserDto.email()))
+        if (clientRepository.existsByEmail(registerUserDto.email()))
             throw new AttributeException("Email already in use");
 
         int id = autoIncrement();
         String pass = passwordEncoder.encode(registerUserDto.password());
         Person person = getPerson(registerUserDto, id, pass);
-        return personRepository.save(person);
+        return clientRepository.save(person);
     }
 
     private static Person getPerson(RegisterUserDto registerUserDto, int id, String password) {
@@ -74,7 +75,7 @@ public class PersonService implements UserService {
     @Override
     public Optional<Person> login(SesionUserDto sesionUserDto) throws Exception {
 
-        Optional<Person> person = personRepository.findByEmail(sesionUserDto.email());
+        Optional<Person> person = clientRepository.findByEmail(sesionUserDto.email());
 
 
         if(person.isEmpty() || !passwordEncoder.matches(sesionUserDto.password(), person.get().getPassword())){
@@ -94,7 +95,7 @@ public class PersonService implements UserService {
      */
     @Override
     public Person profileEdit(UpdateUserDto updateUserDto, int id) throws ResourceNotFoundException {
-        Person person = personRepository.findById(id)
+        Person person = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found"));
 
         person.setName(updateUserDto.name());
@@ -103,7 +104,7 @@ public class PersonService implements UserService {
         person.setPhoto(updateUserDto.photo());
         person.setResidenceCity(updateUserDto.residenceCity());
 
-        return personRepository.save(person);
+        return clientRepository.save(person);
     }
 
     /**
@@ -115,10 +116,10 @@ public class PersonService implements UserService {
      */
     @Override
     public Person delete(int id) throws ResourceNotFoundException {
-        Person person = personRepository.findById(id)
+        Person person = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un usuario"));
         person.setStateUnilocal(StateUnilocal.Inactive);
-        personRepository.save(person);
+        clientRepository.save(person);
         return person;
     }
 
@@ -129,7 +130,7 @@ public class PersonService implements UserService {
      */
     @Override
     public void sendLinkPassword(EmailDTO emailDTO) throws ResourceNotFoundException, MessagingException {
-        Person person = personRepository.findByEmail(emailDTO.destinatario())
+        Person person = clientRepository.findByEmail(emailDTO.destinatario())
                 .orElseThrow(() -> new ResourceNotFoundException("El email no esta asociado a un usuario"));
 
         emailService.sendEmail(emailDTO);
@@ -144,11 +145,11 @@ public class PersonService implements UserService {
      */
     @Override
     public void changePassword(ChangePasswordDTO changePasswordDTO) throws ResourceNotFoundException {
-        Person person = personRepository.findById(changePasswordDTO.id())
+        Person person = clientRepository.findById(changePasswordDTO.id())
                 .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un usuario"));
 
         person.setPassword(changePasswordDTO.password());
-        personRepository.save(person);
+        clientRepository.save(person);
     }
 
 
@@ -160,7 +161,13 @@ public class PersonService implements UserService {
      * @return The database user list
      */
     public List<Person> getAll() {
-        return personRepository.findAll();
+        List<Person> personList = new ArrayList<>();
+        for (Person person : clientRepository.findAll()){
+            if (person.getRole().equals(Role.USER)){
+                personList.add(person);
+            }
+        }
+        return personList;
     }
 
     /**
@@ -171,12 +178,12 @@ public class PersonService implements UserService {
      * @throws ResourceNotFoundException Exception that is executed if a user with that id is not found
      */
     public Person getOne(int id) throws ResourceNotFoundException {
-        return personRepository.findById(id)
+        return clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found"));
     }
 
     private int autoIncrement() {
-        List<Person> people = personRepository.findAll();
+        List<Person> people = clientRepository.findAll();
         return people.isEmpty() ? 1 :
                 people.stream().max(Comparator.comparing(Person::getId)).get().getId() + 1;
     }

@@ -4,23 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0c7b1b6-6f27-4090-8ad1-cc09046d027f" name="Changes" comment="New Changes&#10;Se implemento la logica de mostrar los lugares que se obtienen desde el backend, asi como tambien la logica que permite mostrar los sitios que esten en un rango de 50km de distancia del usuario">
+    <list default="true" id="d0c7b1b6-6f27-4090-8ad1-cc09046d027f" name="Changes" comment="New Changes">
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/ImagenesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/dto/ImagenDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/interfaces/ImagenesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/AuthServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/ImagenesServicioImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/utils/FiltroToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/global/dto/MensajeAuthDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/unilocal/src/test/java/com/avanzada/unilocal/AuthServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/api/placesApiClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/api/placesApiClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PlaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/controller/PlaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/entity/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/repository/PersonRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/repository/ClientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/JwtTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/utils/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/Unilocal/serviceImplements/PersonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/global/dto/MessageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/unilocal/src/main/java/com/avanzada/unilocal/global/dto/MessageDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/components/map-view/map-view.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/components/map-view/map-view.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/interfaces/places.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/interfaces/places.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/maps.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/maps.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/app/maps/services/map.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/app/maps/services/map.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/net-map/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/net-map/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,8 +74,8 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -93,6 +96,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -107,27 +113,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.Unilocal.executor": "Run",
-    "Gradle.unilocal [:UnilocalApplication.main()].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/cardo/OneDrive/Escritorio/Juanes/Programacion/Proyectos/Elipses/InterfazElipses",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "spring.boot.initializr",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Unilocal.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AuthServiceTest.testLoginClient_Success.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.unilocal [:UnilocalApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #4.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/cardo/OneDrive/Escritorio/Juanes/Programacion/Proyectos/Elipses/InterfazElipses&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;spring.boot.initializr&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Unilocal">
     <configuration name="Unilocal" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
@@ -138,6 +146,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AuthServiceTest.testLoginClient_Success" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/backend/unilocal" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.avanzada.unilocal.AuthServiceTest.testLoginClient_Success&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="4" requestIdentifier="#4" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="UnilocalApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="unilocal.main" />
@@ -146,6 +181,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.AuthServiceTest.testLoginClient_Success" />
+        <item itemvalue="HTTP Request.generated-requests | #4" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -187,7 +228,12 @@
       <workItem from="1712848622396" duration="1818000" />
       <workItem from="1713135426106" duration="11532000" />
       <workItem from="1713190091834" duration="6805000" />
-      <workItem from="1713238968146" duration="2023000" />
+      <workItem from="1713238968146" duration="2115000" />
+      <workItem from="1713294736860" duration="940000" />
+      <workItem from="1713389947137" duration="3107000" />
+      <workItem from="1713409887620" duration="10994000" />
+      <workItem from="1713421586929" duration="212000" />
+      <workItem from="1713421909622" duration="251000" />
     </task>
     <task id="LOCAL-00001" summary="New Changes&#10;Se implementó la logica de los tokens haciendo uso de JWT, y tambien la lógica para el envio de correos">
       <option name="closed" value="true" />
@@ -205,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713244627555</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="New Changes&#10;Se implemento la logica de mostrar los lugares que se obtienen desde el backend, asi como tambien la logica que permite mostrar los sitios que esten en un rango de 50km de distancia del usuario">
+      <option name="closed" value="true" />
+      <created>1713244821764</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713244821764</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
