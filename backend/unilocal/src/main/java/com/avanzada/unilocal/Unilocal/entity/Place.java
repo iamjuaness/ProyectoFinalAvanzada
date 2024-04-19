@@ -3,7 +3,6 @@ package com.avanzada.unilocal.Unilocal.entity;
 import com.avanzada.unilocal.Unilocal.enums.BusinessType;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import com.avanzada.unilocal.Unilocal.resources.Location;
-import com.avanzada.unilocal.Unilocal.resources.Revision;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,15 +30,27 @@ public class Place implements Serializable {
     private List<String> schedules;
 
     private List<String> images;
-    private List<Comment> comments;
+    private List<String> comments = new ArrayList<>();
     private BusinessType businessType;
     private List<String> phones;
     private StateUnilocal stateBusiness;
     private String owner;
     private Location location;
 
-    List<Revision> revisions = new ArrayList<>();
+    private  List<Integer> qualifications = new ArrayList<>();
+
+    private List<Integer> revisions = new ArrayList<>();
 
     public Place(int id, String description, String name, List<String> schedules, List<String> images, BusinessType businessType, List<String> phones, StateUnilocal stateBusiness, String owner, Location location) {
+        this.id = id;
+        this.description = description;
+        this.name = name;
+        this.schedules = schedules;
+        this.images = images;
+        this.businessType = businessType;
+        this.phones = phones;
+        this.stateBusiness = stateBusiness;
+        this.owner = owner;
+        this.location = location;
     }
 }

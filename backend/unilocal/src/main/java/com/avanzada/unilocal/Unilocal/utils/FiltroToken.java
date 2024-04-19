@@ -27,7 +27,7 @@ public class FiltroToken extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         // Configuración de cabeceras para CORS
-        response.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.addHeader("Access-Control-Allow-Headers", "Origin, Accept, Content-Type, Authorization");
         if (request.getMethod().equals("OPTIONS")) {
@@ -40,7 +40,7 @@ public class FiltroToken extends OncePerRequestFilter{
             boolean error = true;
             try {
 
-                //Si la petición es para la ruta /api/clientes se verifica que el token sea correcto y que el rol sea USER
+                //Si la petición es para la ruta /api/user se verifica que el token sea correcto y que el rol sea USER
                 if (requestURI.startsWith("/api/user")) {
                     if (token != null) {
                         Jws<Claims> jws = jwtUtils.parseJwt(token);
@@ -49,6 +49,54 @@ public class FiltroToken extends OncePerRequestFilter{
 
                                     HttpServletResponse.SC_FORBIDDEN, response);
 
+                        } else {
+                            error = false;
+                        }
+                    } else {
+                        crearRespuestaError("No tiene permisos para acceder a este recurso",
+
+                                HttpServletResponse.SC_FORBIDDEN, response);
+
+                    }
+                } else if(requestURI.startsWith("/api/place")){
+                    if (token != null){
+                        Jws<Claims> jws = jwtUtils.parseJwt(token);
+                        if (!jws.getPayload().get("role").equals("USER")){
+                            crearRespuestaError("No tiene permisos para acceder a este recurso",
+
+                                    HttpServletResponse.SC_FORBIDDEN, response);
+                        } else {
+                            error = false;
+                        }
+                    } else {
+                        crearRespuestaError("No tiene permisos para acceder a este recurso",
+
+                                HttpServletResponse.SC_FORBIDDEN, response);
+
+                    }
+                } else if (requestURI.startsWith("/api/mods")) {
+                    if (token != null){
+                        Jws<Claims> jws = jwtUtils.parseJwt(token);
+                        if (!jws.getPayload().get("role").equals("MOD")){
+                            crearRespuestaError("No tiene permisos para acceder a este recurso",
+
+                                    HttpServletResponse.SC_FORBIDDEN, response);
+                        } else {
+                            error = false;
+                        }
+                    } else {
+                        crearRespuestaError("No tiene permisos para acceder a este recurso",
+
+                                HttpServletResponse.SC_FORBIDDEN, response);
+
+                    }
+                } else if (requestURI.startsWith("/api/imagenes")) {
+                    if (token != null){
+                        Jws<Claims> jws = jwtUtils.parseJwt(token);
+                        if (!jws.getPayload().get("role").equals("USER")){
+                            crearRespuestaError("No tiene permisos para acceder a este recurso",
+
+                                    HttpServletResponse.SC_FORBIDDEN, response);
                         } else {
                             error = false;
                         }

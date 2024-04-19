@@ -1,5 +1,7 @@
 package com.avanzada.unilocal.Unilocal.controller;
 
+import com.avanzada.unilocal.Unilocal.dto.EmailDTO;
+import com.avanzada.unilocal.Unilocal.dto.RegisterRevisionDto;
 import com.avanzada.unilocal.Unilocal.dto.SesionUserDto;
 import com.avanzada.unilocal.Unilocal.dto.TokenDto;
 import com.avanzada.unilocal.Unilocal.entity.Person;
@@ -7,6 +9,8 @@ import com.avanzada.unilocal.Unilocal.entity.Place;
 import com.avanzada.unilocal.Unilocal.serviceImplements.ModeradorService;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PersonService;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
+import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +30,23 @@ public class ModController {
 
 
     @PostMapping("/autorizar/{lugarId}")
-    public void autorizarLugar(@PathVariable int lugarId) throws ResourceNotFoundException {
-        moderadorService.autorizarLugar(lugarId);
+    public ResponseEntity<String> autorizarLugar(@PathVariable int lugarId, @Valid @RequestBody RegisterRevisionDto registerRevisionDto) throws ResourceNotFoundException, MessagingException {
+        try {
+            moderadorService.autorizarLugar(lugarId, registerRevisionDto);
+            return ResponseEntity.ok("Se ha enviado un correo electronico al usuario avisando que su negocio fue autorizado.");
+        } catch (ResourceNotFoundException | MessagingException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping("/rechazar/{lugarId}")
-    public void rechazarLugar(@PathVariable int lugarId) throws ResourceNotFoundException {
-        moderadorService.rechazarLugar(lugarId);
+    public ResponseEntity<String> rechazarLugar(@PathVariable int lugarId) throws ResourceNotFoundException, MessagingException {
+        try {
+            moderadorService.rechazarLugar(lugarId);
+            return ResponseEntity.ok("Se ha enviado un correo electronico al usuario avisando que su negocio fue rechazado.");
+        } catch (ResourceNotFoundException | MessagingException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("/lugares/pendientes")

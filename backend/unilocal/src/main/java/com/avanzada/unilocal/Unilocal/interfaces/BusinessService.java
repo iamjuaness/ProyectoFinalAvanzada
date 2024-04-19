@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface BusinessService {
 
-    Place createBusiness(CreatePlaceDto createPlaceDto) throws AttributeException;
+    Place createBusiness(CreatePlaceDto createPlaceDto) throws AttributeException, ResourceNotFoundException;
     Place updateBusiness(int id, CreatePlaceDto createPlaceDto) throws AttributeException, ResourceNotFoundException;
 
     Place deleteBusiness(int id) throws ResourceNotFoundException;
@@ -29,9 +29,4 @@ public interface BusinessService {
     List<Person> listOwnerBusiness() throws ResourceNotFoundException;
 
     void changeState(StateUnilocal newState, int id) throws ResourceNotFoundException;
-
-    void registerRevision(RegisterRevisionDto registerRevisionDto, int id) throws ResourceNotFoundException;
-
-    void addComment(int lugarId, CommentDTO comment);
-
 }

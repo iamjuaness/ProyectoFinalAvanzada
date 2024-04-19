@@ -23,26 +23,24 @@ public class PlaceController {
     @Autowired
     PlaceService placeService;
 
-
-    @GetMapping("/get-places")
-    public ResponseEntity<List<Place>> getAll(){
-        return ResponseEntity.ok(placeService.getAll());
-    }
-
-
-
     @GetMapping("/get/{id}")
     public ResponseEntity<Place> getOne(@PathVariable("id") int id) throws ResourceNotFoundException {
         return ResponseEntity.ok(placeService.getOne(id));
     }
 
     @PostMapping("/create-place")
-    public ResponseEntity<MessageDto> save(@Valid @RequestBody CreatePlaceDto createPlaceDto) throws AttributeException {
+    public ResponseEntity<MessageDto> save(@Valid @RequestBody CreatePlaceDto createPlaceDto) throws AttributeException, ResourceNotFoundException {
 
-        placeService.createBusiness(createPlaceDto);
-        String message = "place " + createPlaceDto.name() + " have been saved";
+        Place place = placeService.createBusiness(createPlaceDto);
 
-        return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+        if (place != null){
+            String message = "place " + createPlaceDto.name() + " have been saved";
+
+            return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+        } else {
+            String message = "No se puede crear el lugar, necesita una cuenta activa para hacerlo";
+            return ResponseEntity.ok(new MessageDto(HttpStatus.FORBIDDEN, message));
+        }
     }
 
     @PutMapping("/update/{id}")
@@ -57,27 +55,27 @@ public class PlaceController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<MessageDto> delete(@PathVariable("id") int id) throws ResourceNotFoundException {
         Place place = placeService.deleteBusiness(id);
-        String message = "user " + place.getName() + " have been deleted";
 
-        return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+        if (place != null){
+            String message = "place " + place.getName() + " have been deleted";
+
+            return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+        } else {
+            String message = "Accion incorrecta, el lugar ya ha sido eliminado previamente";
+            return ResponseEntity.ok(new MessageDto(HttpStatus.FORBIDDEN, message));
+        }
     }
 
-    @PostMapping("/{lugarId}/comments")
-    public ResponseEntity<String> agregarComentario(@PathVariable int lugarId, @RequestBody CommentDTO comentario) {
-        placeService.addComment(lugarId, comentario);
-        return ResponseEntity.ok("Comentario agregado exitosamente.");
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<List<Place>> buscarLugares(
-            @RequestParam(required = false) String nombre,
-            @RequestParam(required = false) String tipo,
-            @RequestParam(required = false) Double latitud,
-            @RequestParam(required = false) Double longitud,
-            @RequestParam(required = false, defaultValue = "1000") Double distanciaMaxima) {
-
-        List<Place> lugares = placeService.buscarLugares(nombre, tipo, latitud, longitud, distanciaMaxima);
-        return ResponseEntity.ok(lugares);
-    }
+//    @GetMapping("/search")
+//    public ResponseEntity<List<Place>> buscarLugares(
+//            @RequestParam(required = false) String name,
+//            @RequestParam(required = false) String businessType,
+//            @RequestParam(required = false) Double latitud,
+//            @RequestParam(required = false) Double longitud,
+//            @RequestParam(required = false, defaultValue = "1000") Double distanciaMaxima) {
+//
+//        List<Place> lugares = placeService.buscarLugares(nombre, tipo, latitud, longitud, distanciaMaxima);
+//        return ResponseEntity.ok(lugares);
+//    }
 
 }

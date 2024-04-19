@@ -34,14 +34,14 @@ public class ClientController {
 
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Person> getOne(@PathVariable("id") int id) throws ResourceNotFoundException {
+    public ResponseEntity<Person> getOne(@PathVariable("id") String id) throws ResourceNotFoundException {
         return ResponseEntity.ok(personService.getOne(id));
     }
 
 
 
     @PutMapping("/edit-profile/{id}")
-    public ResponseEntity<MessageDto> update(@PathVariable("id") int id, @Valid @RequestBody UpdateUserDto updateUserDto) throws ResourceNotFoundException, AttributeException {
+    public ResponseEntity<MessageDto> update(@PathVariable("id") String id, @Valid @RequestBody UpdateUserDto updateUserDto) throws ResourceNotFoundException, AttributeException {
         Person person = personService.profileEdit(updateUserDto, id);
         String message = "user " + person.getName() + " have been updated";
 
@@ -50,7 +50,7 @@ public class ClientController {
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<MessageDto> delete(@PathVariable("id") int id) throws ResourceNotFoundException {
+    public ResponseEntity<MessageDto> delete(@PathVariable("id") String id) throws ResourceNotFoundException {
         Person person = personService.delete(id);
         String message = "user " + person.getName() + " have been deleted";
 
@@ -58,7 +58,7 @@ public class ClientController {
     }
 
     @PostMapping("/{usuarioId}/favoritos/{lugarId}")
-    public ResponseEntity<String> agregarFavorito(@PathVariable int usuarioId, @PathVariable int lugarId) {
+    public ResponseEntity<String> agregarFavorito(@PathVariable String usuarioId, @PathVariable int lugarId) {
         try {
             personService.agregarFavorito(usuarioId, lugarId);
             return ResponseEntity.ok("Lugar agregado a favoritos.");
@@ -68,7 +68,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/{usuarioId}/favoritos/{lugarId}")
-    public ResponseEntity<String> eliminarFavorito(@PathVariable int usuarioId, @PathVariable int lugarId) {
+    public ResponseEntity<String> eliminarFavorito(@PathVariable String usuarioId, @PathVariable int lugarId) {
         try {
             personService.eliminarFavorito(usuarioId, lugarId);
             return ResponseEntity.ok("Lugar eliminado de favoritos.");
@@ -78,19 +78,36 @@ public class ClientController {
     }
 
     @GetMapping("/{usuarioId}/favoritos")
-    public ResponseEntity<Set<Place>> obtenerFavoritos(@PathVariable int usuarioId) throws ResourceNotFoundException {
-        Set<Place> favoritos = personService.obtenerFavoritos(usuarioId);
+    public ResponseEntity<List<Place>> obtenerFavoritos(@PathVariable String usuarioId) throws ResourceNotFoundException {
+        List<Place> favoritos = personService.obtenerFavoritos(usuarioId);
         return ResponseEntity.ok(favoritos);
     }
 
+    @PostMapping("/{lugarId}/comments")
+    public ResponseEntity<String> agregarComentario(@PathVariable int lugarId, @RequestBody CommentDTO comentario) throws ResourceNotFoundException {
+        personService.addComment(lugarId, comentario);
+        return ResponseEntity.ok("Comentario agregado exitosamente.");
+    }
+
     @GetMapping("/usuario/{id}/lugares")
-    public List<Place> obtenerLugaresUsuario(@PathVariable int id) {
+    public List<Place> obtenerLugaresUsuario(@PathVariable String id) {
         return personService.obtenerLugaresUsuario(id);
     }
 
     @PostMapping("/comentario/{id}/responder")
     public void responderComentario(@PathVariable int id, @RequestBody CommentDTO respuesta) throws ResourceNotFoundException {
         personService.responderComentario(id, respuesta);
+    }
+
+    @DeleteMapping("/comentario/{id}/delete/{idCliente}")
+    public void eliminarComentario(@PathVariable int id, @PathVariable String idCliente) throws ResourceNotFoundException {
+        personService.eliminarComentario(id, idCliente);
+    }
+
+    @PostMapping("/{lugarId}/qualifications")
+    public ResponseEntity<String> agregarCalificacion(@PathVariable int lugarId, @RequestBody QualificationDTO qualificationDTO) throws ResourceNotFoundException {
+        personService.addQualification(lugarId, qualificationDTO);
+        return ResponseEntity.ok("Comentario agregado exitosamente.");
     }
 
 }

@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface AccountService {
     Optional<Person> login(SesionUserDto sesionUserDto)throws Exception;
-    Person delete(int idCuenta)throws Exception;
+    Person delete(String idCuenta)throws Exception;
     void changePassword(ChangePasswordDTO changePasswordDTO)throws Exception;
 }

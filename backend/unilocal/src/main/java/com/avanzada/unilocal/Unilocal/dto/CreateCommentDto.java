@@ -1,6 +1,6 @@
 package com.avanzada.unilocal.Unilocal.dto;
 
-import com.avanzada.unilocal.Unilocal.resources.Qualification;
+import com.avanzada.unilocal.Unilocal.entity.Qualification;
 import jakarta.validation.constraints.NotBlank;
 
 public record CreateCommentDto(

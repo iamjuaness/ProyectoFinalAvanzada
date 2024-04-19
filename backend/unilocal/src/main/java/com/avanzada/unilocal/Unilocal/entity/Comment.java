@@ -1,6 +1,5 @@
 package com.avanzada.unilocal.Unilocal.entity;
 
-import com.avanzada.unilocal.Unilocal.resources.Qualification;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,11 +7,12 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
 @Getter
-@Document
+@Document(collection = "comments")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
@@ -20,6 +20,14 @@ public class Comment {
     @Id
     private int id;
     private String message;
-    private Qualification qualification;
-    private List<Comment> responses;
+    private List<String> responses = new ArrayList<>();
+
+    public Comment(String message) {
+        this.message = message;
+    }
+
+    public Comment(int id, String message) {
+        this.id = id;
+        this.message = message;
+    }
 }

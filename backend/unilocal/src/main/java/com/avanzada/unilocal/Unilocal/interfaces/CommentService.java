@@ -1,13 +1,19 @@
 package com.avanzada.unilocal.Unilocal.interfaces;
 
+import com.avanzada.unilocal.Unilocal.dto.CommentDTO;
+import com.avanzada.unilocal.Unilocal.entity.Comment;
+import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
+
+import java.util.List;
+
 public interface CommentService {
 
-    void crearComentario();
+    void crearComentario(CommentDTO commentDTO, int lugarId) throws ResourceNotFoundException;
 
-    void responderComentario();
 
-    void listarComentariosNegocio();
+    void responderComentario(int comentarioId, CommentDTO respuesta) throws ResourceNotFoundException;
 
-    void calcularPromedioCalificaciones();
+    List<Comment> listarComentariosNegocio(int lugarId);
 
+    void eliminarComentario(int id, String idCliente);
 }

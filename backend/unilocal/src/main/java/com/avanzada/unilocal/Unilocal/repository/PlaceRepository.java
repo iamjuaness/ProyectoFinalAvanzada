@@ -1,6 +1,7 @@
 package com.avanzada.unilocal.Unilocal.repository;
 
 import com.avanzada.unilocal.Unilocal.entity.Place;
+import com.avanzada.unilocal.Unilocal.enums.BusinessType;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,9 +18,11 @@ public interface PlaceRepository extends MongoRepository<Place, Integer> {
     Optional<Place> findByName(String name);
     Optional<Place> findById(int id);
 
-    List<Place> findByNombreContainingIgnoreCase(String nombre);
+    List<Place> findByOwner(String id);
 
-    List<Place> findByTipoIgnoreCase(String tipo);
+    List<Place> findByNameContainingIgnoreCase(String name);
+
+    List<Place> findByBusinessTypeIgnoreCase(BusinessType tipo);
 
 //    @Query("SELECT l FROM Lugar l WHERE " +
 //            "ACOS(SIN(RADIANS(:latitud)) * SIN(RADIANS(l.latitud)) + " + "COS(RADIANS(:latitud)) * COS(RADIANS(l.latitud)) * COS(RADIANS(l.longitud) - RADIANS(:longitud))) * 6371 <= :distanciaMaxima")
@@ -38,5 +41,5 @@ public interface PlaceRepository extends MongoRepository<Place, Integer> {
 //                                              @Param("longitud") Double longitud,
 //                                              @Param("distanciaMaxima") Double distanciaMaxima);
 
-    List<Place> findByUsuarioId(int usuarioId);
+//    List<Place> findByUsuarioId(int usuarioId);
 }

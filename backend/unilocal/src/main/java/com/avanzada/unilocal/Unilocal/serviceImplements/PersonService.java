@@ -30,7 +30,7 @@ public class PersonService implements UserService {
     @Autowired
     PlaceRepository placeRepository;
     @Autowired
-    CommentRepository commentRepository;
+    CommentServiceImp commentServiceImp;
     @Autowired
     EmailService emailService;
 
@@ -55,16 +55,17 @@ public class PersonService implements UserService {
         if (clientRepository.existsByEmail(registerUserDto.email()))
             throw new AttributeException("Email already in use");
 
-        int id = autoIncrement();
+        String cedula = registerUserDto.cedula();
         String pass = passwordEncoder.encode(registerUserDto.password());
-        Person person = getPerson(registerUserDto, id, pass);
+        Person person = getPerson(registerUserDto, cedula, pass);
         return clientRepository.save(person);
     }
 
-    private static Person getPerson(RegisterUserDto registerUserDto, int id, String password) {
+
+    private static Person getPerson(RegisterUserDto registerUserDto, String id, String password) {
         StateUnilocal register = StateUnilocal.Active;
         Person person = new Person();
-        person.setId(id);
+        person.setCedula(id);
         person.setName(registerUserDto.name());
         person.setNickname(registerUserDto.nickname());
         person.setPassword(password);
@@ -99,7 +100,7 @@ public class PersonService implements UserService {
      * @throws ResourceNotFoundException Exception that is executed if a user with that id is not found
      */
     @Override
-    public Person profileEdit(UpdateUserDto updateUserDto, int id) throws ResourceNotFoundException {
+    public Person profileEdit(UpdateUserDto updateUserDto, String id) throws ResourceNotFoundException {
         Person person = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found"));
 
@@ -120,7 +121,7 @@ public class PersonService implements UserService {
      * @throws ResourceNotFoundException Exception that is executed if a user with that id is not found
      */
     @Override
-    public Person delete(int id) throws ResourceNotFoundException {
+    public Person delete(String id) throws ResourceNotFoundException {
         Person person = clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un usuario"));
         person.setStateUnilocal(StateUnilocal.Inactive);
@@ -157,17 +158,17 @@ public class PersonService implements UserService {
         clientRepository.save(person);
     }
 
-    public void agregarFavorito(int usuarioId, int lugarId) throws ResourceNotFoundException {
+    public void agregarFavorito(String usuarioId, int lugarId) throws ResourceNotFoundException {
         Optional<Person> usuario = Optional.ofNullable(clientRepository.findById(usuarioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado")));
         Optional<Place> lugar = Optional.ofNullable(placeRepository.findById(lugarId)
                 .orElseThrow(() -> new ResourceNotFoundException("Lugar no encontrado")));
 
-        usuario.get().getLugaresFavoritos().add(lugar.get());
+        usuario.get().getLugaresFavoritos().add(lugar.get().getId());
         clientRepository.save(usuario.get());
     }
 
-    public void eliminarFavorito(int usuarioId, int lugarId) throws ResourceNotFoundException {
+    public void eliminarFavorito(String usuarioId, int lugarId) throws ResourceNotFoundException {
         Optional<Person> usuario = Optional.ofNullable(clientRepository.findById(usuarioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado")));
         Optional<Place> lugar = Optional.ofNullable(placeRepository.findById(lugarId)
@@ -177,25 +178,46 @@ public class PersonService implements UserService {
         clientRepository.save(usuario.get());
     }
 
-    public Set<Place> obtenerFavoritos(int usuarioId) throws ResourceNotFoundException {
+    public List<Place> obtenerFavoritos(String usuarioId) throws ResourceNotFoundException {
+        List<Place> places = new ArrayList<>();
         Optional<Person> usuario = Optional.ofNullable(clientRepository.findById(usuarioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado")));
-        return usuario.get().getLugaresFavoritos();
+        for (int i : usuario.get().getLugaresFavoritos()){
+            if (i != 0){
+                for (Place place : placeRepository.findAll()){
+                    if (place.getId() == i){
+                        places.add(place);
+                    }
+                }
+            }
+        }
+        return places;
     }
 
-    public List<Place> obtenerLugaresUsuario(int usuarioId) {
+    @Override
+    public void addComment(int lugarId, CommentDTO comment) throws ResourceNotFoundException {
+        commentServiceImp.crearComentario(comment, lugarId);
+    }
+
+    @Override
+    public void eliminarComentario(int id, String idCliente) {
+        commentServiceImp.eliminarComentario(id, idCliente);
+    }
+
+    @Override
+    public void addQualification(int lugarId, QualificationDTO qualificationDTO) {
+
+    }
+
+
+    public List<Place> obtenerLugaresUsuario(String usuarioId) {
         // Implementación para obtener la lista de lugares del usuario
         // Usar el lugarRepository para obtener los lugares asociados al usuario
-        return placeRepository.findByUsuarioId(usuarioId);
+        return placeRepository.findByOwner(usuarioId);
     }
 
     public void responderComentario(int comentarioId, CommentDTO respuesta) throws ResourceNotFoundException {
-        // Implementación para responder a un comentario
-        // Usar el comentarioRepository para obtener y actualizar el comentario con la respuesta
-        Comment comentario = commentRepository.findById(comentarioId)
-                .orElseThrow(() -> new ResourceNotFoundException("Comentario no encontrado"));
-        comentario.getResponses().add(getComment(respuesta));
-        commentRepository.save(comentario);
+        commentServiceImp.responderComentario(comentarioId,respuesta);
     }
 
 
@@ -223,21 +245,14 @@ public class PersonService implements UserService {
      * @return User
      * @throws ResourceNotFoundException Exception that is executed if a user with that id is not found
      */
-    public Person getOne(int id) throws ResourceNotFoundException {
+    public Person getOne(String id) throws ResourceNotFoundException {
         return clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found"));
-    }
-
-    private int autoIncrement() {
-        List<Person> people = clientRepository.findAll();
-        return people.isEmpty() ? 1 :
-                people.stream().max(Comparator.comparing(Person::getId)).get().getId() + 1;
     }
 
     private Comment getComment(CommentDTO commentDTO){
         Comment comment = new Comment();
         comment.setMessage(commentDTO.message());
-        comment.setQualification(commentDTO.qualification());
         return  comment;
     }
 }

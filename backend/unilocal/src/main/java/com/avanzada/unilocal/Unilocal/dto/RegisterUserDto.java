@@ -4,18 +4,20 @@ import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
 
 public record RegisterUserDto(
-        @NotBlank(message = "name is required")
+
+        @NotBlank(message = "El numero de cedula es obligatorio")
+        String cedula,
+        @NotBlank(message = "El nombre es obligatorio")
         @Length(min = 7, max = 50)
         String name,
-        @NotBlank(message = "photo is required")
         String photo,
-        @NotBlank(message = "nickname is required")
+        @NotBlank(message = "El nombre de usuario es obligatorio")
         String nickname,
-        @NotBlank(message = "email is required")
+        @NotBlank(message = "El correo es obligatorio")
         String email,
-        @NotBlank(message = "password is required")
+        @NotBlank(message = "La contrasena es obligatoria")
         @Length(min = 8)
         String password,
-        @NotBlank(message = "residenceCity is required")
+        @NotBlank(message = "La ciudad de residencia es obligatoria")
         String residenceCity
 ) {}

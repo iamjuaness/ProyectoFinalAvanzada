@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class AuthServiceImp implements AuthService {
 
     @Autowired
@@ -41,7 +40,7 @@ public class AuthServiceImp implements AuthService {
         Map<String, Object> authToken = new HashMap<>();
         authToken.put("role", "USER");
         authToken.put("nombre", person.getName());
-        authToken.put("id", person.getId());
+        authToken.put("id", person.getCedula());
 
         return new TokenDto(jwtTokenService.generarToken(person.getEmail(), authToken));
     }
@@ -62,7 +61,7 @@ public class AuthServiceImp implements AuthService {
         Map<String, Object> authToken = new HashMap<>();
         authToken.put("role", "MOD");
         authToken.put("nombre", person.getName());
-        authToken.put("id", person.getId());
+        authToken.put("id", person.getCedula());
 
         return new TokenDto(jwtTokenService.generarToken(person.getEmail(), authToken));
     }
