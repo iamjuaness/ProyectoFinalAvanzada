@@ -1,0 +1,13 @@
+<div
+  class="fixed top-20 left-5 w-72 bg-white rounded border border-gray-200 shadow-md p-2"
+>
+  <input
+    type="text"
+    class="w-full px-3 py-1 rounded border border-gray-300 focus:outline-none"
+    placeholder="Buscar lugar..."
+    #txtQuery
+    (keyup)="onQueryChanged(txtQuery.value)"
+  />
+
+  <app-search-results></app-search-results>
+</div>

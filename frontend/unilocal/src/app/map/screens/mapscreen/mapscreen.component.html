@@ -1,0 +1,15 @@
+<app-loading *ngIf="!isUserLocationReady; else mapReady"></app-loading>
+<div class="fixed top-0 w-full z-10">
+  <app-nav></app-nav>
+</div>
+<ng-template #mapReady>
+  <div class="relative z-0 h-screen">
+    <app-map-view class="h-96"></app-map-view>
+
+    <app-btn-my-location
+      class="absolute bottom-8 right-8"
+    ></app-btn-my-location>
+
+    <app-search-bar class="absolute top-8 right-8"></app-search-bar>
+  </div>
+</ng-template>
