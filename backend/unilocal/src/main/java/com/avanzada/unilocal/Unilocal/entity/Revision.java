@@ -19,6 +19,6 @@ public class Revision {
     @Id
     private int id;
     private StateUnilocal stateUnilocal;
-    private Person mod;
+    private String mod;
     private String description;
 }

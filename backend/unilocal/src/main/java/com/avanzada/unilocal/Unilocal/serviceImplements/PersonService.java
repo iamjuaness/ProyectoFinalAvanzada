@@ -154,7 +154,7 @@ public class PersonService implements UserService {
         Person person = clientRepository.findById(changePasswordDTO.id())
                 .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un usuario"));
 
-        person.setPassword(changePasswordDTO.password());
+        person.setPassword(passwordEncoder.encode(changePasswordDTO.password()));
         clientRepository.save(person);
     }
 

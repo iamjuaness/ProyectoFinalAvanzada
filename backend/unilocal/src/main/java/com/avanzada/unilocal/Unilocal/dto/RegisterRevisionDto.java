@@ -5,10 +5,8 @@ import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import jakarta.validation.constraints.NotBlank;
 
 public record RegisterRevisionDto(
-        @NotBlank(message = "stateBusiness is required")
-        StateUnilocal stateBusiness,
         @NotBlank(message = "mod is required")
-        Person mod,
+        String mod,
         @NotBlank(message = "description is required")
         String description
 ) {

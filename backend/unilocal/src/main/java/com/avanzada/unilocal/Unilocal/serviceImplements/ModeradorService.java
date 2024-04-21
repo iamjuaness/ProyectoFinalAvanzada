@@ -4,9 +4,11 @@ import com.avanzada.unilocal.Unilocal.dto.EmailDTO;
 import com.avanzada.unilocal.Unilocal.dto.RegisterRevisionDto;
 import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.entity.Place;
+import com.avanzada.unilocal.Unilocal.entity.Revision;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import com.avanzada.unilocal.Unilocal.repository.ClientRepository;
 import com.avanzada.unilocal.Unilocal.repository.PlaceRepository;
+import com.avanzada.unilocal.Unilocal.repository.RevisionRepository;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,11 @@ public class ModeradorService {
     @Autowired
     ClientRepository clientRepository;
     @Autowired
+    RevisionRepository revisionRepository;
+    @Autowired
     EmailService emailService;
+    @Autowired
+    RevisionServiceImp revisionServiceImp;
 
 
     public void autorizarLugar(int lugarId, RegisterRevisionDto registerRevisionDto) throws ResourceNotFoundException, MessagingException {
@@ -32,7 +38,10 @@ public class ModeradorService {
         lugar.get().setStateBusiness(StateUnilocal.Active);
         Optional<Person> person = Optional.ofNullable(clientRepository.findById(lugar.get().getOwner())
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + lugar.get().getOwner())));
+        Revision revision = new Revision(revisionServiceImp.autoIncrement(), StateUnilocal.Active, registerRevisionDto.mod(), registerRevisionDto.description());
+        revisionRepository.save(revision);
         emailService.sendEmail(new EmailDTO("Su negocio fue autorizado", "Nos agradece informarle que su negocio cumple con las normas y fue autorizado", person.get().getEmail()));
+        lugar.get().getRevisions().add(revision.getId());
         placeRepository.save(lugar.get());
     }
 

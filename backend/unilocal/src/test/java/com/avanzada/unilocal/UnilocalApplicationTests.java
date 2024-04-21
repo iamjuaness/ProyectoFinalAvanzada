@@ -380,8 +380,7 @@ class UnilocalApplicationTests {
 	void testAutorizarLugar() throws ResourceNotFoundException, MessagingException {
 		// Arrange
 		int lugarId = 1;
-		Person mod = new Person();
-		RegisterRevisionDto registerRevisionDto = new RegisterRevisionDto(StateUnilocal.Active, mod, "Cumple con todos los requisitos");
+		RegisterRevisionDto registerRevisionDto = new RegisterRevisionDto("mod", "Cumple con todos los requisitos");
 		doNothing().when(moderadorService).autorizarLugar(lugarId, registerRevisionDto);
 
 		// Act

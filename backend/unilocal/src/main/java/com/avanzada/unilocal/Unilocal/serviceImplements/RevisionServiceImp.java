@@ -15,7 +15,7 @@ public class RevisionServiceImp {
     @Autowired
     RevisionRepository revisionRepository;
 
-    private int autoIncrement() {
+    public int autoIncrement() {
         List<Revision> revisions = revisionRepository.findAll();
         return revisions.isEmpty() ? 1 :
                 revisions.stream().max(Comparator.comparing(Revision::getId)).get().getId() + 1;

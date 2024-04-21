@@ -10,6 +10,7 @@ import com.avanzada.unilocal.Unilocal.interfaces.BusinessService;
 import com.avanzada.unilocal.Unilocal.repository.ClientRepository;
 import com.avanzada.unilocal.Unilocal.repository.PlaceRepository;
 import com.avanzada.unilocal.Unilocal.entity.Revision;
+import com.avanzada.unilocal.Unilocal.resources.Location;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,7 @@ public class PlaceService implements BusinessService {
         place.setSchedules(createPlaceDto.schedules());
         place.setBusinessType(createPlaceDto.businessType());
         place.setPhones(createPlaceDto.phones());
+        place.setLocation(createPlaceDto.location());
 
         return placeRepository.save(place);
     }
