@@ -4,10 +4,6 @@ import { SearchResultsComponent } from '../search-results/search-results.compone
 
 @Component({
   selector: 'app-search-bar',
-  standalone: true,
-  imports: [
-    SearchResultsComponent
-  ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css'
 })
@@ -32,7 +28,7 @@ export class SearchBarComponent {
     this.debounceTimer = setTimeout(() => {
 
       this.placesService.getPlacesByQuery(query);
-
+      this.mapService.removeRouteLayerAndSource();
     }, 500);
   }
 

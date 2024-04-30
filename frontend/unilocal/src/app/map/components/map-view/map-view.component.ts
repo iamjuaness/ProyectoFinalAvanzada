@@ -8,8 +8,6 @@ import { IconMap, Place } from '../../interfaces/places.map';
 //  We need to load the CSS asset for MapboxGL otherwise it won't work.
 @Component({
   selector: 'app-map-view',
-  standalone: true,
-  imports: [],
   templateUrl: './map-view.component.html',
   styleUrl: './map-view.component.css'
 })

@@ -152,6 +152,7 @@ export class MapService {
   removeRouteLayerAndSource() {
     if (this.map?.getLayer('RouteString')) {
       this.map.removeLayer('RouteString');
+      this.map.removeSource('RouteString');
     }
   }
 

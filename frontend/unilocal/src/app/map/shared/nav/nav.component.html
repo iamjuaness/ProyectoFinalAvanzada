@@ -5,12 +5,12 @@
 >
   <div class="flex w-full flex-wrap items-center justify-between px-3">
     <div>
-      <a class="mx-2 my-1 flex items-center lg:mb-0 lg:mt-0" href="#">
+      <a class="mx-2 my-1 flex items-center lg:mb-0 lg:mt-0" routerLink="/home">
         <img
           class="me-2"
-          src="https://tecdn.b-cdn.net/img/logo/te-transparent-noshadows.webp"
-          style="height: 20px"
-          alt="TE Logo"
+          src="../../../../assets/mapa.png"
+          style="height: 40px"
+          alt="MAP Logo"
           loading="lazy"
         />
       </a>
@@ -69,13 +69,30 @@
 
       <div class="flex items-center">
         <button
+          type="button"
+          data-twe-ripple-init
+          data-twe-ripple-color="light"
+          class="me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+        >
+          <a href="" routerLink="/home">Home</a>
+        </button>
+        <button
           *ngIf="!userLoginOn"
           type="button"
           data-twe-ripple-init
           data-twe-ripple-color="light"
           class="me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
         >
-          <a href="" routerLink="/login">Iniciar Sesion</a>
+          <a href="" routerLink="/login">Login</a>
+        </button>
+        <button
+          *ngIf="!userLoginOn"
+          type="button"
+          data-twe-ripple-init
+          data-twe-ripple-color="light"
+          class="me-3 inline-block bg-blue-600 rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-50 hover:text-primary-600 hover:bg-blue-400 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+        >
+          <a href="" routerLink="/register">Sign-up</a>
         </button>
         <button
           *ngIf="userLoginOn"

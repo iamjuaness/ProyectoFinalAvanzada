@@ -6,8 +6,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-results',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './search-results.component.html',
   styleUrl: './search-results.component.css'
 })
@@ -54,4 +52,15 @@ export class SearchResultsComponent {
     
   }
 
+  showPanel = false;
+  selectedPlace: any;
+
+  openPanel(place: any) {
+    this.selectedPlace = place;
+    this.showPanel = true;
+  }
+
+  closePanel() {
+    this.showPanel = false;
+  }
 }

@@ -3,8 +3,6 @@ import { MapService, PlacesService } from '../../services';
 
 @Component({
   selector: 'app-btn-my-location',
-  standalone: true,
-  imports: [],
   templateUrl: './btn-my-location.component.html',
   styleUrl: './btn-my-location.component.css'
 })

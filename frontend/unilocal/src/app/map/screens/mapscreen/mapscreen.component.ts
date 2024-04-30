@@ -9,15 +9,6 @@ import { NavComponent } from '../../shared/nav/nav.component';
 
 @Component({
   selector: 'app-mapscreen',
-  standalone: true,
-  imports: [
-    LoadingComponent,
-    MapViewComponent,
-    CommonModule,
-    BtnMyLocationComponent,
-    SearchBarComponent,
-    NavComponent
-  ],
   templateUrl: './mapscreen.component.html',
   styleUrl: './mapscreen.component.css'
 })
