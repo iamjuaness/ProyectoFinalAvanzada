@@ -26,7 +26,9 @@ export class MapViewComponent implements AfterViewInit {
   //  Inicialización del componente después de cargado en la vista
   ngAfterViewInit(): void {
 
-
+    // Declarar una variable para almacenar el marcador actual
+    let currentMarker: mapboxgl.Marker | null = null;
+    
     // 
     if (!this.placesService.userLocation) throw Error('No hay placesService.userLocation')
     
@@ -38,6 +40,28 @@ export class MapViewComponent implements AfterViewInit {
 	    center: this.placesService.userLocation, // starting position [lng, lat]
       zoom: 16.6, // starting zoom
     });
+
+  // Agregar el evento de clic al mapa
+  map.on("click", function (e) {
+      // Verificar si ya existe un marcador
+      if (currentMarker) {
+          // Si existe, eliminar el marcador actual
+          currentMarker.remove();
+      }
+
+      // Crear un nuevo marcador en la posición del clic
+      currentMarker = new mapboxgl.Marker({
+          draggable: true
+      }).setLngLat([e.lngLat.lng, e.lngLat.lat]).addTo(map);
+
+      // Agregar un evento de "dragend" al marcador para obtener la nueva posición
+      currentMarker.on("dragend", function () {
+          var lngLat = currentMarker!.getLngLat();
+          console.log(lngLat);
+      });
+  });
+
+
 
     // clase popup
     const popup = new Popup()
@@ -102,6 +126,8 @@ export class MapViewComponent implements AfterViewInit {
                         // }
                       }
                   });
+
+                
               });
           } else {
               console.error('La respuesta del servidor es incorrecta o está vacía.');

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { LoginDto } from '../../class/dto/login-dto';
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-login',
@@ -7,5 +8,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  loginDto: LoginDto;
+
+  constructor(private authService: AuthService) {
+    this.loginDto = new LoginDto();
+  }
+
+  login() {
+    this.authService.loginUsuario(this.loginDto)
+  }
+
 
 }

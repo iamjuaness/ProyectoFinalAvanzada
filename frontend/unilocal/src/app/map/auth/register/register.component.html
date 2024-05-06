@@ -10,7 +10,12 @@
               Registrarse
             </h2>
           </div>
-          <form class="mt-3 space-y-6" action="#" method="POST">
+          <form
+            class="mt-3 space-y-6"
+            #f="ngForm"
+            (ngSubmit)="registrar()"
+            method="POST"
+          >
             <input type="hidden" name="remember" value="true" />
             <div class="rounded-md shadow-sm -space-y-px mr-4">
               <div class="flex justify-center mb-5">
@@ -32,10 +37,11 @@
                 <div class="md:col-span-3">
                   <input
                     id="identification"
-                    name="identification"
+                    name="cedula"
                     type="text"
                     required
                     pattern="[0-9]{7,10}"
+                    [(ngModel)]="registroClienteDTO.cedula"
                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Cédula"
                   />
@@ -52,6 +58,7 @@
                     type="text"
                     required
                     minlength="5"
+                    [(ngModel)]="registroClienteDTO.name"
                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Nombre (mínimo 5 caracteres)"
                   />
@@ -67,6 +74,7 @@
                     name="nickname"
                     type="text"
                     required
+                    [(ngModel)]="registroClienteDTO.nickname"
                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Nickname"
                   />
@@ -90,6 +98,23 @@
               </div>
               <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
                 <div class="flex items-center justify-end md:col-span-1">
+                  <label for="email" class="">Email</label>
+                </div>
+                <div class="md:col-span-3">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    email
+                    [(ngModel)]="registroClienteDTO.email"
+                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
+                <div class="flex items-center justify-end md:col-span-1">
                   <label for="password" class="">Contraseña</label>
                 </div>
                 <div class="md:col-span-3">
@@ -99,6 +124,7 @@
                     type="password"
                     required
                     minlength="8"
+                    [(ngModel)]="registroClienteDTO.password"
                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                     placeholder="Contraseña (mínimo 8 caracteres)"
                   />
@@ -106,17 +132,39 @@
               </div>
               <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
                 <div class="flex items-center justify-end md:col-span-1">
-                  <label for="city" class="">Residencia</label>
+                  <label for="confirmar" class="">Confirmar Contraseña</label>
                 </div>
                 <div class="md:col-span-3">
                   <input
-                    id="city"
-                    name="city"
-                    type="text"
+                    id="confirmar"
+                    name="confirmPassword"
+                    type="password"
                     required
+                    minlength="8"
+                    [(ngModel)]="registroClienteDTO.confirmPassword"
                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                    placeholder="Ciudad de residencia"
+                    placeholder="Contraseña (mínimo 8 caracteres)"
                   />
+                </div>
+              </div>
+              @if (!sonIguales()) {
+              <p class="text-red-500">Las contraseñas no coinciden</p>
+              }
+              <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
+                <div class="flex items-center justify-end md:col-span-1">
+                  <label for="city" class="">Residencia</label>
+                </div>
+                <div class="md:col-span-3">
+                  <select
+                    name="residenceCity"
+                    required
+                    [(ngModel)]="registroClienteDTO.residenceCity"
+                  >
+                    <option value="" selected>Seleccione una ciudad</option>
+                    @for (item of ciudades; track $index) {
+                    <option [value]="item">{{ item }}</option>
+                    }
+                  </select>
                 </div>
               </div>
             </div>
@@ -124,6 +172,7 @@
             <div>
               <button
                 type="submit"
+                [disabled]="f.invalid || !sonIguales()"
                 class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 Registrarse

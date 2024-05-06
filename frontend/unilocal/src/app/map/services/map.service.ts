@@ -113,7 +113,8 @@ export class MapService {
         features: [
           {
             type: 'Feature',
-            properties: {},
+            properties: {
+            },
             geometry: {
               type: 'LineString',
               coordinates: coords

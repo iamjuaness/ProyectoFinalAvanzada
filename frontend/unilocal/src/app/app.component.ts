@@ -20,7 +20,6 @@ import { NavModule } from './map/shared/nav/nav.module';
   selector: 'app-root',
   templateUrl: './app.component.html',
   imports: [
-    ReactiveFormsModule,
     CommonModule,
     SearchBarModule,
     SearchResultsModule,
