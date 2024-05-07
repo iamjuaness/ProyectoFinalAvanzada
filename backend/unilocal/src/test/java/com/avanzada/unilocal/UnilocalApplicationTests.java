@@ -87,7 +87,7 @@ class UnilocalApplicationTests {
 	@Test
 	void testRegisterUser_Success() throws AttributeException {
 		// Arrange
-		RegisterUserDto registerUserDto = new RegisterUserDto("1234", "Pepe", "", "pepe123", "pepe123@gmail.com", "pepe123", "Armenia");
+		RegisterUserDto registerUserDto = new RegisterUserDto("1234", "Pepe", "", "pepe123", "pepe123@gmail.com", "pepe123", "pepe123");
 		Person person = new Person("1234", "Pepe", "", "pepe123", "pepe123@gmail.com", "pepe123", "Armenia", Role.USER, StateUnilocal.Active);
 		String expectedMessage = "user " + registerUserDto.name() + " have been saved";
 		when(personService.signUp(any(RegisterUserDto.class))).thenReturn(person);

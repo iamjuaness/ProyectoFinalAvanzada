@@ -2,7 +2,7 @@ export class RegistroClienteDTO {
 constructor(
     public cedula: string = '',
     public name: string = '',
-    public photo: string = '',
+    public photo: any = '',
     public nickname: string = '',
     public email: string = '',
     public password: string = '',

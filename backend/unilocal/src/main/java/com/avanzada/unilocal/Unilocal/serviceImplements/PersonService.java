@@ -73,7 +73,7 @@ public class PersonService implements UserService {
         person.setResidenceCity(registerUserDto.residenceCity());
         person.setRole(Role.USER);
         person.setStateUnilocal(register);
-        person.setPhoto(registerUserDto.photo());
+        person.setPhoto((String) registerUserDto.photo());
         return person;
     }
 

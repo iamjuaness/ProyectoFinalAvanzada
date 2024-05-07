@@ -31,7 +31,7 @@ export class RegisterComponent {
         this.fotoPreview = reader.result;
       };
       reader.readAsDataURL(file);
-      this.registroClienteDTO.photo = file.name;
+      this.registroClienteDTO.photo = file;
     }
   }
 

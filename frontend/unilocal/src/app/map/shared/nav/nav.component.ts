@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,10 +12,19 @@ export class NavComponent {
 
   userLoginOn: boolean = false;
 
-  constructor() {
+  constructor(private tokenService: TokenService) {
     
   }
 
-  ngOnInit(): void{}
+  ngOnInit(): void{
+    this.tokenService.isLoggedIn().subscribe((loggedIn: boolean) => {
+      this.userLoginOn = loggedIn; // Actualizar el estado del usuario cuando cambie el estado de inicio de sesión
+    });
+  }
+
+
+  logout() {
+    this.tokenService.logout();
+  }
 
 }

@@ -90,22 +90,6 @@ public class FiltroToken extends OncePerRequestFilter{
                                 HttpServletResponse.SC_FORBIDDEN, response);
 
                     }
-                } else if (requestURI.startsWith("/api/imagenes")) {
-                    if (token != null){
-                        Jws<Claims> jws = jwtUtils.parseJwt(token);
-                        if (!jws.getPayload().get("role").equals("USER")){
-                            crearRespuestaError("No tiene permisos para acceder a este recurso",
-
-                                    HttpServletResponse.SC_FORBIDDEN, response);
-                        } else {
-                            error = false;
-                        }
-                    } else {
-                        crearRespuestaError("No tiene permisos para acceder a este recurso",
-
-                                HttpServletResponse.SC_FORBIDDEN, response);
-
-                    }
                 } else {
                     error = false;
                 }
