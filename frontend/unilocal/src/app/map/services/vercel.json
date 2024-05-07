@@ -1,3 +1,11 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "github": {
+    "silent": false
+  },
+  "rewrites": [
+    {
+      "source": "(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
