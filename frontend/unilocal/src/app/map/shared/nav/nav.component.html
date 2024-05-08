@@ -1,118 +1,180 @@
-<!-- Main navigation container -->
-<nav
-  class="relative flex w-full flex-wrap items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:py-4"
-  data-twe-navbar-ref
->
-  <div class="flex w-full flex-wrap items-center justify-between px-3">
-    <div>
-      <a class="mx-2 my-1 flex items-center lg:mb-0 lg:mt-0" routerLink="/home">
-        <img
-          class="me-2"
-          src="../../../../assets/mapa.png"
-          style="height: 40px"
-          alt="MAP Logo"
-          loading="lazy"
-        />
-      </a>
-    </div>
-
-    <!-- Hamburger button for mobile view -->
-    <button
-      class="block border-0 bg-transparent px-2 text-black/50 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
-      type="button"
-      data-twe-collapse-init
-      data-twe-target="#navbarSupportedContent4"
-      aria-controls="navbarSupportedContent4"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <!-- Hamburger icon -->
-      <span
-        class="[&>svg]:w-7 [&>svg]:stroke-black/50 dark:[&>svg]:stroke-neutral-200"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
+<div>
+  <!-- Main navigation container -->
+  <nav
+    class="relative flex w-full flex-wrap items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:py-4"
+    data-twe-navbar-ref
+  >
+    <div class="flex w-full flex-wrap items-center justify-between px-3">
+      <div>
+        <a
+          class="mx-2 my-1 flex items-center lg:mb-0 lg:mt-0"
+          routerLink="/home"
         >
-          <path
-            fill-rule="evenodd"
-            d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-            clip-rule="evenodd"
+          <img
+            class="me-2"
+            src="../../../../assets/mapa.png"
+            style="height: 40px"
+            alt="MAP Logo"
+            loading="lazy"
           />
-        </svg>
-      </span>
-    </button>
+        </a>
+      </div>
 
-    <!-- Collapsible navbar container -->
-    <div
-      class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
-      id="navbarSupportedContent4"
-      data-twe-collapse-item
-    >
-      <!-- Left links -->
-      <ul
-        class="list-style-none me-auto flex flex-col ps-0 lg:mt-1 lg:flex-row"
-        data-twe-navbar-nav-ref
+      <!-- Hamburger button for mobile view -->
+      <button
+        class="block border-0 bg-transparent px-2 text-black/50 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+        type="button"
+        data-twe-collapse-init
+        data-twe-target="#navbarSupportedContent4"
+        aria-controls="navbarSupportedContent4"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
       >
-        <!-- Home link -->
-        <li class="my-4 ps-2 lg:my-0 lg:pe-1 lg:ps-2" data-twe-nav-item-ref>
-          <a
-            class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
-            aria-current="page"
-            href="#"
-            data-twe-nav-link-ref
-            >Unilocal</a
+        <!-- Hamburger icon -->
+        <span
+          class="[&>svg]:w-7 [&>svg]:stroke-black/50 dark:[&>svg]:stroke-neutral-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
           >
-        </li>
-      </ul>
+            <path
+              fill-rule="evenodd"
+              d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </span>
+      </button>
 
-      <div class="flex items-center">
-        <button
-          type="button"
-          data-twe-ripple-init
-          data-twe-ripple-color="light"
-          class="me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+      <!-- Collapsible navbar container -->
+      <div
+        class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
+        id="navbarSupportedContent4"
+        data-twe-collapse-item
+      >
+        <!-- Left links -->
+        <ul
+          class="list-style-none me-auto flex flex-col ps-0 lg:mt-1 lg:flex-row"
+          data-twe-navbar-nav-ref
         >
-          <a href="" routerLink="/home">Home</a>
-        </button>
-        <button
-          type="button"
-          data-twe-ripple-init
-          data-twe-ripple-color="light"
-          class="me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
-        >
-          <a href="" routerLink="/map">Ver Mapa</a>
-        </button>
-        <button
-          *ngIf="!userLoginOn"
-          type="button"
-          data-twe-ripple-init
-          data-twe-ripple-color="light"
-          class="me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
-        >
-          <a href="" routerLink="/login">Login</a>
-        </button>
-        <button
-          *ngIf="!userLoginOn"
-          type="button"
-          data-twe-ripple-init
-          data-twe-ripple-color="light"
-          class="me-3 inline-block bg-blue-600 rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-50 hover:text-primary-600 hover:bg-blue-400 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
-        >
-          <a href="" routerLink="/register">Sign-up</a>
-        </button>
-        <button
-          *ngIf="userLoginOn"
-          type="button"
-          data-twe-ripple-init
-          data-twe-ripple-color="light"
-          (click)="logout()"
-          class="me-3 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-black shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-        >
-          Cerrar Sesion
-        </button>
+          <!-- Home link -->
+          <li class="my-4 ps-2 lg:my-0 lg:pe-1 lg:ps-2" data-twe-nav-item-ref>
+            <a
+              class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+              aria-current="page"
+              href="#"
+              data-twe-nav-link-ref
+              >Unilocal</a
+            >
+          </li>
+        </ul>
+
+        <div class="flex items-center">
+          <button
+            type="button"
+            data-twe-ripple-init
+            data-twe-ripple-color="light"
+            class="me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+          >
+            <a href="" routerLink="/home">Home</a>
+          </button>
+          <button
+            type="button"
+            data-twe-ripple-init
+            data-twe-ripple-color="light"
+            class="me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+          >
+            <a href="" routerLink="/map">Ver Mapa</a>
+          </button>
+          <button
+            *ngIf="!userLoginOn"
+            type="button"
+            data-twe-ripple-init
+            data-twe-ripple-color="light"
+            class="me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+          >
+            <a href="" routerLink="/login">Login</a>
+          </button>
+          <button
+            *ngIf="!userLoginOn"
+            type="button"
+            data-twe-ripple-init
+            data-twe-ripple-color="light"
+            class="me-3 inline-block bg-blue-600 rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-50 hover:text-primary-600 hover:bg-blue-400 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+          >
+            <a href="" routerLink="/register">Sign-up</a>
+          </button>
+          <div *ngIf="userLoginOn">
+            <!-- Profile dropdown -->
+            <div class="relative ml-4 flex-shrink-0">
+              <div>
+                <button
+                  type="button"
+                  class="relative flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  (click)="toggleMenu()"
+                >
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  />
+                </button>
+              </div>
+
+              <!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+              From: "transform opacity-0 scale-95"
+              To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+              From: "transform opacity-100 scale-100"
+              To: "transform opacity-0 scale-95"
+          -->
+              <div
+                *ngIf="isMenuOpen"
+                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabindex="-1"
+              >
+                <!-- Active: "bg-gray-100", Not Active: "" -->
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-yellow-600"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-0"
+                  >Your Profile</a
+                >
+                <a
+                  href="#"
+                  class="block px-4 py-2 text-sm text-yellow-600"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-1"
+                  >Settings</a
+                >
+                <a
+                  class="block px-4 py-2 text-sm text-yellow-600"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-2"
+                  ><button (click)="logout()">Sign out</button></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
+  </nav>
+</div>

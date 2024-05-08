@@ -38,7 +38,7 @@ export class TokenService {
   public login(token: string) {
     this.setToken(token);
     this.loggedInSubject.next(true)
-    this.router.navigate(["/"]);
+    this.router.navigate(["/map"]);
   }
 
   public logout() {
