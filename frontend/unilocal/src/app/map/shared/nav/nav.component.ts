@@ -12,6 +12,7 @@ export class NavComponent {
 
   userLoginOn: boolean = false;
   isMenuOpen: boolean = false;
+  userPhoto: string = '';
 
   constructor(private tokenService: TokenService) {
     
@@ -21,13 +22,18 @@ export class NavComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  ngOnInit(): void{
-    if (this.tokenService.isLogged()) {
-      this.tokenService.isLoggedIn().subscribe((loggedIn: boolean) => {
-        this.userLoginOn = loggedIn; // Actualizar el estado del usuario cuando cambie el estado de inicio de sesión
-      });
+  ngOnInit(): void {
+    const token = this.tokenService.getToken();
+    console.log(token)
+    if (token) {
+      // Si hay un token presente, establecer userLoginOn como true
+      this.userLoginOn = true;
+      // Decodificar el payload del token y obtener la foto del usuario
+      const payload = this.tokenService.decodePayload(token);
+      this.userPhoto = payload.photo;
     }
   }
+  
 
 
   logout() {

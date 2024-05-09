@@ -38,12 +38,10 @@ public class AuthController {
     }
 
     @PostMapping("/register-client")
-    public ResponseEntity<MessageDto> registerUser(@Valid @RequestBody RegisterUserDto registerUserDto) throws AttributeException {
+    public ResponseEntity<MensajeAuthDto> registerUser(@Valid @RequestBody RegisterUserDto registerUserDto) throws AttributeException {
 
-        personService.signUp(registerUserDto);
-        String message = "user " + registerUserDto.name() + " have been saved";
-
-        return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
+        TokenDto tokenDto = authServiceImp.registerClient(registerUserDto);
+        return ResponseEntity.ok().body(new MensajeAuthDto<>(false, tokenDto));
     }
 
     @PostMapping("/forgot-password")

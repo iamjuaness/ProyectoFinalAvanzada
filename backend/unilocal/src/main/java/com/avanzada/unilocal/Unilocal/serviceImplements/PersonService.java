@@ -107,7 +107,7 @@ public class PersonService implements UserService {
         person.setName(updateUserDto.name());
         person.setEmail(updateUserDto.email());
         person.setNickname(updateUserDto.nickname());
-        person.setPhoto(updateUserDto.photo());
+        person.setPhoto((String) updateUserDto.photo());
         person.setResidenceCity(updateUserDto.residenceCity());
 
         return clientRepository.save(person);

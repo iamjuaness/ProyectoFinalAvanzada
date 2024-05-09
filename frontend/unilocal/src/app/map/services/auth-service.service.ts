@@ -19,18 +19,15 @@ export class AuthService {
   constructor(private tokenService: TokenService,
   private imagenService: ImagenesService) { }
 
-  registrarUsuario(registroClienteDTO: RegistroClienteDTO) {
+    registrarUsuario(registroClienteDTO: RegistroClienteDTO) {
     this.imagenService.subirImagen(registroClienteDTO.photo)
       .then((response) => {
         const cloudinaryURL = response.data.respuesta.secure_url;
 
         registroClienteDTO.photo = cloudinaryURL
-
-
-        axios.post<MessageDto>(`${this.baseUrl}/register-client`, registroClienteDTO)
+        axios.post<MensajeAuthDto>(`${this.baseUrl}/register-client`, registroClienteDTO)
           .then((response) => {
-            console.log('Usuario registrado exitosamente:', response.data.message);
-            
+                        
           })
           .catch((error) => {
             console.error('Error al registrar usuario:', error);
@@ -47,8 +44,7 @@ export class AuthService {
   loginUsuario(LoginDto: LoginDto) {
     axios.post<MensajeAuthDto>(`${this.baseUrl}/login-client`, LoginDto)
       .then((response) => {
-        console.log('Token:', response.data.respuesta);
-        this.tokenService.login(response.data.respuesta);
+        this.tokenService.login(response.data.respuesta.token);
       })
       .catch((error) => {
         console.log('Error:', error);

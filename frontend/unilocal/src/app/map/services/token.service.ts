@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Buffer } from "buffer";
 
 
 const TOKEN_KEY = "AuthToken";
@@ -47,10 +48,29 @@ export class TokenService {
     this.router.navigate(["/login"]);
   }
 
-  private decodePayload(token: string): any {
-    const payload = token!.split(".")[1];
-    const payloadDecoded = Buffer.from(payload, 'base64').toString('ascii');
-    const values = JSON.parse(payloadDecoded);
-    return values;
+  public signup(token: string) {
+    this.setToken(token);
+    this.router.navigate(["/map"])
   }
+
+  public decodePayload(token: string | null): any {
+    if (!token) return null;
+
+    const parts = token.split('.');
+    if (parts.length < 2) {
+      console.error('Token JWT no válido');
+      return null;
+    }
+
+    const payload = parts[1];
+    try {
+      const payloadDecoded = atob(payload);
+      const values = JSON.parse(payloadDecoded);
+      return values;
+    } catch (error) {
+      console.error('Error al decodificar payload:', error);
+      return null;
+    }
+  }
+
 }

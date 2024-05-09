@@ -21,6 +21,8 @@ public record RegisterUserDto<T>(
         @NotBlank(message = "La contrasena es obligatoria")
         @Length(min = 8)
         String confirmPassword,
-
+        @NotBlank(message = "La ciudad de residencia es obligatoria")
         String residenceCity
-) {}
+
+) {
+}

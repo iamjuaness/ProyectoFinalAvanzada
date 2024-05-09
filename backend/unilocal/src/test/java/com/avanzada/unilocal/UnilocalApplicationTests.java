@@ -94,11 +94,11 @@ class UnilocalApplicationTests {
 
 
 		// Act
-		ResponseEntity<MessageDto> responseEntity = authController.registerUser(registerUserDto);
+		ResponseEntity<MensajeAuthDto> responseEntity = authController.registerUser(registerUserDto);
 
 		// Assert
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-		assertEquals(expectedMessage, responseEntity.getBody().message());
+		assertEquals(expectedMessage, responseEntity.getBody().respuesta());
 	}
 
 	@Test
