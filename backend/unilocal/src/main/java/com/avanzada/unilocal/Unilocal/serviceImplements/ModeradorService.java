@@ -9,6 +9,7 @@ import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
 import com.avanzada.unilocal.Unilocal.repository.ClientRepository;
 import com.avanzada.unilocal.Unilocal.repository.PlaceRepository;
 import com.avanzada.unilocal.Unilocal.repository.RevisionRepository;
+import com.avanzada.unilocal.global.exceptions.NoDataFoundException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,5 +135,23 @@ public class ModeradorService {
         return clientRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Not found"));
     }
+
+    public List<Revision> revisionHistory() throws NoDataFoundException {
+        // Verificar si el repositorio de revisiones es nulo
+        if (revisionRepository == null) {
+            throw new IllegalStateException("El repositorio de revisiones no está inicializado correctamente.");
+        }
+
+        // Obtener todas las revisiones del repositorio
+        List<Revision> revisions = revisionRepository.findAll();
+
+        // Verificar si no se encontraron revisiones
+        if (revisions.isEmpty()) {
+            throw new NoDataFoundException("No se encontraron revisiones en la base de datos.");
+        }
+
+        return revisions;
+    }
+
 
 }

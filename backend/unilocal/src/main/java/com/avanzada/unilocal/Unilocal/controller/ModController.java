@@ -6,6 +6,7 @@ import com.avanzada.unilocal.Unilocal.dto.SesionUserDto;
 import com.avanzada.unilocal.Unilocal.dto.TokenDto;
 import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.entity.Place;
+import com.avanzada.unilocal.Unilocal.entity.Revision;
 import com.avanzada.unilocal.Unilocal.serviceImplements.ModeradorService;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PersonService;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
@@ -69,5 +70,10 @@ public class ModController {
     @GetMapping("/get/{id}")
     public ResponseEntity<Person> getOne(@PathVariable("id") String id) throws ResourceNotFoundException {
         return ResponseEntity.ok(personService.getOne(id));
+    }
+
+    @GetMapping("/revision-history")
+    public List<Revision> getRevisionsHistory(){
+        return moderadorService.revisionHistory();
     }
 }
