@@ -51,6 +51,7 @@ public class AuthServiceImp<T> implements AuthService {
         authToken.put("role", "USER");
         authToken.put("nombre", person.getName());
         authToken.put("id", person.getCedula());
+        authToken.put("photo", person.getPhoto());
 
         return new TokenDto(jwtTokenService.generarToken(person.getEmail(), authToken));
     }

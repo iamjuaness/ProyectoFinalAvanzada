@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -15,6 +15,7 @@ import { RegisterComponent } from './map/auth/register/register.component';
 import { LoginModule } from './map/auth/login/login.module';
 import { HomeScreenModule } from './map/screens/homescreen/homescreen.module';
 import { NavModule } from './map/shared/nav/nav.module';
+import { TokenService } from './map/services/token.service';
 
 @Component({
   selector: 'app-root',
@@ -34,8 +35,16 @@ import { NavModule } from './map/shared/nav/nav.module';
     NavModule
   ],
   styleUrl: './app.component.css',
-  standalone: true // Agrega esta línea
+  standalone: true
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'unilocal';
+
+    userLoginOn: boolean = false;
+
+  constructor(private tokenService: TokenService) { }
+
+  ngOnInit(): void {
+    this.userLoginOn = this.tokenService.isLogged();
+  }
 }

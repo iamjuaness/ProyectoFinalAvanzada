@@ -27,7 +27,7 @@ export class AuthService {
         registroClienteDTO.photo = cloudinaryURL
         axios.post<MensajeAuthDto>(`${this.baseUrl}/register-client`, registroClienteDTO)
           .then((response) => {
-                        
+            this.tokenService.signup(response.data.respuesta.token);
           })
           .catch((error) => {
             console.error('Error al registrar usuario:', error);

@@ -39,18 +39,25 @@ export class TokenService {
   public login(token: string) {
     this.setToken(token);
     this.loggedInSubject.next(true)
-    this.router.navigate(["/map"]);
+    this.router.navigate(["/map"]).then(() => {
+      window.location.reload();
+    });
   }
 
   public logout() {
     window.sessionStorage.clear();
     this.loggedInSubject.next(false)
-    this.router.navigate(["/login"]);
+    this.router.navigate(["/login"]).then(() => {
+      window.location.reload();
+    });
   }
 
   public signup(token: string) {
     this.setToken(token);
-    this.router.navigate(["/map"])
+    this.loggedInSubject.next(true)
+    this.router.navigate(["/map"]).then(() => {
+      window.location.reload();
+    });
   }
 
   public decodePayload(token: string | null): any {
