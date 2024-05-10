@@ -119,12 +119,23 @@
                 >
                   <span class="absolute -inset-1.5"></span>
                   <span class="sr-only">Open user menu</span>
-                  <img
-                    *ngIf="userLoginOn && userPhoto"
-                    class="h-10 w-10 rounded-full border-2 border-green-400"
-                    [src]="userPhoto"
-                    alt=""
-                  />
+                  <div class="tooltip-container">
+                    <img
+                      *ngIf="userLoginOn && userPhoto"
+                      class="h-10 w-10 rounded-full border-2 border-green-400"
+                      [src]="userPhoto"
+                      alt=""
+                      (mouseover)="showTooltip = true"
+                      (mouseout)="showTooltip = false"
+                    />
+                    <div *ngIf="showTooltip" class="tooltip">
+                      <p class="justify-center text-white font-bold text-base">
+                        Cuenta de Unilocal
+                      </p>
+                      <p class="text-gray-300 text-base">{{ userName }}</p>
+                      <p class="text-gray-300 text-xs">{{ userEmail }}</p>
+                    </div>
+                  </div>
                   <!-- Si el usuario no está logueado o no tiene una foto, muestra una foto por defecto -->
                   <img
                     *ngIf="!userLoginOn || !userPhoto"

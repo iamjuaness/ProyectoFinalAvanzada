@@ -13,7 +13,10 @@ export class NavComponent {
   @Input() userLoginOn: boolean = false;
   isMenuOpen: boolean = false;
   userPhoto: string = '';
+  userName: string = '';
+  userEmail: string = '';
   payload: any
+  showTooltip: boolean = false;
 
   constructor(private tokenService: TokenService) {
     
@@ -21,6 +24,7 @@ export class NavComponent {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    this.showTooltip = !this.showTooltip;
   }
 
   ngOnInit(): void {
@@ -31,6 +35,8 @@ export class NavComponent {
       // Decodificar el payload del token y obtener la foto del usuario
       this.payload = this.tokenService.decodePayload(token);
       this.userPhoto = this.payload.photo;
+      this.userName = this.payload.nombre;
+      this.userEmail = this.payload.sub;
     }
   }
   
