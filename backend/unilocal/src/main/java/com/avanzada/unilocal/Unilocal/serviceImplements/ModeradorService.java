@@ -33,33 +33,74 @@ public class ModeradorService {
 
 
     public void autorizarLugar(int lugarId, RegisterRevisionDto registerRevisionDto) throws ResourceNotFoundException, MessagingException {
-        Optional<Place> lugar = Optional.ofNullable(placeRepository.findById(lugarId)
-                .orElseThrow(() -> new ResourceNotFoundException("Lugar no encontrado con ID: " + lugarId)));
-        lugar.get().setStateBusiness(StateUnilocal.Active);
-        Optional<Person> person = Optional.ofNullable(clientRepository.findById(lugar.get().getOwner())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + lugar.get().getOwner())));
+        // Verificar si el ID del lugar es válido
+        if (lugarId <= 0) {
+            throw new IllegalArgumentException("ID de lugar inválido: " + lugarId);
+        }
+
+        // Obtener el lugar por ID
+        Optional<Place> lugarOptional = placeRepository.findById(lugarId);
+        if (lugarOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Lugar no encontrado con ID: " + lugarId);
+        }
+
+        Place lugar = lugarOptional.get();
+        // Cambiar el estado del negocio a "Activo"
+        lugar.setStateBusiness(StateUnilocal.Active);
+
+        // Guardar la revisión
         Revision revision = new Revision(revisionServiceImp.autoIncrement(), StateUnilocal.Active, registerRevisionDto.mod(), registerRevisionDto.description());
         revisionRepository.save(revision);
-        emailService.sendEmail(new EmailDTO("Su negocio fue autorizado", "Nos agradece informarle que su negocio cumple con las normas y fue autorizado", person.get().getEmail()));
-        lugar.get().getRevisions().add(revision.getId());
-        placeRepository.save(lugar.get());
+
+        // Enviar correo electrónico al propietario
+        Optional<Person> personOptional = clientRepository.findById(lugar.getOwner());
+        if (personOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Usuario no encontrado con ID: " + lugar.getOwner());
+        }
+        Person person = personOptional.get();
+        emailService.sendEmail(new EmailDTO("Su negocio fue autorizado", "Nos alegra informarle que su negocio cumple con las normas y fue autorizado.", person.getEmail()));
+
+        // Agregar la revisión al lugar y guardar los cambios
+        lugar.getRevisions().add(revision.getId());
+        placeRepository.save(lugar);
     }
 
     public void rechazarLugar(int lugarId) throws ResourceNotFoundException, MessagingException {
-        Optional<Place> lugar = Optional.ofNullable(placeRepository.findById(lugarId)
-                .orElseThrow(() -> new ResourceNotFoundException("Lugar no encontrado con ID: " + lugarId)));
-        lugar.get().setStateBusiness(StateUnilocal.Refused);
-        Optional<Person> person = Optional.ofNullable(clientRepository.findById(lugar.get().getOwner())
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + lugar.get().getOwner())));
-        emailService.sendEmail(new EmailDTO("Su negocio fue rechazado", "Lamentamos informarle que su negocio no cumple con las normas de UniLocal y fue rechazado", person.get().getEmail()));
-        placeRepository.save(lugar.get());
+        // Verificar si el ID del lugar es válido
+        if (lugarId <= 0) {
+            throw new IllegalArgumentException("ID de lugar inválido: " + lugarId);
+        }
+
+        // Obtener el lugar por ID
+        Optional<Place> lugarOptional = placeRepository.findById(lugarId);
+        if (lugarOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Lugar no encontrado con ID: " + lugarId);
+        }
+
+        Place lugar = lugarOptional.get();
+        // Cambiar el estado del negocio a "Rechazado"
+        lugar.setStateBusiness(StateUnilocal.Refused);
+
+        // Enviar correo electrónico al propietario
+        Optional<Person> personOptional = clientRepository.findById(lugar.getOwner());
+        if (personOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Usuario no encontrado con ID: " + lugar.getOwner());
+        }
+        Person person = personOptional.get();
+        emailService.sendEmail(new EmailDTO("Su negocio fue rechazado", "Lamentamos informarle que su negocio no cumple con las normas de UniLocal y fue rechazado", person.getEmail()));
+
+        // Guardar los cambios en el lugar
+        placeRepository.save(lugar);
     }
+
 
     public List<Place> getLugaresPendientes() {
         List<Place> places = new ArrayList<>();
-        for (Place place : placeRepository.findAll()){
-            if (place.getStateBusiness().equals(StateUnilocal.Revision)){
-                places.add(place);
+        if (placeRepository != null) {
+            for (Place place : placeRepository.findAll()) {
+                if (place != null && place.getStateBusiness() != null && place.getStateBusiness().equals(StateUnilocal.Revision)) {
+                    places.add(place);
+                }
             }
         }
         return places;
@@ -67,9 +108,11 @@ public class ModeradorService {
 
     public List<Place> getLugaresAutorizados() {
         List<Place> places = new ArrayList<>();
-        for (Place place : placeRepository.findAll()){
-            if (place.getStateBusiness().equals(StateUnilocal.Active)){
-                places.add(place);
+        if (placeRepository != null) {
+            for (Place place : placeRepository.findAll()) {
+                if (place != null && place.getStateBusiness() != null && place.getStateBusiness().equals(StateUnilocal.Active)) {
+                    places.add(place);
+                }
             }
         }
         return places;
@@ -77,11 +120,19 @@ public class ModeradorService {
 
     public List<Place> getLugaresRechazados() {
         List<Place> places = new ArrayList<>();
-        for (Place place : placeRepository.findAll()){
-            if (place.getStateBusiness().equals(StateUnilocal.Refused)){
-                places.add(place);
+        if (placeRepository != null) {
+            for (Place place : placeRepository.findAll()) {
+                if (place != null && place.getStateBusiness() != null && place.getStateBusiness().equals(StateUnilocal.Refused)) {
+                    places.add(place);
+                }
             }
         }
         return places;
     }
+
+    public Person getOne(String id) throws ResourceNotFoundException {
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
+    }
+
 }

@@ -27,6 +27,8 @@ public class ModController {
 
     @Autowired
     ModeradorService moderadorService;
+    @Autowired
+    PersonService personService;
 
 
     @PostMapping("/autorizar/{lugarId}")
@@ -62,5 +64,10 @@ public class ModController {
     @GetMapping("/lugares/rechazados")
     public List<Place> getLugaresRechazados() {
         return moderadorService.getLugaresRechazados();
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Person> getOne(@PathVariable("id") String id) throws ResourceNotFoundException {
+        return ResponseEntity.ok(personService.getOne(id));
     }
 }
