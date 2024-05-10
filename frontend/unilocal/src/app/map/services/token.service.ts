@@ -36,10 +36,10 @@ export class TokenService {
     return false;
   }
 
-  public login(token: string) {
+  public login(token: string, id:string) {
     this.setToken(token);
     this.loggedInSubject.next(true)
-    this.router.navigate(["/map"]).then(() => {
+    this.router.navigate([`/dashboard-user/${id}`]).then(() => {
       window.location.reload();
     });
   }
@@ -52,10 +52,10 @@ export class TokenService {
     });
   }
 
-  public signup(token: string) {
+  public signup(token: string, id: string) {
     this.setToken(token);
     this.loggedInSubject.next(true)
-    this.router.navigate(["/map"]).then(() => {
+    this.router.navigate([`/dashboard-user/${{id}}`]).then(() => {
       window.location.reload();
     });
   }

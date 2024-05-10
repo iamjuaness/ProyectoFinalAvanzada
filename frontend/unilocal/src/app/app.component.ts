@@ -16,6 +16,7 @@ import { LoginModule } from './map/auth/login/login.module';
 import { HomeScreenModule } from './map/screens/homescreen/homescreen.module';
 import { NavModule } from './map/shared/nav/nav.module';
 import { TokenService } from './map/services/token.service';
+import { DashboardUserModule } from './map/components/dashboard-user/dashboard-user.module';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,8 @@ import { TokenService } from './map/services/token.service';
     RouterModule,
     LoginModule,
     HomeScreenModule,
-    NavModule
+    NavModule,
+    DashboardUserModule
   ],
   styleUrl: './app.component.css',
   standalone: true

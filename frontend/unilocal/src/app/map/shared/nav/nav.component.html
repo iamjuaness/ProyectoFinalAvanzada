@@ -1,7 +1,7 @@
 <div>
   <!-- Main navigation container -->
   <nav
-    class="relative flex w-full flex-wrap items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:py-4"
+    class="relative flex w-full flex-wrap items-center justify-between bg-zinc-300 py-2 shadow-dark-mild dark:bg-neutral-700 lg:py-4"
     data-twe-navbar-ref
   >
     <div class="flex ml-4 w-full flex-wrap items-center justify-between px-3">
@@ -78,6 +78,14 @@
             class="me-3 lg:text-xl font-serif inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
           >
             <a href="" routerLink="/home">Home</a>
+          </button>
+          <button
+            type="button"
+            data-twe-ripple-init
+            data-twe-ripple-color="light"
+            class="me-3 inline-block lg:text-xl font-serif rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+          >
+            <a href="" routerLink="/dashboard-user/{{ userId }}">Dashboard</a>
           </button>
           <button
             type="button"
@@ -166,12 +174,13 @@
               >
                 <!-- Active: "bg-gray-100", Not Active: "" -->
                 <a
-                  href="#"
+                  href=""
+                  routerLink="/dashboard-user/{{ userId }}"
                   class="block px-4 py-2 text-sm text-yellow-600"
                   role="menuitem"
                   tabindex="-1"
                   id="user-menu-item-0"
-                  >Your Profile</a
+                  >Dashboard</a
                 >
                 <a
                   href="#"

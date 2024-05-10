@@ -15,6 +15,7 @@ export class NavComponent {
   userPhoto: string = '';
   userName: string = '';
   userEmail: string = '';
+  userId: string = '';
   payload: any
   showTooltip: boolean = false;
 
@@ -37,6 +38,7 @@ export class NavComponent {
       this.userPhoto = this.payload.photo;
       this.userName = this.payload.nombre;
       this.userEmail = this.payload.sub;
+      this.userId = this.payload.id;
     }
   }
   
