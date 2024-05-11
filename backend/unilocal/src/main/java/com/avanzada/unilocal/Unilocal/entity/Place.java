@@ -2,6 +2,7 @@ package com.avanzada.unilocal.Unilocal.entity;
 
 import com.avanzada.unilocal.Unilocal.enums.BusinessType;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
+import com.avanzada.unilocal.Unilocal.resources.Horario;
 import com.avanzada.unilocal.Unilocal.resources.Location;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class Place implements Serializable {
     private String description;
     private String name;
 
-    private List<String> schedules;
+    private List<Horario> schedules;
 
     private List<String> images;
     private List<String> comments = new ArrayList<>();
@@ -41,7 +42,7 @@ public class Place implements Serializable {
 
     private List<Integer> revisions = new ArrayList<>();
 
-    public Place(int id, String description, String name, List<String> schedules, List<String> images, BusinessType businessType, List<String> phones, StateUnilocal stateBusiness, String owner, Location location) {
+    public Place(int id, String description, String name, List<Horario> schedules, List<String> images, BusinessType businessType, List<String> phones, StateUnilocal stateBusiness, String owner, Location location) {
         this.id = id;
         this.description = description;
         this.name = name;

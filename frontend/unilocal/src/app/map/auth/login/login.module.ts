@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
       CommonModule,
       RouterModule,
       RegisterComponent,
-      FormsModule
+      FormsModule,
   ],
   exports: [
     LoginComponent

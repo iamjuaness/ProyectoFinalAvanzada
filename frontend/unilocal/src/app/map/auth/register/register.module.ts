@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    RegisterComponent
+    // RegisterComponent
   ],
   imports: [
       CommonModule,
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
       FormsModule
   ],
   exports: [
-    RegisterComponent
+    // RegisterComponent
   ]
 })
 export class RegisterModule { }

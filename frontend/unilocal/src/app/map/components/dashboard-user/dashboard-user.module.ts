@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardUserComponent } from './dashboard-user.component';
+import { CreateLocalComponent } from '../create-local/create-local.component';
 
 
 @NgModule({
@@ -8,7 +9,8 @@ import { DashboardUserComponent } from './dashboard-user.component';
         DashboardUserComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        CreateLocalComponent
     ],
     exports: [
         DashboardUserComponent

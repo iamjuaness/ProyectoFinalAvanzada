@@ -49,6 +49,7 @@ export class AuthService {
         const payload = this.tokenService.decodePayload(response.data.respuesta.token);
         const id = payload.id;
         this.tokenService.login(response.data.respuesta.token, id);
+        
       })
       .catch((error) => {
         console.log('Error:', error);

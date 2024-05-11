@@ -1,17 +1,16 @@
+import { Horario } from "../model/horario";
 import { Location } from "../model/location";
 
 export class CreatePlaceDto {
     constructor(
-        description: string,
-        name: string,
-        schedules: string[],
-        images: string[],
-        businessType: BusinessType,
-        owner: string,
-        location: Location,
-        phones: string[]
+        public description: string = '',
+        public name: string = '',
+        public schedules: Horario[] = [new Horario()],
+        public images: any[] = [],
+        public businessType: string = '',
+        public owner: string = '',
+        public location: Location = new Location,
+        public phones: string[] = []
     ) { }
     
 }
-
-type BusinessType = "PANADERIA" | "CAFETERIA" | "BAR" | "RESTAURANTE" | "DISCOTECA" | "SUPERMERCADO" | "TIENDA" | "OTRO";

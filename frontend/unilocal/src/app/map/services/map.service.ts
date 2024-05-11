@@ -3,6 +3,8 @@ import { AnySourceData, LngLatBounds, LngLatLike, Map, Marker, Popup } from 'map
 import { Feature } from '../interfaces/places';
 import { DirectionsApiClient } from '../api';
 import { DirectionsResponse, Route } from '../interfaces/directions';
+import mapboxgl from 'mapbox-gl';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ import { DirectionsResponse, Route } from '../interfaces/directions';
 export class MapService {
 
   
-  private map?: Map;
+  private map: any;
   private markers: Marker[] = [];
   public lugares: Feature[] = [];
 
@@ -159,6 +161,37 @@ export class MapService {
 
   removeMarkers() {
     this.markers.forEach(marker => marker.remove());
+  }
+
+  public crearMapa() {
+    this.map = new mapboxgl.Map({
+      container: 'mapa',
+      style: 'mapbox://styles/iamjuaness/clv1c9h5h01dc01pedsbyaw81',
+      center: [-75.6258, 4.4053],
+      zoom: 9
+    });
+    this.map.addControl(new mapboxgl.NavigationControl());
+    this.map.addControl(
+      new mapboxgl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true
+      })
+    );
+  }
+
+  public agregarMarcador(): Observable<any> {
+    const mapaGlobal = this.map;
+    const marcadores = this.markers;
+    return new Observable<any>(observer => {
+      mapaGlobal.on('click', function (e: any) {
+        marcadores.forEach(marcador => marcador.remove());
+        const marcador = new mapboxgl.Marker()
+          .setLngLat([e.lngLat.lng, e.lngLat.lat])
+          .addTo(mapaGlobal);
+        marcadores.push(marcador);
+        observer.next(marcador.getLngLat());
+      });
+    });
   }
 
 }

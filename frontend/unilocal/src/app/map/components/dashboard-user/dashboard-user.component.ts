@@ -19,11 +19,20 @@ export class DashboardUserComponent {
     const token = this.tokenService.getToken();
     if (token) {
       // Decodificar el payload del token y obtener la foto del usuario
-      this.payload = this.tokenService.decodePayload(token);
-      this.userPhoto = this.payload.photo;
-      this.userName = this.payload.nombre;
-      this.userEmail = this.payload.sub;
+      this.userPhoto = this.tokenService.getPhoto();
+      this.userName = this.tokenService.getNombre();
+      this.userEmail = this.tokenService.getEmail();
     }
+  }
+
+  showPanel = false;
+
+  openPanel() {
+    this.showPanel = true;
+  }
+
+  closePanel() {
+    this.showPanel = false;
   }
 
 }

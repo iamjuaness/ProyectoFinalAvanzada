@@ -1,0 +1,214 @@
+<div
+  class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
+>
+  <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+    <div
+      class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10"
+    >
+      <div class="max-w-md mx-auto">
+        <div class="flex items-center space-x-5">
+          <div
+            class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-yellow-500 text-2xl font-mono"
+          >
+            i
+          </div>
+          <div
+            class="block pl-2 font-semibold text-xl self-start text-gray-700"
+          >
+            <h2 class="leading-relaxed">Crear un negocio</h2>
+            <p class="text-sm text-gray-500 font-normal leading-relaxed">
+              ¡Crea fácilmente un negocio en Unilocal!
+            </p>
+          </div>
+        </div>
+        <form class="" #f="ngForm" method="POST">
+          <div class="divide-y divide-gray-200">
+            <div
+              class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col">
+                  <label class="leading-loose">Nombre</label>
+                  <input
+                    type="text"
+                    name="name"
+                    #name="ngModel"
+                    minlength="3"
+                    maxlength="50"
+                    required
+                    [(ngModel)]="createPlaceDto.name"
+                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    placeholder="Nombre"
+                  />
+                  <!-- Mostrar mensaje de error si el campo es inválido -->
+                  <div
+                    *ngIf="name.invalid && (name.dirty || name.touched)"
+                    class="text-red-500"
+                  >
+                    <div
+                      *ngIf="
+                        f.controls['name'].errors &&
+                        f.controls['name'].errors['required']
+                      "
+                      class="text-red-500"
+                    >
+                      El nombre es obligatorio
+                    </div>
+                    <div
+                      [class.hidden]="
+                        !f.controls['name'].errors ||
+                        !f.controls['name'].errors['minlength']
+                      "
+                      class="text-red-500"
+                    >
+                      El nombre debe tener al menos 3 caracteres
+                    </div>
+                    <div
+                      [class.hidden]="
+                        !f.controls['name'].errors ||
+                        !f.controls['name'].errors['maxlength']
+                      "
+                      class="text-red-500"
+                    >
+                      El nombre debe tener máximo 50 caracteres
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label class="leading-loose">Description</label>
+                  <textarea
+                    name="description"
+                    required
+                    type="text"
+                    [(ngModel)]="createPlaceDto.description"
+                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    placeholder="Description"
+                  ></textarea>
+                </div>
+                <div class="flex flex-col">
+                  <label class="leading-loose">Tipo de Negocio</label>
+                  <select
+                    name="businessType"
+                    required
+                    class="bg-gray-300"
+                    [(ngModel)]="createPlaceDto.businessType"
+                  >
+                    <option value="" selected>Seleccione un tipo</option>
+                    @for (item of tipos; track $index) {
+                    <option [value]="item">{{ item }}</option>
+                    }
+                  </select>
+                </div>
+                <div class="flex flex-col">
+                  <label class="col-sm-2 col-form-label">Horarios: </label>
+                  <div class="col-sm-8">
+                    @for (item of horarios; track $index) {
+                    <div class="row mb-2">
+                      <div class="col">
+                        <input
+                          class="form-control"
+                          placeholder="Día"
+                          type="text"
+                          name="dia-{{ $index }}"
+                          [(ngModel)]="item.dia"
+                          required
+                        />
+                      </div>
+                      <div class="col">
+                        <input
+                          class="form-control"
+                          placeholder="Hora Inicio"
+                          type="time"
+                          name="horaInicio-{{ $index }}"
+                          [(ngModel)]="item.horaInicio"
+                          required
+                        />
+                      </div>
+                      <div class="col">
+                        <input
+                          class="form-control"
+                          placeholder="Hora Fin"
+                          type="time"
+                          name="horaFin-{{ $index }}"
+                          [(ngModel)]="item.horaFin"
+                          required
+                        />
+                      </div>
+                    </div>
+                    }
+                  </div>
+                  <div class="col-sm-2 text-end">
+                    <button class="btn btn-primary" (click)="agregarHorario()">
+                      <i class="fa-solid fa-circle-plus me-1"></i>Agregar
+                      horario
+                    </button>
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label class="leading-loose">Teléfonos</label>
+                  <input
+                    name="phones"
+                    required
+                    type="text"
+                    [(ngModel)]="createPlaceDto.phones"
+                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    placeholder="Teléfonos"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <label class="leading-loose">Imágenes</label>
+                  <input
+                    type="file"
+                    name="images"
+                    required
+                    multiple
+                    (change)="onFileChange($event)"
+                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    placeholder="Imágenes"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Ubicación: </label>
+                    <div class="col-sm-10">
+                      <div id="mapa" class="h-52 w-52"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center space-x-4">
+              <button
+                (click)="closePopup()"
+                class="flex justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none"
+              >
+                <svg
+                  class="w-6 h-6 mr-3"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+                Cancel
+              </button>
+              <button
+                [disabled]="f.invalid"
+                (click)="crearNegocio()"
+                class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+              >
+                Create
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
