@@ -37,6 +37,9 @@ public class AuthController {
         return ResponseEntity.ok().body(new MensajeAuthDto<>(false, tokenDto));
     }
 
+    @PostMapping("/refresh")
+    public ResponseEntity<MensajeAuthDto<TokenDto>> actualizarToken(){}
+
     @PostMapping("/register-client")
     public ResponseEntity<MensajeAuthDto> registerUser(@Valid @RequestBody RegisterUserDto registerUserDto) throws AttributeException {
 
