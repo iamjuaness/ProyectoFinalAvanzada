@@ -41,6 +41,7 @@ export class MapViewComponent implements AfterViewInit {
       zoom: 16.6, // starting zoom
     });
 
+
   // Agregar el evento de clic al mapa
   map.on("click", function (e) {
       // Verificar si ya existe un marcador
@@ -92,7 +93,8 @@ export class MapViewComponent implements AfterViewInit {
                 this.mapService.lugares.push(feature)
                 const place = data[index]; 
 
-                  // Agrega la característica al mapa
+                map.on('load', () => {
+                // Agrega la característica al mapa
                   map.addLayer({
                     id: feature.id,
                     type: 'symbol',
@@ -126,6 +128,7 @@ export class MapViewComponent implements AfterViewInit {
                         // }
                       }
                   });
+                })
 
                 
               });
