@@ -47,7 +47,7 @@ export class RegisterComponent {
   private cargarCiudades() {
     this.publicoService.listarCiudades().subscribe({
       next: (data) => {
-        this.ciudades = data.respuesta;
+        this.ciudades = data.data.respuesta;
       },
       error: (error) => {
         console.log("Error al cargar las ciudades");
