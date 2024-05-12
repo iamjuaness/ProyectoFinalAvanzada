@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MapService, PlacesService } from '../../services';
 import { CreatePlaceDto } from '../../class/dto/create-place-dto';
 import { LocalService } from '../../services/local.service';
@@ -20,6 +20,7 @@ export class CreateLocalComponent {
   createPlaceDto: CreatePlaceDto
   horarios: Horario[];
   tipos: string[];
+   phones: { telefono: string }[] = [{ telefono: '' }];
   
 
   closePopup() {
@@ -44,6 +45,7 @@ export class CreateLocalComponent {
   public crearNegocio() {
     const idUser = this.tokenService.getCodigo();
     this.createPlaceDto.schedules = this.horarios;
+    this.createPlaceDto.phones = this.phones;
     this.createPlaceDto.owner = idUser;
     this.localService.crearLugar(this.createPlaceDto);
     // console.log(this.createPlaceDto)
@@ -51,6 +53,18 @@ export class CreateLocalComponent {
 
   public agregarHorario() {
     this.horarios.push(new Horario());
+  }
+
+  eliminarHorario(index: number): void {
+    this.horarios.splice(index, 1);
+  }
+
+  agregarTelefono(): void {
+    this.phones.push({ telefono: '' });
+  }
+
+  eliminarTelefono(index: number): void {
+    this.phones.splice(index, 1);
   }
 
   public onFileChange(event: any) {

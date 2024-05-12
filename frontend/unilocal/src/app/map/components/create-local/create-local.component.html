@@ -102,15 +102,17 @@
                 <div class="flex flex-col">
                   <label class="col-sm-2 col-form-label">Horarios: </label>
                   <div class="col-sm-8">
-                    @for (item of horarios; track $index) {
-                    <div class="row mb-2">
+                    <div
+                      *ngFor="let horario of horarios; let i = index"
+                      class="row mb-2"
+                    >
                       <div class="col">
                         <input
                           class="form-control"
                           placeholder="Día"
                           type="text"
-                          name="dia-{{ $index }}"
-                          [(ngModel)]="item.dia"
+                          name="dia-{{ i }}"
+                          [(ngModel)]="horario.dia"
                           required
                         />
                       </div>
@@ -119,8 +121,8 @@
                           class="form-control"
                           placeholder="Hora Inicio"
                           type="time"
-                          name="horaInicio-{{ $index }}"
-                          [(ngModel)]="item.horaInicio"
+                          name="horaInicio-{{ i }}"
+                          [(ngModel)]="horario.horaInicio"
                           required
                         />
                       </div>
@@ -129,13 +131,20 @@
                           class="form-control"
                           placeholder="Hora Fin"
                           type="time"
-                          name="horaFin-{{ $index }}"
-                          [(ngModel)]="item.horaFin"
+                          name="horaFin-{{ i }}"
+                          [(ngModel)]="horario.horaFin"
                           required
                         />
                       </div>
+                      <div class="col-sm-2 text-end">
+                        <button
+                          class="btn btn-danger"
+                          (click)="eliminarHorario(i)"
+                        >
+                          <i class="fa-solid fa-circle-minus me-1"></i>Eliminar
+                        </button>
+                      </div>
                     </div>
-                    }
                   </div>
                   <div class="col-sm-2 text-end">
                     <button class="btn btn-primary" (click)="agregarHorario()">
@@ -144,16 +153,43 @@
                     </button>
                   </div>
                 </div>
+
                 <div class="flex flex-col">
-                  <label class="leading-loose">Teléfonos</label>
-                  <input
-                    name="phones"
-                    required
-                    type="text"
-                    [(ngModel)]="createPlaceDto.phones"
-                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                    placeholder="Teléfonos"
-                  />
+                  <label class="col-sm-2 col-form-label">Teléfonos: </label>
+                  <div class="col-sm-8">
+                    <div
+                      *ngFor="let phone of phones; let i = index"
+                      class="row mb-2"
+                    >
+                      <div class="col">
+                        <input
+                          class="form-control"
+                          placeholder="phone"
+                          type="text"
+                          name="phone-{{ i }}"
+                          [(ngModel)]="phones[i].telefono"
+                          required
+                        />
+                      </div>
+                      <div class="col-sm-2 text-end">
+                        <button
+                          class="btn btn-primary"
+                          (click)="eliminarTelefono(i)"
+                        >
+                          <i class="fa-solid fa-circle-minus me-1"></i>Eliminar
+                        </button>
+                      </div>
+                    </div>
+                    <div class="col-sm-2 text-end">
+                      <button
+                        class="btn btn-primary"
+                        (click)="agregarTelefono()"
+                      >
+                        <i class="fa-solid fa-circle-plus me-1"></i>Agregar
+                        Teléfono
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div class="flex flex-col">
                   <label class="leading-loose">Imágenes</label>

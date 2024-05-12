@@ -18,5 +18,6 @@ public record CreatePlaceDto<T>(
         @NotNull(message = "businessType is required") BusinessType businessType,
         @NotBlank(message = "owner is required") String owner,
         @NotNull(message = "location is required") Location location,
-        @NotEmpty(message = "phones are required") List<String> phones) {
+        @NotEmpty(message = "phones are required") List<T> phones
+) {
 }

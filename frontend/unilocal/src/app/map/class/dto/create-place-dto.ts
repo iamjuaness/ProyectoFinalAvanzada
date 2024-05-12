@@ -10,7 +10,7 @@ export class CreatePlaceDto {
         public businessType: string = '',
         public owner: string = '',
         public location: Location = new Location,
-        public phones: string[] = []
+        public phones: any[] = []
     ) { }
     
 }
