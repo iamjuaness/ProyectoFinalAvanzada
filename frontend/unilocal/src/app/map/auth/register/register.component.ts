@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RegistroClienteDTO } from '../../class/dto/registro-cliente-dto';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth-service.service';
+import { PublicService } from '../../services/public.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class RegisterComponent {
   registroClienteDTO: RegistroClienteDTO;
   ciudades: string[];
 
-  constructor(private authService: AuthService ) {
+  constructor(private authService: AuthService, private publicoService: PublicService) {
     this.registroClienteDTO = new RegistroClienteDTO();
     this.ciudades = [];
     this.cargarCiudades();
@@ -44,6 +45,13 @@ export class RegisterComponent {
   }
 
   private cargarCiudades() {
-   this.ciudades = ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena", "Armenia"];
+    this.publicoService.listarCiudades().subscribe({
+      next: (data) => {
+        this.ciudades = data.respuesta;
+      },
+      error: (error) => {
+        console.log("Error al cargar las ciudades");
+      }
+    });
   }
 }
