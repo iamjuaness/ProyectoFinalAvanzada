@@ -1,10 +1,12 @@
 package com.avanzada.unilocal.Unilocal.controller;
 
+import com.avanzada.unilocal.Unilocal.dto.CrearCiudadDto;
+import com.avanzada.unilocal.Unilocal.entity.Ciudad;
+import com.avanzada.unilocal.Unilocal.entity.Tipo;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PublicService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,13 +18,18 @@ public class PublicController {
     private PublicService publicService;
 
     @GetMapping("/listar-ciudades")
-    public List<String> getCiudades(){
+    public List<Ciudad> getCiudades(){
         return publicService.getCiudades();
     }
 
     @GetMapping("/listar-tipos-negocios")
-    public List<String> getTipos(){
-        return publicService.getCiudades();
+    public List<Tipo> getTipos(){
+        return publicService.getTipos();
+    }
+
+    @PostMapping("/crear-ciudades")
+    public void crearCiudad(@Valid @RequestBody CrearCiudadDto crearCiudadDto){
+        publicService.crearCiudad(crearCiudadDto);
     }
 
 }

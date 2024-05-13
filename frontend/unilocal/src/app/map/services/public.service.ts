@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Observable, from } from 'rxjs';
 import { MensajeAuthDto } from '../class/dto/mensaje-auth-dto';
+import { Ciudad } from '../class/model/ciudad';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,10 @@ export class PublicService {
 
   constructor() { }
 
-  public listarCiudades(): Observable<AxiosResponse<MensajeAuthDto>> {
-    return from(axios.get<MensajeAuthDto>(`${this.publicoURL}/listar-ciudades`));
+  public listarCiudades() {
+    return axios.get<Ciudad>(`${this.publicoURL}/listar-ciudades`);
   }
-  public listarTiposNegocio(): Observable<AxiosResponse<MensajeAuthDto>> {
-    return from(axios.get<MensajeAuthDto>(`${this.publicoURL}/listar-tipos-negocio`));
+  public listarTiposNegocio(){
+    return axios.get<Ciudad>(`${this.publicoURL}/listar-tipos-negocio`);
   }
 }

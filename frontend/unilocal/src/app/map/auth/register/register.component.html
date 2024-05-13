@@ -157,7 +157,6 @@
                 <div class="md:col-span-3">
                   <select
                     name="residenceCity"
-                    required
                     [(ngModel)]="registroClienteDTO.residenceCity"
                   >
                     <option value="" selected>Seleccione una ciudad</option>
@@ -177,6 +176,7 @@
               >
                 Registrarse
               </button>
+              <app-alerta [alerta]="alerta"></app-alerta>
             </div>
           </form>
         </div>
