@@ -1,6 +1,7 @@
 package com.avanzada.unilocal.Unilocal.controller;
 
 import com.avanzada.unilocal.Unilocal.dto.CrearCiudadDto;
+import com.avanzada.unilocal.Unilocal.dto.CrearTipoDto;
 import com.avanzada.unilocal.Unilocal.entity.Ciudad;
 import com.avanzada.unilocal.Unilocal.entity.Tipo;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PublicService;
@@ -30,6 +31,11 @@ public class PublicController {
     @PostMapping("/crear-ciudades")
     public void crearCiudad(@Valid @RequestBody CrearCiudadDto crearCiudadDto){
         publicService.crearCiudad(crearCiudadDto);
+    }
+
+    @PostMapping("/crear-tipos")
+    public void crearTipo(@Valid @RequestBody CrearTipoDto crearTipoDto){
+        publicService.crearTipos(crearTipoDto);
     }
 
 }

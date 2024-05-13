@@ -32,7 +32,7 @@ public class Place implements Serializable {
 
     private List<String> images;
     private List<String> comments = new ArrayList<>();
-    private BusinessType businessType;
+    private String businessType;
     private List<String> phones;
     private StateUnilocal stateBusiness;
     private String owner;
@@ -42,7 +42,7 @@ public class Place implements Serializable {
 
     private List<Integer> revisions = new ArrayList<>();
 
-    public Place(int id, String description, String name, List<Horario> schedules, List<String> images, BusinessType businessType, List<String> phones, StateUnilocal stateBusiness, String owner, Location location) {
+    public Place(int id, String description, String name, List<Horario> schedules, List<String> images, String businessType, List<String> phones, StateUnilocal stateBusiness, String owner, Location location) {
         this.id = id;
         this.description = description;
         this.name = name;

@@ -6,6 +6,8 @@ import { Horario } from '../../class/model/horario';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../../services/token.service';
+import { PublicService } from '../../services/public.service';
+import { Tipo } from '../../class/model/tipo';
 
 @Component({
   selector: 'app-create-local',
@@ -27,12 +29,16 @@ export class CreateLocalComponent {
     this.close.emit();
   }
 
-  constructor(private mapaService: MapService, private localService: LocalService, private tokenService: TokenService) {
+  constructor(private mapaService: MapService,
+    private localService: LocalService,
+    private tokenService: TokenService,
+    private publicService: PublicService) {
+    
     this.createPlaceDto = new CreatePlaceDto();
     this.horarios = [new Horario()];
     this.tipos = [];
     this.cargarTipos();
-   }
+  }
 
   ngOnInit(): void {
     this.mapaService.crearMapa();
@@ -75,6 +81,12 @@ export class CreateLocalComponent {
   }
 
   private cargarTipos() {
-   this.tipos = ["PANADERIA", "CAFETERIA", "BAR", "RESTAURANTE", "DISCOTECA", "SUPERMERCADO", "TIENDA", "OTRO"];
+    this.publicService.listarTiposNegocio().then((response) => {
+      // Iterar sobre cada objeto Ciudad en response.data
+      this.tipos = response.data.map((tipo: Tipo) => tipo.tipo);
+    })
+    .catch((error) => {
+      console.log("Error al obtener los tipos")
+    })
   }
 }

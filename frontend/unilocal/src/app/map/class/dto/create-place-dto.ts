@@ -7,7 +7,7 @@ export class CreatePlaceDto {
         public name: string = '',
         public schedules: Horario[] = [new Horario()],
         public images: any[] = [],
-        public businessType: string = '',
+        public businessType: any = '',
         public owner: string = '',
         public location: Location = new Location,
         public phones: any[] = []
