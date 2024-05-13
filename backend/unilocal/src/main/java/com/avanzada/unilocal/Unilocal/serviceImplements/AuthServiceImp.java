@@ -76,4 +76,8 @@ public class AuthServiceImp<T> implements AuthService {
 
         return new TokenDto(jwtTokenService.generarToken(person.getEmail(), authToken));
     }
+
+    public String actualizarToken(String token){
+        return jwtTokenService.actualizarToken(token);
+    }
 }

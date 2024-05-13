@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Buffer } from "buffer";
+import axios from 'axios';
+import { MensajeAuthDto } from '../class/dto/mensaje-auth-dto';
+import { environment } from '../../environments/environment';
+import { TokenDto } from '../class/dto/token-dto';
 
 
 const TOKEN_KEY = "AuthToken";
@@ -123,5 +127,30 @@ export class TokenService {
       return values.role;
     }
     return "";
+  }
+
+  refreshToken() {
+    const token = this.getToken();
+
+    if (token) {
+      return axios.post<MensajeAuthDto>(`${environment.urlAuth}/refresh`, { token });
+    } else {
+      throw new Error('No hay token presente para actualizar');
+    }
+  }
+
+  getTokenExpiration(): number | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      if (tokenPayload && tokenPayload.exp) {
+        return tokenPayload.exp * 1000; // La expiración del token está en segundos, lo convertimos a milisegundos
+      }
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+    }
+    return null;
   }
 }
