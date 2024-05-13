@@ -4,13 +4,13 @@ import { ImagenesService } from './imagenes.service';
 import axios, { AxiosRequestConfig } from 'axios';
 import { usuarioInterceptor } from '../interceptor/usuario.interceptor';
 import { TokenService } from './token.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalService {
 
-  public baseUrl: string = 'http://localhost:8080/api/place';
 
   constructor(private imagenesService: ImagenesService, private tokenService: TokenService) { }
 
@@ -35,7 +35,7 @@ export class LocalService {
     };
 
     // Luego realizar la petición para guardar el lugar
-    const response = await axios.post(`${this.baseUrl}/create-place`, createPlaceDto, {headers});
+    const response = await axios.post(`${environment.urlPlace}/create-place`, createPlaceDto, {headers});
     return response.data;
   }
 }

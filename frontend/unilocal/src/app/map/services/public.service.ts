@@ -3,20 +3,20 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Observable, from } from 'rxjs';
 import { MensajeAuthDto } from '../class/dto/mensaje-auth-dto';
 import { Ciudad } from '../class/model/ciudad';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PublicService {
 
-  private publicoURL = "http://localhost:8080/api/public";
 
   constructor() { }
 
   public listarCiudades() {
-    return axios.get<Ciudad>(`${this.publicoURL}/listar-ciudades`);
+    return axios.get<Ciudad>(`${environment.urlPublic}/listar-ciudades`);
   }
   public listarTiposNegocio(){
-    return axios.get<Ciudad>(`${this.publicoURL}/listar-tipos-negocio`);
+    return axios.get<Ciudad>(`${environment.urlPublic}/listar-tipos-negocio`);
   }
 }

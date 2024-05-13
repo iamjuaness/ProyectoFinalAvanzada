@@ -8,13 +8,13 @@ import { MensajeAuthDto } from '../class/dto/mensaje-auth-dto';
 import { TokenService } from './token.service';
 import { ImagenesService } from './imagenes.service';
 import { error } from 'console';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public baseUrl: string = 'http://localhost:8080/api/auth';
 
   constructor(private tokenService: TokenService,
   private imagenService: ImagenesService) { }
@@ -26,7 +26,7 @@ export class AuthService {
           const cloudinaryURL = response.data.respuesta.secure_url;
           registroClienteDTO.photo = cloudinaryURL;
 
-          axios.post<MensajeAuthDto>(`${this.baseUrl}/register-client`, registroClienteDTO)
+          axios.post<MensajeAuthDto>(`${environment.urlAuth}/register-client`, registroClienteDTO)
             .then((response) => {
               const payload = this.tokenService.decodePayload(response.data.respuesta.token);
               const id = payload.id;
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   loginUsuario(LoginDto: LoginDto) {
-    axios.post<MensajeAuthDto>(`${this.baseUrl}/login-client`, LoginDto)
+    axios.post<MensajeAuthDto>(`${environment.urlAuth}/login-client`, LoginDto)
       .then((response) => {
         const payload = this.tokenService.decodePayload(response.data.respuesta.token);
         const id = payload.id;
