@@ -5,6 +5,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { usuarioInterceptor } from '../interceptor/usuario.interceptor';
 import { TokenService } from './token.service';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,15 @@ import { environment } from '../../environments/environment';
 export class LocalService {
 
 
-  constructor(private imagenesService: ImagenesService, private tokenService: TokenService) { }
+  constructor(private imagenesService: ImagenesService,
+    private tokenService: TokenService,
+  private router: Router) { }
 
   public async crearLugar(createPlaceDto: CreatePlaceDto) {
     // Convertir FileList a un arreglo de archivos
     const imagesToUpload: File[] = Array.from(createPlaceDto.images);
     const images: string[] = [];
+    const id: string = createPlaceDto.owner;
         // Subir cada imagen a Cloudinary
     const uploadPromises = imagesToUpload.map(photo => this.imagenesService.subirImagen(photo).then(response => (
       images.push(response.data.respuesta.secure_url)
@@ -35,7 +39,10 @@ export class LocalService {
     };
 
     // Luego realizar la petición para guardar el lugar
-    const response = await axios.post(`${environment.urlPlace}/create-place`, createPlaceDto, {headers});
+    const response = await axios.post(`${environment.urlPlace}/create-place`, createPlaceDto, { headers });
+    this.router.navigate([`/dashboard-user/${{id}}`]).then(() => {
+      window.location.reload();
+    });
     return response.data;
   }
 }

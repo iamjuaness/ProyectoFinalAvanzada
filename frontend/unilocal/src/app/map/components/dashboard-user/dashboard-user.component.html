@@ -1,7 +1,5 @@
 <div class="bg-blue-300 flex mt-20 justify-between">
-  <div
-    class="max-w-7xl px-4 py-6 bg-blue-300 sm:px-6 lg:px-8 hidden lg:block md:block"
-  >
+  <div class="max-w-7xl px-4 py-6 bg-blue-300 sm:px-6 lg:px-8">
     <img
       class="flex-1 w-48 h-48 rounded-full shadow-lg"
       [src]="userPhoto"
@@ -9,10 +7,17 @@
     />
   </div>
   <div class="bg-blue-300 max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-sans tracking-tight text-gray-900">
-      {{ userName }}
-    </h1>
-    <p class="">{{ userEmail }}</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-1">
+      <h1 class="md:col-span-1 text-3xl font-sans tracking-tight text-gray-900">
+        {{ userName }}
+      </h1>
+      <p
+        class="md:col-span-1 text-sm flex items-center font-serif text-gray-700"
+      >
+        (&#64;{{ userName }})
+      </p>
+    </div>
+    <p>{{ userEmail }}</p>
   </div>
 
   <div class="bg-blue-300 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
@@ -38,7 +43,9 @@
             class="-mt-3 text-sm font-semibold text-gray-500 hover:text-gray-700 py-2 px-3 divide-y rounded bg-white"
           >
             <li class="flex items-center py-3 justify-center">
-              <button class="text-xl">Mi negocios</button>
+              <button (click)="closePanel()" class="text-xl">
+                Mi negocios
+              </button>
               <button>
                 <img
                   class="h-6 w-6 ml-1"
@@ -76,51 +83,8 @@
           <div *ngIf="showPanel" class="">
             <app-create-local (close)="closePanel()"></app-create-local>
           </div>
-          <div
-            *ngIf="!showPanel"
-            class="overflow-hidden border border-gray-200 md:rounded-lg"
-          >
-            <table class="min-w-full divide-y divide-gray-200">
-              <tbody class="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td class="px-4 py-4 text-sm font-medium">
-                    <div>
-                      <h2 class="font-medium text-gray-800">
-                        Resume and Applications
-                      </h2>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                    <div>
-                      <h2 class="font-medium text-gray-800">
-                        Signed Documents
-                      </h2>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                    <div>
-                      <h2 class="font-medium text-gray-800">
-                        Tasklist Attachments
-                      </h2>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                    <div>
-                      <h2 class="font-medium text-gray-800">
-                        Workflow Attachments
-                      </h2>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div *ngIf="!showPanel" class="">
+            <app-card-local></app-card-local>
           </div>
         </div>
         <!-- End of profile tab -->
