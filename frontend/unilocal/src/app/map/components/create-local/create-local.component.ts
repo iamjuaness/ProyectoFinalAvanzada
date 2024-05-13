@@ -82,7 +82,7 @@ export class CreateLocalComponent {
 
   private cargarTipos() {
     this.publicService.listarTiposNegocio().then((response) => {
-      // Iterar sobre cada objeto Ciudad en response.data
+      // Iterar sobre cada objeto Tipo en response.data
       this.tipos = response.data.map((tipo: Tipo) => tipo.tipo);
     })
     .catch((error) => {
