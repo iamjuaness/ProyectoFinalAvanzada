@@ -38,4 +38,8 @@ public class PublicController {
         publicService.crearTipos(crearTipoDto);
     }
 
+    @PostMapping("/inactivar-locales-rechazados")
+    public void inactivarLocales5DiasRechazados(){
+        publicService.cambiarEstadoNegociosRechazados();
+    }
 }

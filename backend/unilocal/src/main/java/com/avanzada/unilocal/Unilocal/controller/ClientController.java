@@ -90,7 +90,7 @@ public class ClientController {
     }
 
     @GetMapping("/usuario/{id}/lugares")
-    public List<Place> obtenerLugaresUsuario(@PathVariable String id) {
+    public List<Place> obtenerLugaresUsuario(@PathVariable String id) throws ResourceNotFoundException {
         return personService.obtenerLugaresUsuario(id);
     }
 

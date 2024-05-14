@@ -7,6 +7,7 @@ import com.avanzada.unilocal.Unilocal.entity.Place;
 import com.avanzada.unilocal.Unilocal.enums.BusinessType;
 import com.avanzada.unilocal.Unilocal.enums.Role;
 import com.avanzada.unilocal.Unilocal.enums.StateUnilocal;
+import com.avanzada.unilocal.Unilocal.resources.Horario;
 import com.avanzada.unilocal.Unilocal.resources.Location;
 import com.avanzada.unilocal.Unilocal.serviceImplements.*;
 import com.avanzada.unilocal.global.dto.MensajeAuthDto;
@@ -87,7 +88,7 @@ class UnilocalApplicationTests {
 	@Test
 	void testRegisterUser_Success() throws AttributeException {
 		// Arrange
-		RegisterUserDto registerUserDto = new RegisterUserDto("1234", "Pepe", "", "pepe123", "pepe123@gmail.com", "pepe123", "pepe123");
+		RegisterUserDto registerUserDto = new RegisterUserDto("1234", "Pepe", "", "pepe123", "pepe123@gmail.com", "pepe123", "pepe123", "armenia");
 		Person person = new Person("1234", "Pepe", "", "pepe123", "pepe123@gmail.com", "pepe123", "Armenia", Role.USER, StateUnilocal.Active);
 		String expectedMessage = "user " + registerUserDto.name() + " have been saved";
 		when(personService.signUp(any(RegisterUserDto.class))).thenReturn(person);
@@ -282,7 +283,7 @@ class UnilocalApplicationTests {
 	}
 
 	@Test
-	void testObtenerLugaresUsuario() {
+	void testObtenerLugaresUsuario() throws ResourceNotFoundException {
 		// Arrange
 		String id = "1";
 		List<Place> expectedPlaces = Arrays.asList(new Place(), new Place());
@@ -464,10 +465,10 @@ class UnilocalApplicationTests {
 	@Test
 	void testSave() throws AttributeException, ResourceNotFoundException {
 		// Arrange
-		List<String> schedules = new ArrayList<>();
+		List<Horario> schedules = new ArrayList<>();
 		List<String> images = new ArrayList<>();
 		List<String> phones = new ArrayList<>();
-		CreatePlaceDto createPlaceDto = new CreatePlaceDto("", "TestName", schedules, images, BusinessType.BAR, "1234", new Location(1, 2), phones);
+		CreatePlaceDto createPlaceDto = new CreatePlaceDto("", "TestName", schedules, images, "Restarante", "1234", new Location(1, 2), phones);
 		Place place = new Place();
 		place.setName("TestName");
 		String message = "place TestName have been saved";
@@ -485,10 +486,10 @@ class UnilocalApplicationTests {
 	void testUpdate() throws ResourceNotFoundException, AttributeException {
 		// Arrange
 		int placeId = 1;
-		List<String> schedules = new ArrayList<>();
+		List<Horario> schedules = new ArrayList<>();
 		List<String> images = new ArrayList<>();
 		List<String> phones = new ArrayList<>();
-		CreatePlaceDto createPlaceDto = new CreatePlaceDto("", "", schedules, images, BusinessType.BAR, "", new Location(1, 2), phones);
+		CreatePlaceDto createPlaceDto = new CreatePlaceDto("", "", schedules, images, "Restaurante", "", new Location(1, 2), phones);
 		Place place = new Place();
 		place.setName("TestName");
 		String message = "place TestName have been updated";

@@ -31,24 +31,53 @@ public class PlaceService implements BusinessService {
 
     @Override
     public Place createBusiness(CreatePlaceDto createPlaceDto) throws AttributeException, ResourceNotFoundException {
-        if (placeRepository.existsByName(createPlaceDto.name()))
-            throw new AttributeException("name already in use");
+        // Verificar si el DTO de creación de lugar no es nulo
+        Objects.requireNonNull(createPlaceDto, "El DTO de creación de lugar no puede ser nulo");
 
-        Optional<Person> person = Optional.ofNullable(clientRepository.findById(createPlaceDto.owner())
-                .orElseThrow(() -> new ResourceNotFoundException("El usuario no se ha encontrado")));
-        if (!person.get().getStateUnilocal().equals(StateUnilocal.Inactive)){
-            int id = autoIncrement();
-            StateUnilocal stateBusiness = StateUnilocal.Revision;
-            Place place = getPlace(createPlaceDto, id, stateBusiness);
-            person.get().getMyPlaces().add(place.getId());
-
-            clientRepository.save(person.get());
-            return placeRepository.save(place);
+        // Verificar si el nombre del lugar ya está en uso
+        if (placeRepository.existsByName(createPlaceDto.name())) {
+            throw new AttributeException("El nombre del lugar ya está en uso");
         }
-        return null;
+
+        // Buscar al propietario por su ID
+        Optional<Person> personOptional = clientRepository.findById(createPlaceDto.owner());
+        Person person = personOptional.orElseThrow(() -> new ResourceNotFoundException("El usuario no se ha encontrado"));
+
+        // Verificar si el propietario está en un estado adecuado para crear un nuevo lugar
+        if (!person.getStateUnilocal().equals(StateUnilocal.Active)) {
+            throw new IllegalStateException("El propietario no está en un estado adecuado para crear un nuevo lugar");
+        }
+
+        // Obtener un nuevo ID para el lugar
+        int id = autoIncrement();
+
+        // Establecer el estado del negocio como "Revisión"
+        StateUnilocal stateBusiness = StateUnilocal.Revision;
+
+        // Crear una instancia de Place con los datos proporcionados en el DTO de creación de lugar
+        Place place = getPlace(createPlaceDto, id, stateBusiness);
+
+        // Agregar el ID del nuevo lugar a la lista de lugares del propietario
+        person.getMyPlaces().add(place.getId());
+
+        // Guardar los cambios en el propietario y en el lugar en la base de datos
+        clientRepository.save(person);
+        return placeRepository.save(place);
     }
 
-    private static Place getPlace(CreatePlaceDto createPlaceDto, int id, StateUnilocal stateUnilocal){
+    private static Place getPlace(CreatePlaceDto createPlaceDto, int id, StateUnilocal stateUnilocal) {
+        // Verificar si el DTO de creación de lugar no es nulo
+        Objects.requireNonNull(createPlaceDto, "El DTO de creación de lugar no puede ser nulo");
+
+        // Verificar si el estado del negocio no es nulo
+        Objects.requireNonNull(stateUnilocal, "El estado del negocio no puede ser nulo");
+
+        // Verificar si el ID es válido
+        if (id <= 0) {
+            throw new IllegalArgumentException("El ID debe ser un número positivo");
+        }
+
+        // Crear una nueva instancia de Place con los datos proporcionados en el DTO de creación de lugar
         Place place = new Place();
         place.setId(id);
         place.setName(createPlaceDto.name());
@@ -60,17 +89,25 @@ public class PlaceService implements BusinessService {
         place.setStateBusiness(stateUnilocal);
         place.setSchedules(createPlaceDto.schedules());
         place.setBusinessType(createPlaceDto.businessType());
+
         return place;
     }
-
     @Override
     public Place updateBusiness(int id, CreatePlaceDto createPlaceDto) throws AttributeException, ResourceNotFoundException {
+        // Verificar si el DTO de creación de lugar no es nulo
+        Objects.requireNonNull(createPlaceDto, "El DTO de creación de lugar no puede ser nulo");
+
+        // Buscar el lugar por su ID
         Place place = placeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Lugar no encontrado"));
 
-        if (placeRepository.existsByName(createPlaceDto.name()) && !Objects.equals(placeRepository.findByName(createPlaceDto.name()).get().getName(), createPlaceDto.name()))
-            throw new AttributeException("id already in use");
+        // Verificar si el nombre del lugar ya está en uso por otro lugar
+        if (placeRepository.existsByName(createPlaceDto.name()) &&
+                !Objects.equals(placeRepository.findByName(createPlaceDto.name()).get().getId(), id)) {
+            throw new AttributeException("El nombre del lugar ya está en uso");
+        }
 
+        // Actualizar los datos del lugar con los proporcionados en el DTO de creación de lugar
         place.setName(createPlaceDto.name());
         place.setImages(createPlaceDto.images());
         place.setDescription(createPlaceDto.description());
@@ -79,85 +116,95 @@ public class PlaceService implements BusinessService {
         place.setPhones(createPlaceDto.phones());
         place.setLocation(createPlaceDto.location());
 
+        // Guardar los cambios y devolver el lugar actualizado
         return placeRepository.save(place);
     }
 
     @Override
     public Place deleteBusiness(int id) throws ResourceNotFoundException {
+        // Buscar el lugar por su ID
         Place place = placeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un lugar"));
+                .orElseThrow(() -> new ResourceNotFoundException("El ID no está asociado a un lugar"));
 
-        if (!place.getStateBusiness().equals(StateUnilocal.Inactive)){
+        // Verificar si el estado del lugar no es "Inactivo"
+        if (!place.getStateBusiness().equals(StateUnilocal.Inactive)) {
+            // Cambiar el estado del lugar a "Inactivo"
             place.setStateBusiness(StateUnilocal.Inactive);
-            for (Person person : clientRepository.findAll()){
-                if (person != null && !person.getMyPlaces().isEmpty()){
-                    for (Integer place1 : person.getMyPlaces()){
-                        if (place1 == place.getId()){
-                            person.getLugaresFavoritos().remove(place1);
-                            clientRepository.save(person);
-                            break;
-                        }
+
+            // Recorrer todos los usuarios para eliminar el lugar de sus listas de lugares favoritos si es necesario
+            for (Person person : clientRepository.findAll()) {
+                if (person != null && !person.getLugaresFavoritos().isEmpty()) {
+                    if (person.getLugaresFavoritos().contains(place.getId())) {
+                        person.getLugaresFavoritos().remove(Integer.valueOf(place.getId()));
+                        clientRepository.save(person);
                     }
                 }
             }
-            placeRepository.save(place);
-            return place;
+
+            // Guardar los cambios en la base de datos y devolver el lugar eliminado
+            return placeRepository.save(place);
+        } else {
+            // Devolver null o lanzar una excepción si el lugar ya estaba inactivo
+            throw new IllegalStateException("El lugar ya está inactivo");
         }
-        return null;
     }
 
     @Override
     public Place findBusiness(int id) throws ResourceNotFoundException {
-        Place place = placeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("El id no esta asociado a un lugar"));
-
-        return place;
+        // Buscar el lugar por su ID
+        return placeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("El ID no está asociado a un lugar"));
     }
 
     @Override
     public List<Place> filterByState(StateUnilocal stateBusiness) {
+        // Verificar si el estado proporcionado no es nulo
+        Objects.requireNonNull(stateBusiness, "El estado del negocio no puede ser nulo");
 
-        List<Place> places = new ArrayList<>();
-
-        for(Place place: placeRepository.findAll()){
-            if (place.getStateBusiness().equals(stateBusiness)){
-                places.add(place);
-            }
-        }
-
-        return places;
+        // Filtrar los lugares por estado en la base de datos
+        return placeRepository.findByStateBusinessIgnoreCase(stateBusiness);
     }
 
     @Override
     public List<Person> listOwnerBusiness() throws ResourceNotFoundException {
         List<Person> people = new ArrayList<>();
 
-        for(Place place: placeRepository.findAll()){
-            if (place != null && place.getOwner() != null) throw new ResourceNotFoundException("No hay lugares creados");{
-                people.add(clientRepository.findById(place.getOwner()).get());
+        // Obtener todos los lugares
+        List<Place> places = placeRepository.findAll();
+
+        // Verificar si no hay lugares creados en el sistema
+        if (places.isEmpty()) {
+            throw new ResourceNotFoundException("No hay lugares creados");
+        }
+
+        // Recorrer todos los lugares y agregar los propietarios válidos a la lista
+        for (Place place : places) {
+            if (place.getOwner() != null) {
+                Optional<Person> ownerOptional = clientRepository.findById(place.getOwner());
+                ownerOptional.ifPresent(people::add);
             }
         }
 
         return people;
-
     }
 
     @Override
     public void changeState(StateUnilocal newState, int id) throws ResourceNotFoundException {
+        // Buscar el lugar por su ID
+        Optional<Place> placeOptional = placeRepository.findById(id);
+        Place place = placeOptional.orElseThrow(() -> new ResourceNotFoundException("El ID no está asociado a un lugar"));
 
-        for (Place place : placeRepository.findAll()){
-            if (place.getId() == id) throw new ResourceNotFoundException("El id no esta asociado a un lugar");
-            {
-                place.setStateBusiness(newState);
-            }
-        }
+        // Cambiar el estado del lugar
+        place.setStateBusiness(newState);
+
+        // Guardar el cambio en la base de datos
+        placeRepository.save(place);
     }
 
 
     public List<Place> buscarLugares(String nombre, BusinessType tipo, Double latitud, Double longitud, Double distanciaMaxima) {
         // Implementar la lógica de búsqueda de lugares según los parámetros proporcionados
         // Puedes utilizar métodos de consulta de Spring Data JPA o consultas personalizadas según sea necesario
-        // Por ejemplo:
         if (nombre != null && tipo != null && latitud != null && longitud != null) {
 //            return placeRepository.buscarPorNombreTipoYDistancia(nombre, tipo, latitud, longitud, distanciaMaxima);
         } else if (nombre != null) {
@@ -175,19 +222,48 @@ public class PlaceService implements BusinessService {
     //-----------------------------Private Methods----------------------------------------
 
     public List<Place> getAll() {
-        List<Place> places = new ArrayList<>();
-        for (Place place : placeRepository.findAll()){
-            if (place.getStateBusiness().equals(StateUnilocal.Active)){
-                places.add(place);
+        List<Place> activePlaces = new ArrayList<>();
+        try {
+            // Obtener todos los lugares de la base de datos
+            List<Place> allPlaces = placeRepository.findAll();
+
+            // Verificar si la lista de lugares no está vacía
+            if (allPlaces.isEmpty()) {
+                // Manejar el caso en el que no hay lugares en la base de datos
+                throw new ResourceNotFoundException("No se encontraron lugares en la base de datos");
             }
+
+            // Filtrar los lugares en estado activo y agregarlos a la lista de lugares activos
+            for (Place place : allPlaces) {
+                if (place.getStateBusiness().equals(StateUnilocal.Active)) {
+                    activePlaces.add(place);
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        return places;
+
+        return activePlaces;
     }
 
 
     public Place getOne(int id) throws ResourceNotFoundException {
-        return placeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Not found"));
+        try {
+            // Buscar el lugar por su ID en la base de datos
+            Optional<Place> placeOptional = placeRepository.findById(id);
+
+            // Verificar si el lugar existe en la base de datos
+            if (placeOptional.isPresent()) {
+                // Devolver el lugar si se encuentra
+                return placeOptional.get();
+            } else {
+                // Lanzar una excepción si el lugar no se encuentra
+                throw new ResourceNotFoundException("Lugar no encontrado para el ID: " + id);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new ResourceNotFoundException("Error al buscar el lugar para el ID: " + id);
+        }
     }
 
     // private methods
