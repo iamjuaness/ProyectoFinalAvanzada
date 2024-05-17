@@ -4,5 +4,7 @@ export const environment = {
     urlPublic: 'http://localhost:8080/api/public',
     urlAuth: 'http://localhost:8080/api/auth',
     urlImage: 'http://localhost:8080/api/imagenes',
-    urlPlace: 'http://localhost:8080/api/place'
+    urlPlace: 'http://localhost:8080/api/place',
+    urlClient: 'http://localhost:8080/api/user',
+    urlMod: 'http://localhost:8080/api/mods'
 }

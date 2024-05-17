@@ -332,7 +332,7 @@ class UnilocalApplicationTests {
 		doNothing().when(personService).addQualification(lugarId, qualificationDTO);
 
 		// Act
-		ResponseEntity<String> responseEntity = clientController.agregarCalificacion(lugarId, qualificationDTO);
+		ResponseEntity<MensajeAuthDto> responseEntity = clientController.agregarCalificacion(lugarId, qualificationDTO);
 
 		// Assert
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());

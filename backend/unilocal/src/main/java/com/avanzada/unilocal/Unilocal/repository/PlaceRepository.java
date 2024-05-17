@@ -27,7 +27,6 @@ public interface PlaceRepository extends MongoRepository<Place, Integer> {
 
     List<Place> findByStateBusinessIgnoreCase(StateUnilocal stateBusiness);
 
-    List<Place> findByUsuarioId(int usuarioId);
 
     List<Place> findByStateBusiness(StateUnilocal stateUnilocal);
 }

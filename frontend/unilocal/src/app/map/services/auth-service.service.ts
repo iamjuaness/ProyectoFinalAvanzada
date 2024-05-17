@@ -3,11 +3,9 @@ import { MessageDto } from '../class/dto/message-dto';
 import axios from "axios";
 import { RegistroClienteDTO } from '../class/dto/registro-cliente-dto';
 import { LoginDto } from '../class/dto/login-dto';
-import { response } from 'express';
 import { MensajeAuthDto } from '../class/dto/mensaje-auth-dto';
 import { TokenService } from './token.service';
 import { ImagenesService } from './imagenes.service';
-import { error } from 'console';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -58,4 +56,9 @@ export class AuthService {
         console.log('Error:', error);
       });
   }
+
+
+
+
+
 }

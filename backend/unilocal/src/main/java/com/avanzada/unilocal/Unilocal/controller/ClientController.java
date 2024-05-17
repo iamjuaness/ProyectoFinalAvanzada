@@ -5,6 +5,7 @@ import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.entity.Place;
 import com.avanzada.unilocal.Unilocal.serviceImplements.AuthServiceImp;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PersonService;
+import com.avanzada.unilocal.global.dto.MensajeAuthDto;
 import com.avanzada.unilocal.global.dto.MessageDto;
 import com.avanzada.unilocal.global.exceptions.AttributeException;
 import com.avanzada.unilocal.global.exceptions.ResourceNotFoundException;
@@ -32,13 +33,10 @@ public class ClientController {
         return ResponseEntity.ok(personService.getAll());
     }
 
-
     @GetMapping("/get/{id}")
     public ResponseEntity<Person> getOne(@PathVariable("id") String id) throws ResourceNotFoundException {
         return ResponseEntity.ok(personService.getOne(id));
     }
-
-
 
     @PutMapping("/edit-profile/{id}")
     public ResponseEntity<MessageDto> update(@PathVariable("id") String id, @Valid @RequestBody UpdateUserDto updateUserDto) throws ResourceNotFoundException, AttributeException {
@@ -47,7 +45,6 @@ public class ClientController {
 
         return ResponseEntity.ok(new MessageDto(HttpStatus.OK, message));
     }
-
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<MessageDto> delete(@PathVariable("id") String id) throws ResourceNotFoundException {
@@ -67,7 +64,7 @@ public class ClientController {
         }
     }
 
-    @DeleteMapping("/{usuarioId}/favoritos/{lugarId}")
+    @DeleteMapping("/{usuarioId}/eliminar-favoritos/{lugarId}")
     public ResponseEntity<String> eliminarFavorito(@PathVariable String usuarioId, @PathVariable int lugarId) {
         try {
             personService.eliminarFavorito(usuarioId, lugarId);
@@ -95,19 +92,21 @@ public class ClientController {
     }
 
     @PostMapping("/comentario/{id}/responder")
-    public void responderComentario(@PathVariable int id, @RequestBody CommentDTO respuesta) throws ResourceNotFoundException {
+    public ResponseEntity<MensajeAuthDto> responderComentario(@PathVariable int id, @RequestBody CommentDTO respuesta) throws ResourceNotFoundException {
         personService.responderComentario(id, respuesta);
+        return ResponseEntity.ok(new MensajeAuthDto(false, "Se respondio el comentario correctamente"));
     }
 
     @DeleteMapping("/comentario/{id}/delete/{idCliente}")
-    public void eliminarComentario(@PathVariable int id, @PathVariable String idCliente) throws ResourceNotFoundException {
+    public ResponseEntity<MensajeAuthDto> eliminarComentario(@PathVariable int id, @PathVariable String idCliente) throws ResourceNotFoundException {
         personService.eliminarComentario(id, idCliente);
+        return ResponseEntity.ok(new MensajeAuthDto(false, "Se elimino correctamente"));
     }
 
     @PostMapping("/{lugarId}/qualifications")
-    public ResponseEntity<String> agregarCalificacion(@PathVariable int lugarId, @RequestBody QualificationDTO qualificationDTO) throws ResourceNotFoundException {
+    public ResponseEntity<MensajeAuthDto> agregarCalificacion(@PathVariable int lugarId, @RequestBody QualificationDTO qualificationDTO) throws ResourceNotFoundException {
         personService.addQualification(lugarId, qualificationDTO);
-        return ResponseEntity.ok("Comentario agregado exitosamente.");
+        return ResponseEntity.ok(new MensajeAuthDto(false, "Se agrego la calificacion correctamente"));
     }
 
 }
