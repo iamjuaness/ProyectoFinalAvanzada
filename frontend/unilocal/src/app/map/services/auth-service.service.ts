@@ -7,6 +7,10 @@ import { MensajeAuthDto } from '../class/dto/mensaje-auth-dto';
 import { TokenService } from './token.service';
 import { ImagenesService } from './imagenes.service';
 import { environment } from '../../environments/environment';
+import { TokenDto } from '../class/dto/token-dto';
+import { Observable } from 'rxjs';
+import { response } from 'express';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +59,13 @@ export class AuthService {
       .catch((error) => {
         console.log('Error:', error);
       });
+  }
+
+  refresh() {
+    return axios.post<MensajeAuthDto>('/refresh', this.tokenService.getToken()).then((response) => {
+      this.tokenService.setToken(response.data.respuesta);
+    }).catch((error) => {
+      console.log('No se pudo actualizar el token:', error);
+    });
   }
 }

@@ -33,10 +33,15 @@ public class JwtUtils {
 
     }
 
-    public Jws<Claims> parseJwt(String jwtString) throws ExpiredJwtException,
-            UnsupportedJwtException, MalformedJwtException, IllegalArgumentException {
-        JwtParser jwtParser = Jwts.parser().verifyWith( getKey() ).build();
-        return jwtParser.parseSignedClaims(jwtString);
+    public Jws<Claims> parseJwt(String jwtString) {
+        try {
+            JwtParser jwtParser = Jwts.parser().verifyWith( getKey() ).build();
+            return jwtParser.parseSignedClaims(jwtString);
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | IllegalArgumentException e) {
+            e.printStackTrace(); // Imprimir la traza de la excepción para depurar
+            // Manejar la excepción según sea necesario
+            return null; // O devuelve un valor predeterminado o lanza una nueva excepción
+        }
     }
 
     private SecretKey getKey(){
@@ -47,18 +52,24 @@ public class JwtUtils {
 
     public String actualizarToken(String token) {
         try {
+            // Eliminar comillas simples o dobles del token si están presentes
+            token = token.replaceAll("[\"']", "");
             // Parsear el token para verificar si está vencido y extraer los claims
             Jws<Claims> claims = parseJwt(token);
 
-            // Verificar si el token ha expirado
-            if (claims.getBody().getExpiration().before(new Date())) {
-                // El token ha expirado, generar un nuevo token actualizado
+            // Verificar si el token está a punto de expirar (por ejemplo, dentro de los próximos 5 minutos)
+            Instant tokenExpiration = claims.getBody().getExpiration().toInstant();
+            Instant now = Instant.now();
+            Instant fiveMinutesBeforeExpiration = tokenExpiration.minus(5, ChronoUnit.MINUTES); // Puedes ajustar el intervalo según tus necesidades
+
+            if (now.isAfter(fiveMinutesBeforeExpiration)) {
+                // El token está a punto de expirar, generar un nuevo token actualizado
                 String email = claims.getBody().getSubject();
                 Map<String, Object> nuevosClaims = new HashMap<>();
                 // Agregar cualquier otro claim que desees transferir al nuevo token
                 return generarToken(email, nuevosClaims);
             } else {
-                // El token aún no ha expirado, devolver el token original
+                // El token aún no está próximo a expirar, devolver el token original
                 return token;
             }
         } catch (JwtException e) {

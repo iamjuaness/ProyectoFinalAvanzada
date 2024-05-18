@@ -10,3 +10,5 @@ import { usuarioInterceptor } from './map/interceptor/usuario.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(), provideHttpClient(withInterceptors([usuarioInterceptor]))]
 };
+
+

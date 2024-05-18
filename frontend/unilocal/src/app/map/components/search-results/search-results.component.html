@@ -11,7 +11,7 @@
       class="bg-white border border-gray-300 shadow-md rounded-md overflow-hidden"
     >
       <div class="p-4">
-        <h6 class="font-semibold">{{ place.text_es }}</h6>
+        <h2 class="font-semibold">{{ place.text_es }}</h2>
         <p class="text-gray-600">{{ place.place_name }}</p>
       </div>
       <div
@@ -19,7 +19,7 @@
       >
         <button
           class="px-3 gap-4 py-1 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
-          (click)="openPanel(place)"
+          (click)="flyTo(place)"
         >
           Ver mapa
         </button>

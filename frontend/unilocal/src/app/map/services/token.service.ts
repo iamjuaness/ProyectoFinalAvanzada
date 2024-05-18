@@ -6,6 +6,7 @@ import axios from 'axios';
 import { MensajeAuthDto } from '../class/dto/mensaje-auth-dto';
 import { environment } from '../../environments/environment';
 import { TokenDto } from '../class/dto/token-dto';
+import { response } from 'express';
 
 
 const TOKEN_KEY = "AuthToken";
@@ -145,6 +146,7 @@ export class TokenService {
 
     try {
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      console.log(tokenPayload)
       if (tokenPayload && tokenPayload.exp) {
         return tokenPayload.exp * 1000; // La expiración del token está en segundos, lo convertimos a milisegundos
       }
