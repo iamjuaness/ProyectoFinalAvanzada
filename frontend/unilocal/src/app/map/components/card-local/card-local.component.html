@@ -3,8 +3,8 @@
 >
   <div class="relative w-64">
     <img
-      src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
-      alt="ui/ux review check"
+      [src]="lugar.images[currentImageIndex]"
+      [alt]="lugar.name"
       class="w-64 h-64 object-cover object-center"
     />
     <div
@@ -27,9 +27,9 @@
   </div>
   <div class="p-6">
     <div class="mb-3 flex items-center justify-between">
-      <h5 class="text-xl font-medium text-blue-gray-900">
-        Wooden House, Florida
-      </h5>
+      <h2 class="text-2xl font-medium text-blue-gray-900">
+        {{ lugar.name }}
+      </h2>
       <p
         class="flex items-center gap-1.5 text-base font-normal text-blue-gray-900"
       >
@@ -45,19 +45,37 @@
             clip-rule="evenodd"
           ></path>
         </svg>
-        5.0
+        {{ lugar.qualifications }}
       </p>
     </div>
-    <p class="text-base font-light leading-relaxed text-gray-700">
-      Enter a freshly updated and thoughtfully furnished peaceful home
-      surrounded by ancient trees, stone walls, and open meadows.
+    <div class="mb-3 flex items-center justify-between">
+      <h3>Tipo:</h3>
+      <h3 class="text-2xl font-medium text-blue-gray-900">
+        {{ lugar.businessType }}
+      </h3>
+    </div>
+    <div class="mb-3 flex items-center justify-between">
+      <h3>Estado:</h3>
+      <h3
+        class="text-2xl font-medium"
+        [ngClass]="{
+          'text-green-500': lugar.stateBusiness === 'Active',
+          'text-blue-500': lugar.stateBusiness === 'Revision',
+          'text-red-500': lugar.stateBusiness === 'Refused'
+        }"
+      >
+        {{ lugar.stateBusiness }}
+      </h3>
+    </div>
+    <p class="text-sm font-light leading-relaxed text-gray-700">
+      {{ lugar.description }}
     </p>
     <div class="p-6 pt-3">
       <button
         class="w-full py-3.5 px-7 text-sm font-bold uppercase text-white bg-pink-500 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:shadow-none active:shadow-none"
         type="button"
       >
-        Reserve
+        Ver más
       </button>
     </div>
   </div>

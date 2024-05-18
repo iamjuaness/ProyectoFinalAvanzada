@@ -146,14 +146,14 @@ export class MapViewComponent implements AfterViewInit {
 }
 
 const iconMap: IconMap = {
-  PANADERIA: 'bakery',
-  CAFETERIA: 'cafe',
-  BAR: 'bar',
-  RESTAURANTE: 'restaurant',
-  DISCOTECA: 'bar',
-  SUPERMERCADO: 'grocery',
-  TIENDA: 'shop',
-  OTRO: 'border-dot-13'
+  Panadería: 'bakery',
+  Cafetería: 'cafe',
+  Bar: 'bar',
+  Restaurante: 'restaurant',
+  Discoteca: 'bar',
+  Supermercado: 'grocery',
+  Tienda: 'shop',
+  Otro: 'border-dot-13'
 };
 
 function typePlace(type: string): string {

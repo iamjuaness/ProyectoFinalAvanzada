@@ -1,6 +1,9 @@
 import { Horario } from "./horario";
 
 export class Lugar {
+    map(arg0: (lugar: Lugar) => Lugar): Lugar[] {
+      throw new Error('Method not implemented.');
+    }
     constructor(
         public id: number = 0,
         public description: string = '',
@@ -10,7 +13,7 @@ export class Lugar {
         public comments: string[] = [],
         public businessType: string = '',
         public phones: string[] = [],
-        public stateUnilocal: any = '',
+        public stateBusiness: string = '',
         public ownerId: string = '',
         public location: Location = new Location(),
         public qualifications: number[] = [],

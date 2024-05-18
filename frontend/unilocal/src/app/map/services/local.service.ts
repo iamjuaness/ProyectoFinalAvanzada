@@ -35,7 +35,7 @@ export class LocalService {
     // Configurar el token JWT en el encabezado Authorization
     const token = this.tokenService.getToken(); // Función para obtener el token JWT
     const headers: AxiosRequestConfig['headers'] = {
-        Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
     };
 
     // Luego realizar la petición para guardar el lugar

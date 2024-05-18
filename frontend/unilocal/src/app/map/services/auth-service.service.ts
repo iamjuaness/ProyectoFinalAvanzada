@@ -56,9 +56,4 @@ export class AuthService {
         console.log('Error:', error);
       });
   }
-
-
-
-
-
 }

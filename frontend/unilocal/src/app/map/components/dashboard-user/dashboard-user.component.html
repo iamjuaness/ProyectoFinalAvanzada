@@ -1,7 +1,7 @@
 <div class="bg-blue-300 flex mt-20 justify-between">
   <div class="max-w-7xl px-4 py-6 bg-blue-300 sm:px-6 lg:px-8">
     <img
-      class="flex-1 w-48 h-48 rounded-full shadow-lg"
+      class="flex-1 lg:w-48 lg:h-48 w-20 h-20 rounded-full shadow-lg"
       [src]="userPhoto"
       alt=""
     />
@@ -14,7 +14,7 @@
       <p
         class="md:col-span-1 text-sm flex items-center font-serif text-gray-700"
       >
-        (&#64;{{ userName }})
+        (&#64;{{ userNickname }})
       </p>
     </div>
     <p>{{ userEmail }}</p>
@@ -44,7 +44,7 @@
           >
             <li class="flex items-center py-3 justify-center">
               <button (click)="closePanel()" class="text-xl">
-                Mi negocios
+                Mis negocios
               </button>
               <button>
                 <img
@@ -83,8 +83,15 @@
           <div *ngIf="showPanel" class="">
             <app-create-local (close)="closePanel()"></app-create-local>
           </div>
-          <div *ngIf="!showPanel" class="">
-            <app-card-local></app-card-local>
+          <div
+            *ngIf="!showPanel"
+            class="grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2 justify-center items-center mt-24"
+          >
+            <app-card-local
+              class="col-span-1 mb-6 mr-4"
+              *ngFor="let lugar of lugaresUsuario"
+              [lugar]="lugar"
+            ></app-card-local>
           </div>
         </div>
         <!-- End of profile tab -->
