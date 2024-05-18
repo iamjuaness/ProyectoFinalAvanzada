@@ -14,7 +14,7 @@ export class Lugar {
         public businessType: string = '',
         public phones: string[] = [],
         public stateBusiness: string = '',
-        public ownerId: string = '',
+        public owner: string = '',
         public location: Location = new Location(),
         public qualifications: number[] = [],
         public revisions: number[] = []

@@ -51,16 +51,16 @@ export class ClienteService {
     return axios.delete<MessageDto>(`${environment.urlClient}/delete/${usuarioId}`, {headers});
   }
   
-  agregarFavorito(usuarioId: string, lugarId: string) {
+  agregarFavorito(usuarioId: string, lugarId: number) {
     // Configurar el token JWT en el encabezado Authorization
     const token = this.tokenService.getToken(); // Función para obtener el token JWT
     const headers: AxiosRequestConfig['headers'] = {
       Authorization: `Bearer ${token}`
     };
-    return axios.post(`${environment.urlClient}/${usuarioId}/favoritos/${lugarId}`, {headers});
+    return axios.post(`${environment.urlClient}/${usuarioId}/favoritos/${lugarId}`, {}, {headers});
   }
   
-  eliminarFavoritos(usuarioId: string, lugarId: string) {
+  eliminarFavoritos(usuarioId: string, lugarId: number) {
     // Configurar el token JWT en el encabezado Authorization
     const token = this.tokenService.getToken(); // Función para obtener el token JWT
     const headers: AxiosRequestConfig['headers'] = {
@@ -78,7 +78,7 @@ export class ClienteService {
     return axios.get<Lugar>(`${environment.urlClient}/${usuarioId}/favoritos`, {headers});
   }
   
-  agregarComentario(lugarId: string) {
+  agregarComentario(lugarId: number) {
     // Configurar el token JWT en el encabezado Authorization
     const token = this.tokenService.getToken(); // Función para obtener el token JWT
     const headers: AxiosRequestConfig['headers'] = {
@@ -105,7 +105,7 @@ export class ClienteService {
     return axios.post<MensajeAuthDto>(`${environment.urlClient}/comentario/${usuarioId}/responder`, {headers});
   }
   
-  agregarCalificacion(lugarId: string) {
+  agregarCalificacion(lugarId: number) {
     // Configurar el token JWT en el encabezado Authorization
     const token = this.tokenService.getToken(); // Función para obtener el token JWT
     const headers: AxiosRequestConfig['headers'] = {

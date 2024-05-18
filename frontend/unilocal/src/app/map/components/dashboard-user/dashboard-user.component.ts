@@ -28,36 +28,49 @@ export class DashboardUserComponent {
       this.userPhoto = this.tokenService.getPhoto();
       this.userName = this.tokenService.getNombre();
       this.userEmail = this.tokenService.getEmail();
+      this.userId = this.tokenService.getCodigo();
       this.obtenerNicknameUsuario();
       this.obtenerLugaresUsuario();
+      this.obtenerFavoritos()
     }
   }
 
-  showPanel = false;
+  showNegocios = true;
+  showFavoritos = false;
+  showCrearNegocio = false;
 
-  openPanel() {
-    this.showPanel = true;
+  openCrearNegocio() {
+    this.showCrearNegocio = true;
+    this.showNegocios = false;
+    this.showFavoritos = false;
   }
 
-  closePanel() {
-    this.showPanel = false;
+  openMisNegocios() {
+    this.showCrearNegocio = false;
+    this.showNegocios = true;
+    this.showFavoritos = false;
+  }
+  openMisFavoritos() {
+    this.showCrearNegocio = false;
+    this.showNegocios = false;
+    this.showFavoritos = true;
   }
 
   obtenerNicknameUsuario() {
-    this.clientService.getPerson(this.tokenService.getCodigo()).then((response) => {
+    this.clientService.getPerson(this.userId).then((response) => {
       this.userNickname = response.data.nickname;
     })
   }
 
   obtenerLugaresUsuario() {
-    this.clientService.obtenerLugaresUsuario(this.tokenService.getCodigo()).then((response) => {
+    this.clientService.obtenerLugaresUsuario(this.userId).then((response) => {
       this.lugaresUsuario = response.data.map((lugar: Lugar) => lugar);
       console.log(this.lugaresUsuario)
     })
   }
 
   obtenerFavoritos() {
-    this.clientService.obtenerFavoritos(this.tokenService.getCodigo()).then((response) => {
+    this.clientService.obtenerFavoritos(this.userId).then((response) => {
       this.favoritosUsuario = response.data.map((lugar: Lugar) => lugar);
     })
   }
