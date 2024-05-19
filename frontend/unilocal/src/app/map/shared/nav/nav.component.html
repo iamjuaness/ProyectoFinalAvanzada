@@ -80,13 +80,22 @@
             <a href="" routerLink="/home">Home</a>
           </button>
           <button
-            *ngIf="userLoginOn"
+            *ngIf="userLoginOn && userRole === 'USER'"
             type="button"
             data-twe-ripple-init
             data-twe-ripple-color="light"
             class="me-3 inline-block lg:text-xl font-serif rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
           >
             <a href="" routerLink="/dashboard-user/{{ userId }}">Dashboard</a>
+          </button>
+          <button
+            *ngIf="userLoginOn && userRole === 'MOD'"
+            type="button"
+            data-twe-ripple-init
+            data-twe-ripple-color="light"
+            class="me-3 inline-block lg:text-xl font-serif rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500"
+          >
+            <a href="" routerLink="/dashboard-mod/{{ userId }}">Dashboard</a>
           </button>
           <button
             type="button"

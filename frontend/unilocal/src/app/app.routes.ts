@@ -8,6 +8,7 @@ import { HomescreenComponent } from './map/screens/homescreen/homescreen.compone
 import { DashboardUserComponent } from './map/components/dashboard-user/dashboard-user.component';
 import { LoginGuard } from './map/services/permiso.service';
 import { RolesGuard } from './map/services/roles.service';
+import { DashboardModComponent } from './map/components/dashboard-mod/dashboard-mod.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomescreenComponent },
@@ -16,6 +17,10 @@ export const routes: Routes = [
     { path: 'map', component: MapscreenComponent},
     { path: 'dashboard-user/:id', component: DashboardUserComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["USER"]
+        }
+    },
+    { path: 'dashboard-mod/:id', component: DashboardModComponent, canActivate: [RolesGuard], data: {
+            expectedRole: ["MOD"]
         }
     },
 

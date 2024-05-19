@@ -7,6 +7,7 @@ import { MensajeAuthDto } from '../class/dto/mensaje-auth-dto';
 import { environment } from '../../environments/environment';
 import { TokenDto } from '../class/dto/token-dto';
 import { response } from 'express';
+import { ToastrService } from 'ngx-toastr';
 
 
 const TOKEN_KEY = "AuthToken";
@@ -18,7 +19,7 @@ export class TokenService {
 
   private loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private toastr: ToastrService) { }
 
   isLoggedIn(): Observable<boolean> {
     return this.loggedInSubject.asObservable();
@@ -41,13 +42,25 @@ export class TokenService {
     return false;
   }
 
-  public login(token: string, id:string) {
+  
+  public loginUser(token: string, id:string) {
     this.setToken(token);
     this.loggedInSubject.next(true)
+    this.toastr.success('✅ Iniciando sesión como usuario', 'UNILOCAL')
     this.router.navigate([`/dashboard-user/${id}`]).then(() => {
       window.location.reload();
     });
   }
+
+  public loginMod(token: string, id:string) {
+    this.setToken(token);
+    this.loggedInSubject.next(true)
+    this.toastr.success('✅ Iniciando sesión como moderador', 'UNILOCAL')
+    this.router.navigate([`/dashboard-mod/${id}`]).then(() => {
+      window.location.reload();
+    });
+  }
+
 
   public logout() {
     window.sessionStorage.clear();

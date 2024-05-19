@@ -344,6 +344,7 @@ public class PersonService implements UserService {
 
     //----------------------Private Methods--------------------------------------
 
+
     /**
      * Method that obtains all users from the database
      *
@@ -352,14 +353,12 @@ public class PersonService implements UserService {
     public List<Person> getAll() {
         List<Person> personList = new ArrayList<>();
         for (Person person : clientRepository.findAll()) {
-            // Verificar si el rol de la persona es igual a Role.USER
-            if (person.getRole() != null && person.getRole().equals(Role.USER)) {
+            if (person.getRole() != null) {
                 personList.add(person);
             }
         }
         return personList;
     }
-
     /**
      * Method that obtains a user by his/her ID from the database
      *

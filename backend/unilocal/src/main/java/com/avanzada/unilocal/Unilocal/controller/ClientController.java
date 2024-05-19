@@ -27,12 +27,6 @@ public class ClientController {
     @Autowired
     AuthServiceImp authServiceImp;
 
-
-    @GetMapping("/get-all")
-    public ResponseEntity<List<Person>> getAll() {
-        return ResponseEntity.ok(personService.getAll());
-    }
-
     @GetMapping("/get/{id}")
     public ResponseEntity<Person> getOne(@PathVariable("id") String id) throws ResourceNotFoundException {
         return ResponseEntity.ok(personService.getOne(id));

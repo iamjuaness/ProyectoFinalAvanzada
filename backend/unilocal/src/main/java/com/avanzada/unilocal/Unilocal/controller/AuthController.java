@@ -1,6 +1,7 @@
 package com.avanzada.unilocal.Unilocal.controller;
 
 import com.avanzada.unilocal.Unilocal.dto.*;
+import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.entity.Place;
 import com.avanzada.unilocal.Unilocal.serviceImplements.AuthServiceImp;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PersonService;
@@ -93,6 +94,11 @@ public class AuthController {
     @GetMapping("/get-places")
     public ResponseEntity<List<Place>> getAll(){
         return ResponseEntity.ok(placeService.getAll());
+    }
+
+    @GetMapping("/get-all-users")
+    public ResponseEntity<List<Person>> getAllUsers() {
+        return ResponseEntity.ok(personService.getAll());
     }
 
 }

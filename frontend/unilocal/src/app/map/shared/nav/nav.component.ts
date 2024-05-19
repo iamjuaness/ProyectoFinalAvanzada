@@ -16,7 +16,8 @@ export class NavComponent {
   userName: string = '';
   userEmail: string = '';
   userId: string = '';
-  payload: any
+  payload: any;
+  userRole: string = '';
   showTooltip: boolean = false;
 
   constructor(private tokenService: TokenService) {
@@ -39,6 +40,7 @@ export class NavComponent {
       this.userName = this.payload.nombre;
       this.userEmail = this.payload.sub;
       this.userId = this.payload.id;
+      this.userRole = this.payload.role;
     }
   }
   

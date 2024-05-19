@@ -53,7 +53,7 @@ export class AuthService {
       .then((response) => {
         const payload = this.tokenService.decodePayload(response.data.respuesta.token);
         const id = payload.id;
-        this.tokenService.login(response.data.respuesta.token, id);
+        this.tokenService.loginUser(response.data.respuesta.token, id);
         
       })
       .catch((error) => {
@@ -61,11 +61,29 @@ export class AuthService {
       });
   }
 
+  loginMod(LoginDto: LoginDto) {
+    axios.post<MensajeAuthDto>(`${environment.urlAuth}/login-mod`, LoginDto)
+      .then((response) => {
+        const payload = this.tokenService.decodePayload(response.data.respuesta.token);
+        const id = payload.id;
+        this.tokenService.loginMod(response.data.respuesta.token, id);
+        
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }
+
+
   refresh() {
     return axios.post<MensajeAuthDto>('/refresh', this.tokenService.getToken()).then((response) => {
       this.tokenService.setToken(response.data.respuesta);
     }).catch((error) => {
       console.log('No se pudo actualizar el token:', error);
     });
+  }
+
+  obtenerUsuarios() {
+    return axios.get(`${environment.urlAuth}/get-all-users`);
   }
 }
