@@ -45,7 +45,6 @@ export class TokenService {
   
   public loginUser(token: string, id:string) {
     this.setToken(token);
-    this.loggedInSubject.next(true)
     this.toastr.success('✅ Iniciando sesión como usuario', 'UNILOCAL')
     this.router.navigate([`/dashboard-user/${id}`]).then(() => {
       window.location.reload();
@@ -54,7 +53,6 @@ export class TokenService {
 
   public loginMod(token: string, id:string) {
     this.setToken(token);
-    this.loggedInSubject.next(true)
     this.toastr.success('✅ Iniciando sesión como moderador', 'UNILOCAL')
     this.router.navigate([`/dashboard-mod/${id}`]).then(() => {
       window.location.reload();
@@ -65,14 +63,12 @@ export class TokenService {
   public logout() {
     window.sessionStorage.clear();
     this.loggedInSubject.next(false)
-    this.router.navigate(["/login"]).then(() => {
-      window.location.reload();
-    });
+    this.router.navigate(["/login"])
   }
 
   public signup(token: string, id: string) {
     this.setToken(token);
-    this.loggedInSubject.next(true)
+    this.toastr.success('✅ Tu registro fue exitoso', 'UNILOCAL')
     this.router.navigate([`/dashboard-user/${{id}}`]).then(() => {
       window.location.reload();
     });

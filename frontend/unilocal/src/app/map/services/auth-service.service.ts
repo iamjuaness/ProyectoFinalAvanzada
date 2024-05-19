@@ -86,4 +86,8 @@ export class AuthService {
   obtenerUsuarios() {
     return axios.get(`${environment.urlAuth}/get-all-users`);
   }
+
+  obtenerLugares() {
+    return axios.get(`${environment.urlAuth}/get-all-places`)
+  }
 }

@@ -65,7 +65,6 @@ export class DashboardUserComponent {
   obtenerLugaresUsuario() {
     this.clientService.obtenerLugaresUsuario(this.userId).then((response) => {
       this.lugaresUsuario = response.data.map((lugar: Lugar) => lugar);
-      console.log(this.lugaresUsuario)
     })
   }
 

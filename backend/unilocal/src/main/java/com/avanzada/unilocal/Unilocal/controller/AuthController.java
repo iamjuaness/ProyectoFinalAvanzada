@@ -92,13 +92,18 @@ public class AuthController {
     }
 
     @GetMapping("/get-places")
-    public ResponseEntity<List<Place>> getAll(){
-        return ResponseEntity.ok(placeService.getAll());
+    public ResponseEntity<List<Place>> getAllActives(){
+        return ResponseEntity.ok(placeService.getAllPlacesActives());
     }
 
     @GetMapping("/get-all-users")
     public ResponseEntity<List<Person>> getAllUsers() {
         return ResponseEntity.ok(personService.getAll());
+    }
+
+    @GetMapping("/get-all-places")
+    public ResponseEntity<List<Place>> getAllPlaces(){
+        return ResponseEntity.ok(placeService.getAllPlaces());
     }
 
 }

@@ -149,10 +149,10 @@ class UnilocalApplicationTests {
 	void testGetAllPlaces_Success() {
 		// Arrange
 		List<Place> places = new ArrayList<>();
-		when(placeService.getAll()).thenReturn(places);
+		when(placeService.getAllPlacesActives()).thenReturn(places);
 
 		// Act
-		ResponseEntity<List<Place>> responseEntity = authController.getAll();
+		ResponseEntity<List<Place>> responseEntity = authController.getAllActives();
 
 		// Assert
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());

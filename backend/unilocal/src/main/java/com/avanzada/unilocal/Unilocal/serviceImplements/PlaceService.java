@@ -221,7 +221,7 @@ public class PlaceService implements BusinessService {
 
     //-----------------------------Private Methods----------------------------------------
 
-    public List<Place> getAll() {
+    public List<Place> getAllPlacesActives() {
         List<Place> activePlaces = new ArrayList<>();
         try {
             // Obtener todos los lugares de la base de datos
@@ -239,6 +239,26 @@ public class PlaceService implements BusinessService {
                     activePlaces.add(place);
                 }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return activePlaces;
+    }
+
+    public List<Place> getAllPlaces() {
+        List<Place> activePlaces = new ArrayList<>();
+        try {
+            // Obtener todos los lugares de la base de datos
+            List<Place> allPlaces = placeRepository.findAll();
+
+            // Verificar si la lista de lugares no está vacía
+            if (allPlaces.isEmpty()) {
+                // Manejar el caso en el que no hay lugares en la base de datos
+                throw new ResourceNotFoundException("No se encontraron lugares en la base de datos");
+            }
+
+            activePlaces = allPlaces;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
