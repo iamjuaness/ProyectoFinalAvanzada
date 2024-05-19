@@ -54,7 +54,6 @@ export class CreateLocalComponent {
     this.createPlaceDto.phones = this.phones;
     this.createPlaceDto.owner = idUser;
     this.localService.crearLugar(this.createPlaceDto);
-    // console.log(this.createPlaceDto)
   }
 
   public agregarHorario() {

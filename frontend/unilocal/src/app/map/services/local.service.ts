@@ -6,6 +6,8 @@ import { usuarioInterceptor } from '../interceptor/usuario.interceptor';
 import { TokenService } from './token.service';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,8 @@ export class LocalService {
 
   constructor(private imagenesService: ImagenesService,
     private tokenService: TokenService,
-  private router: Router) { }
+    private router: Router,
+  private toastrService: ToastrService) { }
 
   public async crearLugar(createPlaceDto: CreatePlaceDto) {
     // Convertir FileList a un arreglo de archivos
@@ -39,10 +42,16 @@ export class LocalService {
     };
 
     // Luego realizar la petición para guardar el lugar
-    const response = await axios.post(`${environment.urlPlace}/create-place`, createPlaceDto, { headers });
+    await axios.post(`${environment.urlPlace}/create-place`, createPlaceDto, { headers }).then((response) => {
+      this.toastrService.success('✅ Lugar creado con éxito', 'UNILOCAL');
+      return response.data;
+    }
+    ).catch((error) => {
+      this.toastrService.error('❌ Error al crear el lugar', 'UNILOCAL');
+      return error.error;
+    });
     this.router.navigate([`/dashboard-user/${{id}}`]).then(() => {
       window.location.reload();
     });
-    return response.data;
   }
 }

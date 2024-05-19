@@ -3,6 +3,7 @@ import { Lugar } from '../../class/model/lugar';
 import { CommonModule } from '@angular/common';
 import { ClienteService } from '../../services/cliente.service';
 import { error } from 'console';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-card-local',
@@ -20,7 +21,7 @@ export class CardLocalComponent implements OnInit, OnDestroy {
   currentImageIndex: number = 0;
   intervalId: any;
 
-  constructor(private clientService: ClienteService){}
+  constructor(private clientService: ClienteService, private toastrService: ToastrService){}
 
   ngOnInit(): void {
     this.startImageCarousel();
@@ -43,16 +44,20 @@ export class CardLocalComponent implements OnInit, OnDestroy {
       this.clientService.eliminarFavoritos(this.usuarioId, lugarId).then((response) => {
         console.log('Eliminado de favoritos');
         this.favoritoAgregado.emit(); // Actualizamos la lista de favoritos
+        this.toastrService.info('❌ Eliminado de mis favoritos', 'UNILOCAL')
       }).catch((error) => {
         console.error('Error al eliminar de favoritos', error);
+        this.toastrService.error(`Error al eliminar de favoritos ${error}`, 'UNILOCAL')
       });
     } else {
       // Si el lugar no está en favoritos, lo agregamos
       this.clientService.agregarFavorito(this.usuarioId, lugarId).then((response) => {
         console.log('Agregado a favoritos');
         this.favoritoAgregado.emit(); // Actualizamos la lista de favoritos
+        this.toastrService.success('❤️ Agregado a mis favoritos', 'UNILOCAL')
       }).catch((error) => {
         console.error('Error al agregar a favoritos', error);
+        this.toastrService.error(`Error al agregar a favoritos ${error}`, 'UNILOCAL')
       });
     }
   }
