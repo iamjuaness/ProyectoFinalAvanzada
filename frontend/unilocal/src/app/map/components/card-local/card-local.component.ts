@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ClienteService } from '../../services/cliente.service';
 import { error } from 'console';
 import { ToastrService } from 'ngx-toastr';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-card-local',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './card-local.component.html',
   styleUrl: './card-local.component.css'
 })
@@ -21,7 +22,7 @@ export class CardLocalComponent implements OnInit, OnDestroy {
   currentImageIndex: number = 0;
   intervalId: any;
 
-  constructor(private clientService: ClienteService, private toastrService: ToastrService){}
+  constructor(private clientService: ClienteService, private toastrService: ToastrService, private router: Router){}
 
   ngOnInit(): void {
     this.startImageCarousel();
@@ -64,5 +65,11 @@ export class CardLocalComponent implements OnInit, OnDestroy {
 
   isFavorite(lugarId: number): boolean {
     return this.favoritosUsuario.some(l => l.id === lugarId);
+  }
+
+  navegarDetalleProducto(lugarId: number) {
+    this.router.navigate([`/detail-local/${lugarId}`]).then(() => {
+      window.location.reload();
+    });
   }
 }

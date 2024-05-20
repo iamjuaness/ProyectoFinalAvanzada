@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { error } from 'console';
+import { Lugar } from '../class/model/lugar';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +54,15 @@ export class LocalService {
     this.router.navigate([`/dashboard-user/${{id}}`]).then(() => {
       window.location.reload();
     });
+  }
+
+
+  obtenerLugar(idLugar: number) {
+    // Configurar el token JWT en el encabezado Authorization
+    const token = this.tokenService.getToken(); // Función para obtener el token JWT
+    const headers: AxiosRequestConfig['headers'] = {
+      Authorization: `Bearer ${token}`
+    };
+    return axios.get<Lugar>(`${environment.urlPlace}/get-place/${idLugar}`, {headers});
   }
 }

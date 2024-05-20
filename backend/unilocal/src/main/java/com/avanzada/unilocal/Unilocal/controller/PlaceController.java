@@ -23,7 +23,7 @@ public class PlaceController {
     @Autowired
     PlaceService placeService;
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get-place/{id}")
     public ResponseEntity<Place> getOne(@PathVariable("id") int id) throws ResourceNotFoundException {
         return ResponseEntity.ok(placeService.getOne(id));
     }
