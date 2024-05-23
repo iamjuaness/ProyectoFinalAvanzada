@@ -3,6 +3,8 @@ import { MapService, PlacesService } from '../../services';
 import mapboxgl, { Marker, Popup } from 'mapbox-gl';
 import { CustomFeature, Feature, PlacesResponse } from '../../interfaces/places';
 import { IconMap, Place } from '../../interfaces/places.map';
+import { environment } from '../../../environments/environment';
+import { response } from 'express';
 
 
 //  We need to load the CSS asset for MapboxGL otherwise it won't work.
@@ -80,10 +82,10 @@ export class MapViewComponent implements AfterViewInit {
     this.mapService.setMap(map);
 
   // Ejemplo de solicitud HTTP utilizando fetch
-  fetch('http://localhost:8080/api/auth/get-places')
+  fetch(`${environment.urlAuth}/get-places`)
       .then(response => response.json())
       .then((data: any) => { // Supongamos que los datos devueltos tienen un formato diferente al de las características
-          // Verifica si los datos no son undefined
+        // Verifica si los datos no son undefined
           if (data) {
               // Convierte los datos a características utilizando la función placeToFeature
             const features: CustomFeature[] = data.map(placeToFeature);
