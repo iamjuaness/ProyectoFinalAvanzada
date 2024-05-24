@@ -1,17 +1,18 @@
-# Use an OpenJDK base image
-FROM openjdk:17
-# Set the working directory in the container
-WORKDIR /app
-# Copy the Gradle build files
-COPY build.gradle .
-COPY settings.gradle .
-COPY gradlew .
-COPY gradle/ ./gradle/
-# Copy the application source code
-COPY src/ ./src/
-# Build the application using Gradle
-RUN ./gradlew build
-# Set the port to expose
+#
+# Build stage
+#
+FROM gradle:latest AS build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle clean
+RUN gradle bootJar
+
+
+#
+# Package stage
+#
+FROM eclipse-temurin:17-jdk-jammy
+ARG JAR_FILE=build/libs/*.jar
+COPY --from=build /home/gradle/src/build/libs/*.jar app.jar
 EXPOSE ${PORT}
-# Set the entry point to run the application
-ENTRYPOINT ["java", "-jar", "build/libs/unilocal-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/app.jar"]
