@@ -10,12 +10,16 @@ import { LoginGuard } from './map/services/permiso.service';
 import { RolesGuard } from './map/services/roles.service';
 import { DashboardModComponent } from './map/components/dashboard-mod/dashboard-mod.component';
 import { DetailLocalComponent } from './map/components/detail-local/detail-local.component';
+import { ForgotPasswordComponent } from './map/components/forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './map/components/change-password/change-password.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomescreenComponent },
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] },
-    { path: 'map', component: MapscreenComponent},
+    { path: 'map', component: MapscreenComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent},
+    { path: 'change-password/:id', component: ChangePasswordComponent},
     { path: 'dashboard-user/:id', component: DashboardUserComponent, canActivate: [RolesGuard], data: {
             expectedRole: ["USER"]
         }

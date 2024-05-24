@@ -11,6 +11,8 @@ import { TokenDto } from '../class/dto/token-dto';
 import { Observable } from 'rxjs';
 import { response } from 'express';
 import { error } from 'console';
+import { EmailDto } from '../class/dto/email-dto';
+import { ChangePasswordDto } from '../class/dto/change-password-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -89,5 +91,13 @@ export class AuthService {
 
   obtenerLugares() {
     return axios.get(`${environment.urlAuth}/get-all-places`)
+  }
+
+  recuperarContrasenia(emailDto: EmailDto) {
+    return axios.post(`${environment.urlAuth}/forgot-password`, emailDto)
+  }
+  
+  cambiarContrasenia(passwordDto: ChangePasswordDto) {
+    return axios.post(`${environment.urlAuth}/reset-password`, passwordDto)
   }
 }

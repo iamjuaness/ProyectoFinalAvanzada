@@ -188,7 +188,7 @@ public class PersonService implements UserService {
      * @throws ResourceNotFoundException Exception that is executed if a user with that email is not found
      */
     @Override
-    public void sendLinkPassword(EmailDTO emailDTO) throws ResourceNotFoundException, MessagingException {
+    public String sendLinkPassword(EmailDTO emailDTO) throws ResourceNotFoundException, MessagingException {
         // Verificar si el DTO de correo electrónico es nulo o si el destinatario es nulo o vacío
         if (emailDTO == null || emailDTO.destinatario() == null || emailDTO.destinatario().isEmpty()) {
             throw new IllegalArgumentException("El DTO de correo electrónico y el destinatario no pueden ser nulos o vacíos");
@@ -200,6 +200,7 @@ public class PersonService implements UserService {
 
         // Enviar el correo electrónico con el servicio de correo electrónico
         emailService.sendEmail(emailDTO);
+        return person.getCedula();
     }
     /**
      * This method changes the user's password
