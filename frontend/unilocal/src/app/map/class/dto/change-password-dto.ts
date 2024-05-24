@@ -1,6 +1,6 @@
 export class ChangePasswordDto {
     constructor(
-        id: string,
-        password: string
+        public id: string | null = '',
+        public password: string = ''
     ){}
 }
