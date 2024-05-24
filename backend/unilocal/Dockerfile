@@ -13,9 +13,5 @@ COPY src/ ./src/
 RUN ./gradlew build
 # Set the port to expose
 EXPOSE ${PORT}
-<<<<<<< HEAD
 ENTRYPOINT ["java","-jar","/app.jar"]
-=======
-# Set the entry point to run the application
-ENTRYPOINT ["java", "-jar", "build/libs/unilocal-0.0.1-SNAPSHOT.jar"]
->>>>>>> parent of 60a91cf (Update DockerFile)
+
