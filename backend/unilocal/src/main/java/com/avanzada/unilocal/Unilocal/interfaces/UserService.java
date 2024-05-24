@@ -14,7 +14,7 @@ public interface UserService extends AccountService {
 
     Person profileEdit(UpdateUserDto updateUserDto, String id) throws ResourceNotFoundException;
 
-    void sendLinkPassword(EmailDTO emailDTO) throws ResourceNotFoundException, MessagingException;
+    String sendLinkPassword(EmailDTO emailDTO) throws ResourceNotFoundException, MessagingException;
 
     void agregarFavorito(String usuarioId, int lugarId) throws ResourceNotFoundException;
 
