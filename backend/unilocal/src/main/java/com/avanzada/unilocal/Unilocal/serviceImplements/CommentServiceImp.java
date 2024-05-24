@@ -30,9 +30,10 @@ public class CommentServiceImp implements CommentService {
                 .orElseThrow(() -> new ResourceNotFoundException("lugar no encontrado")));
 
         int id = autoIncrement();
-        Comment comment = new Comment(id, commentDTO.message());
+        Comment comment = new Comment(id, commentDTO.message(), commentDTO.idCliente());
         commentRepository.save(comment);
         place.get().getComments().add(String.valueOf(id));
+        placeRepository.save(place.get());
     }
 
     @Override
@@ -42,8 +43,9 @@ public class CommentServiceImp implements CommentService {
         Optional<Comment> comentario = Optional.ofNullable(commentRepository.findById(comentarioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Comentario no encontrado")));
         int id = autoIncrement();
-        Comment comment = new Comment(id, respuesta.message());
+        Comment comment = new Comment(id, respuesta.message(), respuesta.idCliente());
         comentario.get().getResponses().add(String.valueOf(id));
+        commentRepository.save(comment);
         commentRepository.save(comentario.get());
     }
 

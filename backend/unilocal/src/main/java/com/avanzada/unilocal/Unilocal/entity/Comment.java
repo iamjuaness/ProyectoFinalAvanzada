@@ -19,6 +19,7 @@ public class Comment {
 
     @Id
     private int id;
+    private String idClient;
     private String message;
     private List<String> responses = new ArrayList<>();
 
@@ -26,8 +27,9 @@ public class Comment {
         this.message = message;
     }
 
-    public Comment(int id, String message) {
+    public Comment(int id, String message, String idClient) {
         this.id = id;
         this.message = message;
+        this.idClient = idClient;
     }
 }

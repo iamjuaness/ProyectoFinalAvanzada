@@ -1,9 +1,11 @@
 package com.avanzada.unilocal.Unilocal.controller;
 
 import com.avanzada.unilocal.Unilocal.dto.*;
+import com.avanzada.unilocal.Unilocal.entity.Comment;
 import com.avanzada.unilocal.Unilocal.entity.Person;
 import com.avanzada.unilocal.Unilocal.entity.Place;
 import com.avanzada.unilocal.Unilocal.serviceImplements.AuthServiceImp;
+import com.avanzada.unilocal.Unilocal.serviceImplements.CommentServiceImp;
 import com.avanzada.unilocal.Unilocal.serviceImplements.PersonService;
 import com.avanzada.unilocal.global.dto.MensajeAuthDto;
 import com.avanzada.unilocal.global.dto.MessageDto;
@@ -26,6 +28,9 @@ public class ClientController {
     PersonService personService;
     @Autowired
     AuthServiceImp authServiceImp;
+
+    @Autowired
+    CommentServiceImp commentServiceImp;
 
     @GetMapping("/get/{id}")
     public ResponseEntity<Person> getOne(@PathVariable("id") String id) throws ResourceNotFoundException {
@@ -79,10 +84,14 @@ public class ClientController {
         personService.addComment(lugarId, comentario);
         return ResponseEntity.ok("Comentario agregado exitosamente.");
     }
-
     @GetMapping("/usuario/{id}/lugares")
     public List<Place> obtenerLugaresUsuario(@PathVariable String id) throws ResourceNotFoundException {
         return personService.obtenerLugaresUsuario(id);
+    }
+
+    @GetMapping("/comments/{lugarId}")
+    public List<Comment> obtenerComentariosLugar(@PathVariable int lugarId) {
+        return commentServiceImp.listarComentariosNegocio(lugarId);
     }
 
     @PostMapping("/comentario/{id}/responder")
