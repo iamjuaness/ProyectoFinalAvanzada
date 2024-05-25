@@ -60,18 +60,22 @@ public class CommentServiceImp implements CommentService {
         }
 
         for (Place place : places) {
-            List<String> placeComments = place.getComments();
-            if (placeComments != null && !placeComments.isEmpty()) {
-                for (String commentId : placeComments) {
-                    try {
-                        int parsedCommentId = Integer.parseInt(commentId);
-                        Optional<Comment> commentOptional = commentRepository.findById(parsedCommentId);
-                        if (commentOptional.isPresent()) {
-                            Comment comment = commentOptional.get();
-                            comments.add(comment);
+            if (place.getId() == lugarId) {
+                List<String> placeComments = place.getComments();
+                if (placeComments != null && !placeComments.isEmpty()) {
+                    for (String commentId : placeComments) {
+                        try {
+                            int parsedCommentId = Integer.parseInt(commentId);
+                            Optional<Comment> commentOptional = commentRepository.findById(parsedCommentId);
+                            if (commentOptional.isPresent()) {
+                                Comment comment = commentOptional.get();
+                                comments.add(comment);
+                            } else {
+                                System.err.println("Comment not found for ID: " + parsedCommentId);
+                            }
+                        } catch (NumberFormatException e) {
+                            System.err.println("Invalid comment ID format: " + commentId);
                         }
-                    } catch (NumberFormatException e) {
-                        System.err.println("Invalid comment ID format: " + commentId);
                     }
                 }
             }

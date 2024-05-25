@@ -332,6 +332,8 @@ public class PersonService implements UserService {
         return lugares;
     }
 
+
+
     @Override
     public void responderComentario(int comentarioId, CommentDTO respuesta) throws ResourceNotFoundException {
         try {
