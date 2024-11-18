@@ -17,7 +17,7 @@
 - `Gestión de negocios`: Permite crear y gestionar negocios a nivel de locación
 - `Control de horarios`: Ofrece la opción de personalizar los horarios del negocio
 - `Gestión de actualizaciones del negocio`: Da la opción de actualizar caracteristicas del negocio
-- `Búsqueda de negocios cerca del usuario`: Al buscar negocios se muestran aquellos que se encuentran cerca del usuario
+- `Búsqueda de negocios cerca del usuario`: Al buscar negocios se muestran aquellos que se encuentran cerca del usuario.
 
 ## ✔️ Tecnologías utilizadas
 - `Springboot`:  Framework de código abierto para la creación de aplicaciones empresariales en Java de forma rápida y sencilla.
